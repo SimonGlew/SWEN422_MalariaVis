@@ -19,14 +19,13 @@ var driver = new webdriver.Builder().
 
 describe('#firstTest', async () => {
     it('runs a first test', async () => {
-        this.timeout(0)
         await driver.get('http://www.google.com')
         await driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack\n')
         let title = await driver.getTitle()
         console.log(title);
         assert.equal(1 == 1, true)
         driver.quit();
-    });
+    }).timeout(0);
 })
 
 
