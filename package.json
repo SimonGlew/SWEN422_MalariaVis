@@ -5,7 +5,7 @@
   "main": "server/app.js",
   "scripts": {
     "start": "nodemon --watch",
-    "test": "node server/test/test.js"
+    "test": "mocha server/test/test.js"
   },
   "repository": {
     "type": "git",
@@ -14,8 +14,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "assert": "^1.4.1",
     "express": "^4.16.3",
     "fast-csv": "^2.4.1",
+    "mocha": "^5.2.0",
     "nodemon": "^1.18.4",
     "selenium-webdriver": "^4.0.0-alpha.1"
   }

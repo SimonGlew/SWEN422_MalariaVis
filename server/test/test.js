@@ -1,4 +1,5 @@
-var webdriver = require('selenium-webdriver');
+var webdriver = require('selenium-webdriver'),
+    assert = require('assert')
 
 // Input capabilities
 var capabilities = {
@@ -16,14 +17,20 @@ var driver = new webdriver.Builder().
     withCapabilities(capabilities).
     build();
 
-driver.get('http://www.google.com').then(function () {
-    driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack\n').then(function () {
-        driver.getTitle().then(function (title) {
-            console.log(title);
-            driver.quit();
+describe('#firstTest', async () => {
+    it('runs a first test', async () => {
+        driver.get('http://www.google.com').then(function () {
+            driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack\n').then(function () {
+                driver.getTitle().then(function (title) {
+                    console.log(title);
+                    assert.equal(1 == 1, true)
+                    driver.quit();
+                });
+            });
         });
-    });
-});
+    })
+})
+
 
 //BROWSER STACK LOGIN DETAILS
 
