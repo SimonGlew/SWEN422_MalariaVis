@@ -1,10 +1,12 @@
 var express = require('express');
+
 var app = express();
 var config = require('./config')
 
 var parser = require('./handlers/parserHandler')
 
 // app.use('/', express.static(__dirname + '/public'));
+
 var router = require('./src/js/router')();
 app.use(express.static('public'));
 app.set('views', './src/views');
