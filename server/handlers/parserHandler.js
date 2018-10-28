@@ -10,11 +10,12 @@ function parse(directoryName) {
 
         csv.fromStream(stream, { headers: true })
             .on("data", (blob) => {
-                if(file.type == 'incidence'){
-                    dataHandler.addIncidenceToMap(blob)
-                }else{
-                    dataHandler.addMortalityToMap(blob)
-                }
+                if(!blob.Code) return;
+                if(file.type == 'incidence')dataHandler.addIncidenceToMap(blob)
+                else dataHandler.addMortalityToMap(blob)
+            })
+            .on('end', () => {
+                console.log(dataHandler.getCountries())
             })
     })
 

@@ -1,14 +1,18 @@
-var express = require('express');
+const express = require('express');
+
+const dataHandler = require('../../handlers/dataHandler')
 
 var router = express.Router();
-var route = function(nav){
 
-	//Redirect '/' path to '/week'
-	router.route('/').get(function(req, res){
-		res.sendFile('index.html');
-	});
 
-	return router
-}
+router.get('/', (req, res) => {
+	res.render('index');
+});
 
-module.exports = route;
+router.get('/api/countriesList', (req, res) => {
+	let data = dataHandler.getCountries()
+	res.send(data)
+})
+
+
+module.exports = router;
