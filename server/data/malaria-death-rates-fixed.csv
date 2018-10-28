@@ -107,33 +107,6 @@ American Samoa,ASM,2013,0.208585400092
 American Samoa,ASM,2014,0.208028601637
 American Samoa,ASM,2015,0.20737666002299998
 American Samoa,ASM,2016,0.20680225367900001
-Andean Latin America,,1990,0.353559920034
-Andean Latin America,,1991,0.34977193168
-Andean Latin America,,1992,0.343962585664
-Andean Latin America,,1993,0.336221177056
-Andean Latin America,,1994,0.31588301113
-Andean Latin America,,1995,0.296841632952
-Andean Latin America,,1996,0.276171947455
-Andean Latin America,,1997,0.252839327063
-Andean Latin America,,1998,0.23481652477399997
-Andean Latin America,,1999,0.200290095372
-Andean Latin America,,2000,0.167717389394
-Andean Latin America,,2001,0.139931398613
-Andean Latin America,,2002,0.11802742705
-Andean Latin America,,2003,0.101052896361
-Andean Latin America,,2004,0.0885313586747
-Andean Latin America,,2005,0.0786362363116
-Andean Latin America,,2006,0.0710852076726
-Andean Latin America,,2007,0.0656725447392
-Andean Latin America,,2008,0.0616703190988
-Andean Latin America,,2009,0.058725495523600006
-Andean Latin America,,2010,0.0565346521835
-Andean Latin America,,2011,0.054468503951599995
-Andean Latin America,,2012,0.05250408128260001
-Andean Latin America,,2013,0.050780508460200005
-Andean Latin America,,2014,0.0491100533421
-Andean Latin America,,2015,0.0481252765869
-Andean Latin America,,2016,0.047642883848
 Andorra,AND,1990,0
 Andorra,AND,1991,0
 Andorra,AND,1992,0
@@ -269,33 +242,6 @@ Armenia,ARM,2013,0
 Armenia,ARM,2014,0
 Armenia,ARM,2015,0
 Armenia,ARM,2016,0
-Australasia,,1990,0
-Australasia,,1991,0
-Australasia,,1992,0
-Australasia,,1993,0
-Australasia,,1994,0
-Australasia,,1995,0
-Australasia,,1996,0
-Australasia,,1997,0
-Australasia,,1998,0
-Australasia,,1999,0
-Australasia,,2000,0
-Australasia,,2001,0
-Australasia,,2002,0
-Australasia,,2003,0
-Australasia,,2004,0
-Australasia,,2005,0
-Australasia,,2006,0
-Australasia,,2007,0
-Australasia,,2008,0
-Australasia,,2009,0
-Australasia,,2010,0
-Australasia,,2011,0
-Australasia,,2012,0
-Australasia,,2013,0
-Australasia,,2014,0
-Australasia,,2015,0
-Australasia,,2016,0
 Australia,AUS,1990,0
 Australia,AUS,1991,0
 Australia,AUS,1992,0
@@ -1025,114 +971,6 @@ Central African Republic,CAF,2013,62.7738385979
 Central African Republic,CAF,2014,60.6933186361
 Central African Republic,CAF,2015,57.3914400867
 Central African Republic,CAF,2016,54.72322692899999
-Central Asia,,1990,0.0303763495319
-Central Asia,,1991,0.029895379306400002
-Central Asia,,1992,0.0301777135514
-Central Asia,,1993,0.030251158461699998
-Central Asia,,1994,0.0308871747515
-Central Asia,,1995,0.0307584220073
-Central Asia,,1996,0.0308533563945
-Central Asia,,1997,0.031262045918
-Central Asia,,1998,0.0313562540636
-Central Asia,,1999,0.029958134718
-Central Asia,,2000,0.027713292056800003
-Central Asia,,2001,0.025103593643099997
-Central Asia,,2002,0.0224010854671
-Central Asia,,2003,0.0203683421519
-Central Asia,,2004,0.0186114296268
-Central Asia,,2005,0.017311098972499998
-Central Asia,,2006,0.0162489867164
-Central Asia,,2007,0.0152622267977
-Central Asia,,2008,0.0145100364753
-Central Asia,,2009,0.012835905060100001
-Central Asia,,2010,0.012194359985700001
-Central Asia,,2011,0.0110230618406
-Central Asia,,2012,0.009706626613870001
-Central Asia,,2013,0.00574939392111
-Central Asia,,2014,0.00575359357319
-Central Asia,,2015,0.0056952379370600005
-Central Asia,,2016,0.00566336706135
-Central Europe,,1990,0
-Central Europe,,1991,0
-Central Europe,,1992,0
-Central Europe,,1993,0
-Central Europe,,1994,0
-Central Europe,,1995,0
-Central Europe,,1996,0
-Central Europe,,1997,0
-Central Europe,,1998,0
-Central Europe,,1999,0
-Central Europe,,2000,0
-Central Europe,,2001,0
-Central Europe,,2002,0
-Central Europe,,2003,0
-Central Europe,,2004,0
-Central Europe,,2005,0
-Central Europe,,2006,0
-Central Europe,,2007,0
-Central Europe,,2008,0
-Central Europe,,2009,0
-Central Europe,,2010,0
-Central Europe,,2011,0
-Central Europe,,2012,0
-Central Europe,,2013,0
-Central Europe,,2014,0
-Central Europe,,2015,0
-Central Europe,,2016,0
-Central Latin America,,1990,0.295624747741
-Central Latin America,,1991,0.278155420142
-Central Latin America,,1992,0.258552314535
-Central Latin America,,1993,0.24158624146
-Central Latin America,,1994,0.22207624144600002
-Central Latin America,,1995,0.204466135454
-Central Latin America,,1996,0.188472615236
-Central Latin America,,1997,0.17214375867700002
-Central Latin America,,1998,0.15758878415799998
-Central Latin America,,1999,0.140290759027
-Central Latin America,,2000,0.127123225909
-Central Latin America,,2001,0.115605868602
-Central Latin America,,2002,0.10636979547400001
-Central Latin America,,2003,0.0961846528443
-Central Latin America,,2004,0.0877407220694
-Central Latin America,,2005,0.0801921739932
-Central Latin America,,2006,0.0748586858841
-Central Latin America,,2007,0.0695863234235
-Central Latin America,,2008,0.0660653383576
-Central Latin America,,2009,0.06339535521539999
-Central Latin America,,2010,0.0604636345837
-Central Latin America,,2011,0.0578927319779
-Central Latin America,,2012,0.0563996588332
-Central Latin America,,2013,0.054843923138799995
-Central Latin America,,2014,0.053392247933899996
-Central Latin America,,2015,0.0534473103026
-Central Latin America,,2016,0.0528111555818
-Central Sub-Saharan Africa,,1990,108.666707682
-Central Sub-Saharan Africa,,1991,111.17950507200001
-Central Sub-Saharan Africa,,1992,110.53370117400002
-Central Sub-Saharan Africa,,1993,110.78980619000001
-Central Sub-Saharan Africa,,1994,110.627495325
-Central Sub-Saharan Africa,,1995,112.704067513
-Central Sub-Saharan Africa,,1996,114.919664889
-Central Sub-Saharan Africa,,1997,113.4915747
-Central Sub-Saharan Africa,,1998,115.95449923
-Central Sub-Saharan Africa,,1999,115.989753411
-Central Sub-Saharan Africa,,2000,115.79950779900001
-Central Sub-Saharan Africa,,2001,118.86494748899999
-Central Sub-Saharan Africa,,2002,118.565289336
-Central Sub-Saharan Africa,,2003,121.08354181199999
-Central Sub-Saharan Africa,,2004,119.473147415
-Central Sub-Saharan Africa,,2005,118.230962973
-Central Sub-Saharan Africa,,2006,116.681611921
-Central Sub-Saharan Africa,,2007,115.123702616
-Central Sub-Saharan Africa,,2008,110.72115058700001
-Central Sub-Saharan Africa,,2009,103.971281896
-Central Sub-Saharan Africa,,2010,97.9612857049
-Central Sub-Saharan Africa,,2011,90.6404902883
-Central Sub-Saharan Africa,,2012,82.966309813
-Central Sub-Saharan Africa,,2013,76.5583385673
-Central Sub-Saharan Africa,,2014,72.77852048230001
-Central Sub-Saharan Africa,,2015,67.03415484349999
-Central Sub-Saharan Africa,,2016,64.6395277873
 Chad,TCD,1990,42.0448554435
 Chad,TCD,1991,42.4724469628
 Chad,TCD,1992,42.7709036286
@@ -1592,87 +1430,6 @@ Dominican Republic,DOM,2013,0.0229502098545
 Dominican Republic,DOM,2014,0.022702320313899998
 Dominican Republic,DOM,2015,0.0225600957088
 Dominican Republic,DOM,2016,0.022129846938699998
-East Asia,,1990,0.0269026740907
-East Asia,,1991,0.0265947040548
-East Asia,,1992,0.0259210231563
-East Asia,,1993,0.0246550319512
-East Asia,,1994,0.0239543586282
-East Asia,,1995,0.0228071917762
-East Asia,,1996,0.0223847920937
-East Asia,,1997,0.021662341507100003
-East Asia,,1998,0.0212407845899
-East Asia,,1999,0.020476794745599998
-East Asia,,2000,0.020032782185
-East Asia,,2001,0.0198841373087
-East Asia,,2002,0.0197987409687
-East Asia,,2003,0.0190034087524
-East Asia,,2004,0.0181665735917
-East Asia,,2005,0.0175863014246
-East Asia,,2006,0.0164889692053
-East Asia,,2007,0.0156791480005
-East Asia,,2008,0.0149379167734
-East Asia,,2009,0.014281631509599999
-East Asia,,2010,0.0139201113565
-East Asia,,2011,0.012954322962799998
-East Asia,,2012,0.012344521966000001
-East Asia,,2013,0.0121392050796
-East Asia,,2014,0.0124118189277
-East Asia,,2015,0.012081644052499998
-East Asia,,2016,0.0121965888904
-Eastern Europe,,1990,0
-Eastern Europe,,1991,0
-Eastern Europe,,1992,0
-Eastern Europe,,1993,0
-Eastern Europe,,1994,0
-Eastern Europe,,1995,0
-Eastern Europe,,1996,0
-Eastern Europe,,1997,0
-Eastern Europe,,1998,0
-Eastern Europe,,1999,0
-Eastern Europe,,2000,0
-Eastern Europe,,2001,0
-Eastern Europe,,2002,0
-Eastern Europe,,2003,0
-Eastern Europe,,2004,0
-Eastern Europe,,2005,0
-Eastern Europe,,2006,0
-Eastern Europe,,2007,0
-Eastern Europe,,2008,0
-Eastern Europe,,2009,0
-Eastern Europe,,2010,0
-Eastern Europe,,2011,0
-Eastern Europe,,2012,0
-Eastern Europe,,2013,0
-Eastern Europe,,2014,0
-Eastern Europe,,2015,0
-Eastern Europe,,2016,0
-Eastern Sub-Saharan Africa,,1990,77.8262301723
-Eastern Sub-Saharan Africa,,1991,78.4930018028
-Eastern Sub-Saharan Africa,,1992,77.7921787691
-Eastern Sub-Saharan Africa,,1993,77.8218133414
-Eastern Sub-Saharan Africa,,1994,77.6069316348
-Eastern Sub-Saharan Africa,,1995,77.6336449978
-Eastern Sub-Saharan Africa,,1996,77.5032633173
-Eastern Sub-Saharan Africa,,1997,76.8300986519
-Eastern Sub-Saharan Africa,,1998,77.49171088290001
-Eastern Sub-Saharan Africa,,1999,77.546221319
-Eastern Sub-Saharan Africa,,2000,74.8073017635
-Eastern Sub-Saharan Africa,,2001,75.138421439
-Eastern Sub-Saharan Africa,,2002,72.667868742
-Eastern Sub-Saharan Africa,,2003,69.4663828967
-Eastern Sub-Saharan Africa,,2004,64.3222307762
-Eastern Sub-Saharan Africa,,2005,58.705121753
-Eastern Sub-Saharan Africa,,2006,51.22109712500001
-Eastern Sub-Saharan Africa,,2007,45.7278630222
-Eastern Sub-Saharan Africa,,2008,39.526471743
-Eastern Sub-Saharan Africa,,2009,36.621229286
-Eastern Sub-Saharan Africa,,2010,34.124225258100005
-Eastern Sub-Saharan Africa,,2011,29.586977982
-Eastern Sub-Saharan Africa,,2012,26.2097355711
-Eastern Sub-Saharan Africa,,2013,25.1028616032
-Eastern Sub-Saharan Africa,,2014,24.4740286629
-Eastern Sub-Saharan Africa,,2015,23.867635537600002
-Eastern Sub-Saharan Africa,,2016,23.1508444325
 Ecuador,ECU,1990,0.688421849771
 Ecuador,ECU,1991,0.687959526437
 Ecuador,ECU,1992,0.675832780864
@@ -2348,87 +2105,6 @@ Haiti,HTI,2013,0.103127478412
 Haiti,HTI,2014,0.101651049761
 Haiti,HTI,2015,0.09787001786749999
 Haiti,HTI,2016,0.0964529012595
-High SDI,,1990,0.0013872132478
-High SDI,,1991,0.00128044767589
-High SDI,,1992,0.00116529824688
-High SDI,,1993,0.0010752617355999998
-High SDI,,1994,0.00100487784315
-High SDI,,1995,0.0009235341645159999
-High SDI,,1996,0.0008453703532430001
-High SDI,,1997,0.000774291535263
-High SDI,,1998,0.000712773635184
-High SDI,,1999,0.000659490111389
-High SDI,,2000,0.000601670388867
-High SDI,,2001,0.0005470308333489999
-High SDI,,2002,0.000497027554531
-High SDI,,2003,0.00045748795549500004
-High SDI,,2004,0.000416919164241
-High SDI,,2005,0.000383728724061
-High SDI,,2006,0.000351301274609
-High SDI,,2007,0.00032925175335800003
-High SDI,,2008,0.000309885690229
-High SDI,,2009,0.000292668565292
-High SDI,,2010,0.000273642711417
-High SDI,,2011,0.000254003100048
-High SDI,,2012,0.000236503595704
-High SDI,,2013,0.000222037201022
-High SDI,,2014,0.00021213127496399998
-High SDI,,2015,0.000202995879072
-High SDI,,2016,0.000194231162504
-High-income Asia Pacific,,1990,0.0072829920158900005
-High-income Asia Pacific,,1991,0.006668344890849999
-High-income Asia Pacific,,1992,0.006013735370080001
-High-income Asia Pacific,,1993,0.00549093173631
-High-income Asia Pacific,,1994,0.005075032855159999
-High-income Asia Pacific,,1995,0.00461897757463
-High-income Asia Pacific,,1996,0.0042036565726499995
-High-income Asia Pacific,,1997,0.0038352771615599995
-High-income Asia Pacific,,1998,0.0035195845655999996
-High-income Asia Pacific,,1999,0.0032481243622499998
-High-income Asia Pacific,,2000,0.00295002655404
-High-income Asia Pacific,,2001,0.00266497831185
-High-income Asia Pacific,,2002,0.00240327472776
-High-income Asia Pacific,,2003,0.00219548068307
-High-income Asia Pacific,,2004,0.00198130631142
-High-income Asia Pacific,,2005,0.0018060065900500002
-High-income Asia Pacific,,2006,0.0016346498795000001
-High-income Asia Pacific,,2007,0.0015210350544899998
-High-income Asia Pacific,,2008,0.0014194610168
-High-income Asia Pacific,,2009,0.00133158243006
-High-income Asia Pacific,,2010,0.00123558449944
-High-income Asia Pacific,,2011,0.0011357833144399999
-High-income Asia Pacific,,2012,0.00104838660783
-High-income Asia Pacific,,2013,0.000975463220427
-High-income Asia Pacific,,2014,0.0009278150338589999
-High-income Asia Pacific,,2015,0.0008835186674519999
-High-income Asia Pacific,,2016,0.000841670811156
-High-middle SDI,,1990,0.11677839900300001
-High-middle SDI,,1991,0.120077221215
-High-middle SDI,,1992,0.11748186659099999
-High-middle SDI,,1993,0.11680502152500001
-High-middle SDI,,1994,0.121598874941
-High-middle SDI,,1995,0.122188439533
-High-middle SDI,,1996,0.123080571088
-High-middle SDI,,1997,0.128099459243
-High-middle SDI,,1998,0.125566404342
-High-middle SDI,,1999,0.10354956404400001
-High-middle SDI,,2000,0.0887583788767
-High-middle SDI,,2001,0.0801257001494
-High-middle SDI,,2002,0.0747907702886
-High-middle SDI,,2003,0.0707297141439
-High-middle SDI,,2004,0.0680924611477
-High-middle SDI,,2005,0.0652479003682
-High-middle SDI,,2006,0.0623750887402
-High-middle SDI,,2007,0.05979316720860001
-High-middle SDI,,2008,0.055713424888
-High-middle SDI,,2009,0.052223514209399996
-High-middle SDI,,2010,0.049514329683899995
-High-middle SDI,,2011,0.047945633974299996
-High-middle SDI,,2012,0.0459093995792
-High-middle SDI,,2013,0.045385054576400005
-High-middle SDI,,2014,0.0455203142737
-High-middle SDI,,2015,0.0455595947019
-High-middle SDI,,2016,0.0456829701776
 Honduras,HND,1990,0.528294356164
 Honduras,HND,1991,0.515652524035
 Honduras,HND,1992,0.512388344736
@@ -2942,33 +2618,6 @@ Laos,LAO,2013,0.378623116647
 Laos,LAO,2014,0.370791895022
 Laos,LAO,2015,0.357762038269
 Laos,LAO,2016,0.35654118440399996
-Latin America and Caribbean,,1990,0.304334275876
-Latin America and Caribbean,,1991,0.28948746337299996
-Latin America and Caribbean,,1992,0.26592745808900004
-Latin America and Caribbean,,1993,0.24369697143099997
-Latin America and Caribbean,,1994,0.221638558346
-Latin America and Caribbean,,1995,0.19863928000699999
-Latin America and Caribbean,,1996,0.178989557995
-Latin America and Caribbean,,1997,0.161636575355
-Latin America and Caribbean,,1998,0.145205445767
-Latin America and Caribbean,,1999,0.128154269294
-Latin America and Caribbean,,2000,0.11427980079
-Latin America and Caribbean,,2001,0.10189085744800001
-Latin America and Caribbean,,2002,0.0923485049944
-Latin America and Caribbean,,2003,0.0839616037168
-Latin America and Caribbean,,2004,0.0769364305114
-Latin America and Caribbean,,2005,0.0709321299936
-Latin America and Caribbean,,2006,0.0663506067797
-Latin America and Caribbean,,2007,0.0618498746689
-Latin America and Caribbean,,2008,0.0586889658786
-Latin America and Caribbean,,2009,0.0564259196153
-Latin America and Caribbean,,2010,0.0541421123828
-Latin America and Caribbean,,2011,0.052612792312199994
-Latin America and Caribbean,,2012,0.050634972311000004
-Latin America and Caribbean,,2013,0.0487989360495
-Latin America and Caribbean,,2014,0.0474103114993
-Latin America and Caribbean,,2015,0.0469290415548
-Latin America and Caribbean,,2016,0.0467631695349
 Latvia,LVA,1990,0
 Latvia,LVA,1991,0
 Latvia,LVA,1992,0
@@ -3131,60 +2780,6 @@ Lithuania,LTU,2013,0
 Lithuania,LTU,2014,0
 Lithuania,LTU,2015,0
 Lithuania,LTU,2016,0
-Low SDI,,1990,73.7824592681
-Low SDI,,1991,74.6064456162
-Low SDI,,1992,74.0135087162
-Low SDI,,1993,74.16514358789999
-Low SDI,,1994,73.990738602
-Low SDI,,1995,74.28514970490001
-Low SDI,,1996,74.508577354
-Low SDI,,1997,73.7164543313
-Low SDI,,1998,74.4849714262
-Low SDI,,1999,74.9239716818
-Low SDI,,2000,74.82511753579999
-Low SDI,,2001,75.8775013261
-Low SDI,,2002,75.4456675311
-Low SDI,,2003,75.0587581389
-Low SDI,,2004,73.0701961223
-Low SDI,,2005,70.8952634136
-Low SDI,,2006,66.9398677854
-Low SDI,,2007,63.8970170345
-Low SDI,,2008,60.107942289499995
-Low SDI,,2009,56.94667168990001
-Low SDI,,2010,54.1627146784
-Low SDI,,2011,49.9659733136
-Low SDI,,2012,45.708615456
-Low SDI,,2013,42.5313807924
-Low SDI,,2014,40.569090446800004
-Low SDI,,2015,38.9670874147
-Low SDI,,2016,37.8730383248
-Low-middle SDI,,1990,19.111331912
-Low-middle SDI,,1991,19.5981203553
-Low-middle SDI,,1992,19.7571624202
-Low-middle SDI,,1993,20.0826833001
-Low-middle SDI,,1994,20.2154647736
-Low-middle SDI,,1995,20.3136648334
-Low-middle SDI,,1996,20.4314238442
-Low-middle SDI,,1997,20.5346428878
-Low-middle SDI,,1998,20.9013145025
-Low-middle SDI,,1999,21.0222649009
-Low-middle SDI,,2000,20.9326476572
-Low-middle SDI,,2001,21.3897321782
-Low-middle SDI,,2002,21.507669131300002
-Low-middle SDI,,2003,22.010343587
-Low-middle SDI,,2004,21.6256023537
-Low-middle SDI,,2005,21.1273116747
-Low-middle SDI,,2006,21.2168471627
-Low-middle SDI,,2007,21.1571614842
-Low-middle SDI,,2008,21.1519753264
-Low-middle SDI,,2009,19.784796427
-Low-middle SDI,,2010,18.587550776799997
-Low-middle SDI,,2011,17.5016545826
-Low-middle SDI,,2012,16.637732932400002
-Low-middle SDI,,2013,16.474465469600002
-Low-middle SDI,,2014,16.2392318251
-Low-middle SDI,,2015,15.7712598431
-Low-middle SDI,,2016,15.702085836499998
 Luxembourg,LUX,1990,0
 Luxembourg,LUX,1991,0
 Luxembourg,LUX,1992,0
@@ -3536,33 +3131,6 @@ Micronesia (country),FSM,2013,0
 Micronesia (country),FSM,2014,0
 Micronesia (country),FSM,2015,0
 Micronesia (country),FSM,2016,0
-Middle SDI,,1990,0.927399728361
-Middle SDI,,1991,0.9199811053150001
-Middle SDI,,1992,0.903844284968
-Middle SDI,,1993,0.8958311705600001
-Middle SDI,,1994,0.8990204571980001
-Middle SDI,,1995,0.8831792445180001
-Middle SDI,,1996,0.87328498338
-Middle SDI,,1997,0.892526607907
-Middle SDI,,1998,0.848559704806
-Middle SDI,,1999,0.819922612731
-Middle SDI,,2000,0.7838626926339999
-Middle SDI,,2001,0.760273145385
-Middle SDI,,2002,0.741489988523
-Middle SDI,,2003,0.729485192309
-Middle SDI,,2004,0.734888953198
-Middle SDI,,2005,0.719603697616
-Middle SDI,,2006,0.688106393665
-Middle SDI,,2007,0.670123183321
-Middle SDI,,2008,0.645255429638
-Middle SDI,,2009,0.623803200115
-Middle SDI,,2010,0.620170707481
-Middle SDI,,2011,0.62664493594
-Middle SDI,,2012,0.615656877079
-Middle SDI,,2013,0.6169258331899999
-Middle SDI,,2014,0.60491862994
-Middle SDI,,2015,0.600545584289
-Middle SDI,,2016,0.601751715654
 Moldova,MDA,1990,0
 Moldova,MDA,1991,0
 Moldova,MDA,1992,0
@@ -3914,60 +3482,6 @@ Nigeria,NGA,2013,102.75159717099999
 Nigeria,NGA,2014,99.84621128920001
 Nigeria,NGA,2015,95.4886699467
 Nigeria,NGA,2016,92.7983899346
-North Africa and Middle East,,1990,0.796817784113
-North Africa and Middle East,,1991,0.8457259651150001
-North Africa and Middle East,,1992,0.8709121982079999
-North Africa and Middle East,,1993,0.916024994298
-North Africa and Middle East,,1994,0.969029394919
-North Africa and Middle East,,1995,1.00816355741
-North Africa and Middle East,,1996,1.0642699588
-North Africa and Middle East,,1997,1.0923749421
-North Africa and Middle East,,1998,1.14701349016
-North Africa and Middle East,,1999,1.19030815596
-North Africa and Middle East,,2000,1.24850079663
-North Africa and Middle East,,2001,1.26481519665
-North Africa and Middle East,,2002,1.26969324761
-North Africa and Middle East,,2003,1.28388732837
-North Africa and Middle East,,2004,1.28545536742
-North Africa and Middle East,,2005,1.34443134699
-North Africa and Middle East,,2006,1.10584036899
-North Africa and Middle East,,2007,1.0031049362
-North Africa and Middle East,,2008,0.906328544997
-North Africa and Middle East,,2009,0.8477516802589999
-North Africa and Middle East,,2010,0.77704304654
-North Africa and Middle East,,2011,0.731042892023
-North Africa and Middle East,,2012,0.7351928125130001
-North Africa and Middle East,,2013,0.7984786706310001
-North Africa and Middle East,,2014,0.8198502744109999
-North Africa and Middle East,,2015,0.832150817399
-North Africa and Middle East,,2016,0.8331789285750001
-North America,,1990,0
-North America,,1991,0
-North America,,1992,0
-North America,,1993,0
-North America,,1994,0
-North America,,1995,0
-North America,,1996,0
-North America,,1997,0
-North America,,1998,0
-North America,,1999,0
-North America,,2000,0
-North America,,2001,0
-North America,,2002,0
-North America,,2003,0
-North America,,2004,0
-North America,,2005,0
-North America,,2006,0
-North America,,2007,0
-North America,,2008,0
-North America,,2009,0
-North America,,2010,0
-North America,,2011,0
-North America,,2012,0
-North America,,2013,0
-North America,,2014,0
-North America,,2015,0
-North America,,2016,0
 North Korea,PRK,1990,0.0378880670855
 North Korea,PRK,1991,0.0355214843298
 North Korea,PRK,1992,0.0333351483179
@@ -4076,33 +3590,6 @@ Norway,NOR,2013,0
 Norway,NOR,2014,0
 Norway,NOR,2015,0
 Norway,NOR,2016,0
-Oceania,,1990,14.7813393568
-Oceania,,1991,16.2041041928
-Oceania,,1992,14.9905983575
-Oceania,,1993,13.483754533199999
-Oceania,,1994,12.773376683999999
-Oceania,,1995,12.278084300600002
-Oceania,,1996,12.4219704798
-Oceania,,1997,11.9339580264
-Oceania,,1998,12.5042681527
-Oceania,,1999,29.5912636324
-Oceania,,2000,53.178834734300004
-Oceania,,2001,51.616289746700005
-Oceania,,2002,46.2151122174
-Oceania,,2003,49.1148437201
-Oceania,,2004,48.3945801163
-Oceania,,2005,42.5730627772
-Oceania,,2006,39.172564774499996
-Oceania,,2007,27.412680931100002
-Oceania,,2008,19.4273383774
-Oceania,,2009,15.8878571771
-Oceania,,2010,12.6988925089
-Oceania,,2011,10.7115647562
-Oceania,,2012,10.499754852399999
-Oceania,,2013,11.716497110799999
-Oceania,,2014,9.40521495952
-Oceania,,2015,8.63632563812
-Oceania,,2016,8.71131079257
 Oman,OMN,1990,0.0332768356876
 Oman,OMN,1991,0.0351976036179
 Oman,OMN,1992,0.0343146104598
@@ -4940,33 +4427,6 @@ South Africa,ZAF,2013,0.292918240271
 South Africa,ZAF,2014,0.29597967330499997
 South Africa,ZAF,2015,0.303542763457
 South Africa,ZAF,2016,0.31412555754
-South Asia,,1990,6.208657864319999
-South Asia,,1991,6.1385084900499995
-South Asia,,1992,6.02948683493
-South Asia,,1993,5.96744169393
-South Asia,,1994,5.86445712322
-South Asia,,1995,5.79807878137
-South Asia,,1996,5.6434356141599995
-South Asia,,1997,5.607624031179999
-South Asia,,1998,5.571212742459999
-South Asia,,1999,5.43837588002
-South Asia,,2000,5.36928004548
-South Asia,,2001,5.24087872232
-South Asia,,2002,5.03218379649
-South Asia,,2003,4.81582040503
-South Asia,,2004,4.60566046755
-South Asia,,2005,4.4051370317
-South Asia,,2006,4.262607314229999
-South Asia,,2007,4.16730668816
-South Asia,,2008,4.00926131624
-South Asia,,2009,3.8804784475
-South Asia,,2010,3.80429978342
-South Asia,,2011,3.77284186349
-South Asia,,2012,3.63453999456
-South Asia,,2013,3.62017649115
-South Asia,,2014,3.64266854481
-South Asia,,2015,3.6524869331599996
-South Asia,,2016,3.6127191464800004
 South Korea,KOR,1990,0.0366322963638
 South Korea,KOR,1991,0.0332911508332
 South Korea,KOR,1992,0.029913150092799996
@@ -5021,87 +4481,6 @@ South Sudan,SSD,2013,22.2838598039
 South Sudan,SSD,2014,23.3909436274
 South Sudan,SSD,2015,22.8871707889
 South Sudan,SSD,2016,22.0487104029
-Southeast Asia,,1990,5.28717462701
-Southeast Asia,,1991,5.23839194323
-Southeast Asia,,1992,5.05493832063
-Southeast Asia,,1993,4.92551626747
-Southeast Asia,,1994,4.85570962259
-Southeast Asia,,1995,4.65571613994
-Southeast Asia,,1996,4.58702799961
-Southeast Asia,,1997,4.7063964113
-Southeast Asia,,1998,4.41818770711
-Southeast Asia,,1999,4.24358359789
-Southeast Asia,,2000,4.00558336694
-Southeast Asia,,2001,3.8747492751999997
-Southeast Asia,,2002,3.76987307568
-Southeast Asia,,2003,3.6964167143
-Southeast Asia,,2004,3.65269400069
-Southeast Asia,,2005,3.56473394215
-Southeast Asia,,2006,3.48880120135
-Southeast Asia,,2007,3.40539210775
-Southeast Asia,,2008,3.33803249278
-Southeast Asia,,2009,3.28383109934
-Southeast Asia,,2010,3.24668223727
-Southeast Asia,,2011,3.0706578979800003
-Southeast Asia,,2012,3.00201374777
-Southeast Asia,,2013,2.97784973579
-Southeast Asia,,2014,2.6897091514900002
-Southeast Asia,,2015,2.5859386239399997
-Southeast Asia,,2016,2.5613476226
-Southern Latin America,,1990,0.0208257692363
-Southern Latin America,,1991,0.0194351310762
-Southern Latin America,,1992,0.0183849130811
-Southern Latin America,,1993,0.0170855284343
-Southern Latin America,,1994,0.015912990668
-Southern Latin America,,1995,0.0149481749232
-Southern Latin America,,1996,0.0141426600239
-Southern Latin America,,1997,0.0132352521761
-Southern Latin America,,1998,0.012500034929100002
-Southern Latin America,,1999,0.0117928011111
-Southern Latin America,,2000,0.0108592316819
-Southern Latin America,,2001,0.010211382407
-Southern Latin America,,2002,0.00961718564283
-Southern Latin America,,2003,0.00888366218342
-Southern Latin America,,2004,0.00803476403287
-Southern Latin America,,2005,0.007450238281
-Southern Latin America,,2006,0.0070175592938900005
-Southern Latin America,,2007,0.0067139998543
-Southern Latin America,,2008,0.00622192173645
-Southern Latin America,,2009,0.005813380527499999
-Southern Latin America,,2010,0.00534624543132
-Southern Latin America,,2011,0.00499131843609
-Southern Latin America,,2012,0.004703617480499999
-Southern Latin America,,2013,0.00439931728434
-Southern Latin America,,2014,0.00404058227382
-Southern Latin America,,2015,0.00373651734196
-Southern Latin America,,2016,0.0034672166924899998
-Southern Sub-Saharan Africa,,1990,1.69405394971
-Southern Sub-Saharan Africa,,1991,1.60211662809
-Southern Sub-Saharan Africa,,1992,1.60022893955
-Southern Sub-Saharan Africa,,1993,1.58019145139
-Southern Sub-Saharan Africa,,1994,1.55453170824
-Southern Sub-Saharan Africa,,1995,1.5859463616799998
-Southern Sub-Saharan Africa,,1996,1.5990217239600002
-Southern Sub-Saharan Africa,,1997,1.63536791308
-Southern Sub-Saharan Africa,,1998,1.6598365669800001
-Southern Sub-Saharan Africa,,1999,1.8318422304100002
-Southern Sub-Saharan Africa,,2000,1.9056612518799998
-Southern Sub-Saharan Africa,,2001,1.9753614459100002
-Southern Sub-Saharan Africa,,2002,2.15821611527
-Southern Sub-Saharan Africa,,2003,2.32783929419
-Southern Sub-Saharan Africa,,2004,2.52330041563
-Southern Sub-Saharan Africa,,2005,2.49994691737
-Southern Sub-Saharan Africa,,2006,2.5672484985899997
-Southern Sub-Saharan Africa,,2007,2.4378660392900002
-Southern Sub-Saharan Africa,,2008,2.39385993419
-Southern Sub-Saharan Africa,,2009,2.19020983067
-Southern Sub-Saharan Africa,,2010,2.23353596858
-Southern Sub-Saharan Africa,,2011,2.23488120278
-Southern Sub-Saharan Africa,,2012,2.1703660458
-Southern Sub-Saharan Africa,,2013,2.1232403936599997
-Southern Sub-Saharan Africa,,2014,2.18514498134
-Southern Sub-Saharan Africa,,2015,2.2146336982199997
-Southern Sub-Saharan Africa,,2016,2.2878031315
 Spain,ESP,1990,0
 Spain,ESP,1991,0
 Spain,ESP,1992,0
@@ -5156,33 +4535,6 @@ Sri Lanka,LKA,2013,0.135101792946
 Sri Lanka,LKA,2014,0.132998751196
 Sri Lanka,LKA,2015,0.133257947026
 Sri Lanka,LKA,2016,0
-Sub-Saharan Africa,,1990,89.32558900810001
-Sub-Saharan Africa,,1991,90.9932636196
-Sub-Saharan Africa,,1992,90.9137888275
-Sub-Saharan Africa,,1993,91.7594663614
-Sub-Saharan Africa,,1994,91.9508394463
-Sub-Saharan Africa,,1995,92.46216763790001
-Sub-Saharan Africa,,1996,93.0441816138
-Sub-Saharan Africa,,1997,92.5481945123
-Sub-Saharan Africa,,1998,93.9059200733
-Sub-Saharan Africa,,1999,94.2340537458
-Sub-Saharan Africa,,2000,93.5367454964
-Sub-Saharan Africa,,2001,95.3874953962
-Sub-Saharan Africa,,2002,95.4961773495
-Sub-Saharan Africa,,2003,96.2815933315
-Sub-Saharan Africa,,2004,93.8396644154
-Sub-Saharan Africa,,2005,90.9866631946
-Sub-Saharan Africa,,2006,87.6995501848
-Sub-Saharan Africa,,2007,85.0070713054
-Sub-Saharan Africa,,2008,81.8377796935
-Sub-Saharan Africa,,2009,76.37793953
-Sub-Saharan Africa,,2010,71.64341436800001
-Sub-Saharan Africa,,2011,66.0734311273
-Sub-Saharan Africa,,2012,61.04200764309999
-Sub-Saharan Africa,,2013,57.860432261199996
-Sub-Saharan Africa,,2014,55.720065533
-Sub-Saharan Africa,,2015,53.3470713762
-Sub-Saharan Africa,,2016,51.9252993267
 Sudan,SDN,1990,10.8868609992
 Sudan,SDN,1991,11.4079596133
 Sudan,SDN,1992,11.4363341675
@@ -5561,33 +4913,6 @@ Trinidad and Tobago,TTO,2013,0
 Trinidad and Tobago,TTO,2014,0
 Trinidad and Tobago,TTO,2015,0
 Trinidad and Tobago,TTO,2016,0
-Tropical Latin America,,1990,0.351419377478
-Tropical Latin America,,1991,0.32759792128099996
-Tropical Latin America,,1992,0.290623916008
-Tropical Latin America,,1993,0.25379399391499996
-Tropical Latin America,,1994,0.222376288123
-Tropical Latin America,,1995,0.185227058207
-Tropical Latin America,,1996,0.157066141784
-Tropical Latin America,,1997,0.135730105288
-Tropical Latin America,,1998,0.11343549234900001
-Tropical Latin America,,1999,0.0985477113268
-Tropical Latin America,,2000,0.0867029669159
-Tropical Latin America,,2001,0.0775696512289
-Tropical Latin America,,2002,0.0700581888648
-Tropical Latin America,,2003,0.0648121442406
-Tropical Latin America,,2004,0.0607278662847
-Tropical Latin America,,2005,0.056944533590600005
-Tropical Latin America,,2006,0.0534895609264
-Tropical Latin America,,2007,0.050095777649699996
-Tropical Latin America,,2008,0.0474171215839
-Tropical Latin America,,2009,0.0451507627789
-Tropical Latin America,,2010,0.0431510549929
-Tropical Latin America,,2011,0.0411314838989
-Tropical Latin America,,2012,0.0391505960729
-Tropical Latin America,,2013,0.0377565334938
-Tropical Latin America,,2014,0.0373212303365
-Tropical Latin America,,2015,0.0368181740114
-Tropical Latin America,,2016,0.0375152507317
 Tunisia,TUN,1990,0
 Tunisia,TUN,1991,0
 Tunisia,TUN,1992,0
@@ -5993,87 +5318,6 @@ Wales,,2013,0
 Wales,,2014,0
 Wales,,2015,0
 Wales,,2016,0
-Western Europe,,1990,0
-Western Europe,,1991,0
-Western Europe,,1992,0
-Western Europe,,1993,0
-Western Europe,,1994,0
-Western Europe,,1995,0
-Western Europe,,1996,0
-Western Europe,,1997,0
-Western Europe,,1998,0
-Western Europe,,1999,0
-Western Europe,,2000,0
-Western Europe,,2001,0
-Western Europe,,2002,0
-Western Europe,,2003,0
-Western Europe,,2004,0
-Western Europe,,2005,0
-Western Europe,,2006,0
-Western Europe,,2007,0
-Western Europe,,2008,0
-Western Europe,,2009,0
-Western Europe,,2010,0
-Western Europe,,2011,0
-Western Europe,,2012,0
-Western Europe,,2013,0
-Western Europe,,2014,0
-Western Europe,,2015,0
-Western Europe,,2016,0
-Western Sub-Saharan Africa,,1990,118.937106588
-Western Sub-Saharan Africa,,1991,121.853695421
-Western Sub-Saharan Africa,,1992,122.35490647699999
-Western Sub-Saharan Africa,,1993,124.228419085
-Western Sub-Saharan Africa,,1994,124.755507529
-Western Sub-Saharan Africa,,1995,125.163053065
-Western Sub-Saharan Africa,,1996,125.93899729
-Western Sub-Saharan Africa,,1997,125.460808147
-Western Sub-Saharan Africa,,1998,127.298921588
-Western Sub-Saharan Africa,,1999,127.682129971
-Western Sub-Saharan Africa,,2000,128.37090454100002
-Western Sub-Saharan Africa,,2001,131.55230701099998
-Western Sub-Saharan Africa,,2002,134.06541152
-Western Sub-Saharan Africa,,2003,138.234491279
-Western Sub-Saharan Africa,,2004,137.337565676
-Western Sub-Saharan Africa,,2005,135.825239713
-Western Sub-Saharan Africa,,2006,134.934127406
-Western Sub-Saharan Africa,,2007,133.841799024
-Western Sub-Saharan Africa,,2008,132.97937345
-Western Sub-Saharan Africa,,2009,123.956902636
-Western Sub-Saharan Africa,,2010,116.191973654
-Western Sub-Saharan Africa,,2011,108.713736199
-Western Sub-Saharan Africa,,2012,101.77854368
-Western Sub-Saharan Africa,,2013,96.8556386603
-Western Sub-Saharan Africa,,2014,93.419458292
-Western Sub-Saharan Africa,,2015,90.0111942525
-Western Sub-Saharan Africa,,2016,87.537183301
-World,OWID_WRL,1990,11.9919743508
-World,OWID_WRL,1991,12.3040848177
-World,OWID_WRL,1992,12.462722183799999
-World,OWID_WRL,1993,12.7437947858
-World,OWID_WRL,1994,12.9516065251
-World,OWID_WRL,1995,13.1947569778
-World,OWID_WRL,1996,13.4241227049
-World,OWID_WRL,1997,13.598440316
-World,OWID_WRL,1998,13.9620493012
-World,OWID_WRL,1999,14.2715053283
-World,OWID_WRL,2000,14.4170812695
-World,OWID_WRL,2001,14.854815211300002
-World,OWID_WRL,2002,15.038252269300001
-World,OWID_WRL,2003,15.3083654374
-World,OWID_WRL,2004,15.1440375004
-World,OWID_WRL,2005,14.8932975538
-World,OWID_WRL,2006,14.672997992400001
-World,OWID_WRL,2007,14.3998683729
-World,OWID_WRL,2008,14.0972232817
-World,OWID_WRL,2009,13.383326643099998
-World,OWID_WRL,2010,12.7306214194
-World,OWID_WRL,2011,11.9703805489
-World,OWID_WRL,2012,11.1884796507
-World,OWID_WRL,2013,10.8217231195
-World,OWID_WRL,2014,10.5427564509
-World,OWID_WRL,2015,10.234016515
-World,OWID_WRL,2016,10.2035514262
 Yemen,YEM,1990,0.0448435851738
 Yemen,YEM,1991,0.0442876454236
 Yemen,YEM,1992,0.0448882995396
