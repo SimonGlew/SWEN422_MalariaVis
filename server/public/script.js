@@ -2,10 +2,27 @@ var server = "http://localhost:8000";
 
 var mapData;
 
-d3.json(server + "/worldmap.json").then(function(data){
-  mapData = data;
-  drawMap();
-})
+var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
+var promises = [];
+
+files.forEach(function(url) {
+    promises.push(d3.json(url))
+});
+
+Promise.all(promises).then(function(values) {
+    processData(values);
+});
+
+function processData(data){
+  mapData = data[0]
+  console.log(mapData)
+  incidence = data[1];
+  console.log(incidence)
+  for(var i = 0; i < mapData.features.length; i++){
+    console.log(mapData.features[i].properties.adm0_a3)
+  }
+  drawMap()
+}
 
 function drawMap(){
   var mapsvg = d3.select("#map");
