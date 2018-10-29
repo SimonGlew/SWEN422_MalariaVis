@@ -106,18 +106,30 @@ function drawMap(){
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
                             .style("top" , d3.event.pageY + 5 + "px");
-       d3.selectAll("#tooltip > p > .mortality").html("5543");
-       d3.selectAll("#tooltip > p > .incidence").html("1234");
-       d3.selectAll("#tooltip > p > .percentage").html("34");
+       currentYearMortality = getDataPointRounded(d.properties.mortalityRates);
+       currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
+       if (Number.isFinite(currentYearIncidence)) {
+           currentYearPerc = Math.round(100*currentYearMortality / currentYearIncidence);
+       } else {
+         currentYearPerc = "-";
+       }
+       d3.selectAll("#tooltip > p > .mortality").html(currentYearMortality);
+       d3.selectAll("#tooltip > p > .incidence").html(currentYearIncidence);
+       d3.selectAll("#tooltip > p > .percentage").html(currentYearPerc);
        d3.selectAll("#tooltip > h1").html(d.properties.name);
-       console.log(d);
      })
      .on("mouseout", function(d){
        d3.select(this).style("opacity", 0.6);
        d3.select("#tooltip").style("display", "none");
      })
 
-
-
+  function getDataPointRounded(data) {
+    nd = "No data";
+    if (!data) {
+        return nd;
+    }
+    e = data.filter(function(p){return p.year == year})[0];
+    return Math.round(e.Value*100)/100 || nd;
+  }
 
 }
