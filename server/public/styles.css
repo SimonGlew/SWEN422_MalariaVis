@@ -95,15 +95,15 @@ fieldset[disabled] .btn-action.active {
 .slider-col{
   margin-top: -28px;
 }
-.mortality-slider, 
-.incidents-slider, 
+.mortality-slider,
+.incidents-slider,
 .deathPercentage-slider{
   margin-top: 10px;
   width:100%
 }
 
-.mortality-rate-slider, 
-.incidents-rate-slider, 
+.mortality-rate-slider,
+.incidents-rate-slider,
 .deathPercentage-rate-slider{
   width: 3em !important;
   height: 1.6em !important;

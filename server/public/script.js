@@ -1,9 +1,14 @@
 var server = "http://localhost:8000";
 
 var mapData;
+var incidence;
+var mortality;
 
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
+
+var year = 2000;
+var colorBy = "incidence";
 
 files.forEach(function(url) {
     promises.push(d3.json(url))
@@ -15,14 +20,38 @@ Promise.all(promises).then(function(values) {
 
 function processData(data){
   mapData = data[0]
-  console.log(mapData)
   incidence = data[1];
-  console.log(incidence)
+  mortality = data[2]
   for(var i = 0; i < mapData.features.length; i++){
-    console.log(mapData.features[i].properties.adm0_a3)
+    mapData.features[i].properties.incidenceRates = incidence[mapData.features[i].properties.adm0_a3];
+    mapData.features[i].properties.mortalityRates = mortality[mapData.features[i].properties.adm0_a3];
   }
+  console.log(incidence)
   drawMap()
 }
+
+
+
+function getColor(feature){
+  if(colorBy == "incidence"){
+    var data = feature.properties.incidenceRates;
+    if(!data){
+      return colorScale(0);
+    }
+    for(var i = 0; i < data.length; i++){
+      console.log(data[i].year)
+      if(data[i].year == year){
+        console.log(data[i].Value)
+        return colorScale(data[i].Value);
+      }
+    }
+  }
+}
+
+
+var colorScale = d3.scaleLinear()
+  .domain([0, 200, 1000])
+  .range(['#FFF', '#fc9272', '#de2d26'])
 
 function drawMap(){
   var mapsvg = d3.select("#map");
@@ -37,7 +66,6 @@ function drawMap(){
   var zoom = d3.zoom()
     .scaleExtent([1, 100])
     .on("zoom", zoomed)
-
 
   mapsvg.append("rect")
     .attr("id", "mouselistener")
@@ -65,7 +93,10 @@ function drawMap(){
    .append("path")
      .attr("d", path)
      .attr("class", "mapfeature")
-     .attr("fill", "#333")
+     .attr("fill", function(d){
+       return getColor(d)
+
+     })
      .attr("stroke-width", 0.5)
      .attr("stroke", "#000")
      .attr("pointer-events", "all")
