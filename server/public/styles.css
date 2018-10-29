@@ -138,14 +138,6 @@ fieldset[disabled] .btn-action.active {
    user-select: none;
 }
 
-.rival-tooltip{
-  padding: 2px 10px;
-}
-
-#team-title-container{
-  text-align: center;
-}
-
 thead{
   background-color: #d4d5d6;
 }
@@ -156,17 +148,6 @@ thead{
 
 .black{
   color: #000;
-}
-
-#tooltip{
-  position:fixed;
-  /* max-width:150px; */
-  min-width:100px;
-  min-height:20px;
-  background-color:lightgrey;
-  border-radius: 5px;
-  border:3px solid black;
-  pointer-events: none;
 }
 
 #venue-comparison-container{
@@ -183,4 +164,24 @@ span.block{
 
 .winrate-label{
   font-size:11px;
+}
+
+#tooltip {
+	padding: 0.5em;
+	position: absolute;
+	display: none;
+	color: #FFF;
+	background-color: #FF2A5E;
+	box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+	border: 1px solid #dd0036;
+	border-radius: 4px;
+}
+
+#tooltip h1 {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#tooltip p {
+	margin-bottom: 0em;
 }

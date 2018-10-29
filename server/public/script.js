@@ -101,11 +101,20 @@ function drawMap(){
      .attr("stroke", "#000")
      .attr("pointer-events", "all")
      .style("opacity", 0.6)
-     .on("mouseover", function(d){
+     .on("mousemove", function(d){
        d3.select(this).style("opacity", 0.8);
+       d3.select("#tooltip").style("display", "inline-block")
+                            .style("left", d3.event.pageX + 5 + "px")
+                            .style("top" , d3.event.pageY + 5 + "px");
+       d3.selectAll("#tooltip > p > .mortality").html("5543");
+       d3.selectAll("#tooltip > p > .incidence").html("1234");
+       d3.selectAll("#tooltip > p > .percentage").html("34");
+       d3.selectAll("#tooltip > h1").html(d.properties.name);
+       console.log(d);
      })
      .on("mouseout", function(d){
        d3.select(this).style("opacity", 0.6);
+       d3.select("#tooltip").style("display", "none");
      })
 
 
