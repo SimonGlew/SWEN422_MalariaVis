@@ -1,3 +1,9 @@
+svg {
+	border: 2px solid #999;
+	border-radius: 100px;
+	box-shadow: 20px 20px 20px 20px #FF2A5E;
+}
+
 .navbar{
   background-color: #ff285e;
 }
