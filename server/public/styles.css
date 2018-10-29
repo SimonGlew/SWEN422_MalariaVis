@@ -97,6 +97,7 @@ fieldset[disabled] .btn-action.active {
 }
 .mortality-slider, 
 .incidents-slider, 
+.year-slider, 
 .deathPercentage-slider{
   margin-top: 10px;
   width:100%
@@ -104,6 +105,7 @@ fieldset[disabled] .btn-action.active {
 
 .mortality-rate-slider, 
 .incidents-rate-slider, 
+.year-rate-slider,
 .deathPercentage-rate-slider{
   width: 3em !important;
   height: 1.6em !important;
