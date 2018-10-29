@@ -21,7 +21,24 @@ function drawMap(){
     .scaleExtent([1, 100])
     .on("zoom", zoomed)
 
-  console.log(mapData)
+
+  mapsvg.append("rect")
+    .attr("id", "mouselistener")
+        .attr("x", 0)
+        .attr("y", 0)
+        .attr("width", mapWidth)
+        .attr("height", mapHeight)
+        .style("opacity", 0)
+        .call(zoom)
+
+    //Transform the map and markers based on how it has been zoomed and translated.
+    function zoomed(){
+      console.log(d3.event.transform)
+      mapsvg.select(".worldmap").selectAll("path")
+        .attr("transform", d3.event.transform);
+    }
+
+
 
   mapsvg.append("g")
    .attr("class", "worldmap")
@@ -31,9 +48,6 @@ function drawMap(){
    .append("path")
      .attr("d", path)
      .attr("class", "mapfeature")
-     .attr("id", function(d){
-       return d.properties.adm0_a3;
-     })
      .attr("fill", "#333")
      .attr("stroke-width", 0.5)
      .attr("stroke", "#000")
@@ -46,30 +60,7 @@ function drawMap(){
        d3.select(this).style("opacity", 0.6);
      })
 
-     mapsvg.append("rect")
-       .attr("id", "mouselistener")
-           .attr("x", 0)
-           .attr("y", 0)
-           .attr("width", mapWidth)
-           .attr("height", mapHeight)
-           .style("opacity", 0)
-           .on("mousemove", function(){
-             var e = d3.event;
-             var prev = this.style.pointerEvents;
-             this.style.pointerEvents = 'none';
-             var el = document.elementFromPoint(d3.event.x, d3.event.y);
-             console.log(d3.select(el).attr("id"))
-             this.style.pointerEvents = prev;
-           })
-           .call(zoom)
 
-       //Transform the map and markers based on how it has been zoomed and translated.
-       function zoomed(){
-         console.log(d3.event)
-         console.log(d3.event.transform)
-         mapsvg.select(".worldmap").selectAll("path")
-           .attr("transform", d3.event.transform);
-       }
 
 
 }
