@@ -14,5 +14,40 @@ router.get('/api/countriesList', (req, res) => {
 	res.send(data)
 })
 
+router.get('/api/incidenceRates', (req, res) => {
+	requested_countries = req.query.countries
+	if (requested_countries == undefined) {
+		// No specific country was requested so return all of the data
+	  res.send(dataHandler.getIncidences())
+	} else {
+		requested_countries_data = []
+		if(!Array.isArray(requested_countries)) requested_countries = [requested_countries]
+		Object.keys(dataHandler.getIncidences()).filter(r => requested_countries.indexOf(r) != -1).forEach(country => {
+			requested_countries_data.push({
+				key: country,
+				value: dataHandler.getIncidences()[country]
+			});
+		})
+		res.send(requested_countries_data)
+	}
+})
+
+router.get('/api/mortalityRates', (req, res) => {
+	requested_countries = req.query.countries
+	if (requested_countries == undefined) {
+		// No specific country was requested so return all of the data
+	  res.send(dataHandler.getMortality())
+	} else {
+		requested_countries_data = []
+		if(!Array.isArray(requested_countries)) requested_countries = [requested_countries]
+		Object.keys(dataHandler.getMortality()).filter(r => requested_countries.indexOf(r) != -1).forEach(country => {
+			requested_countries_data.push({
+				key: country,
+				value: dataHandler.getMortality()[country]
+			});
+		})
+		res.send(requested_countries_data)
+	}
+})
 
 module.exports = router;
