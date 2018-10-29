@@ -1,6 +1,7 @@
 var actionStack = [],
     index = 0
 
+var incidentMortality = 'm'
 
 function undoAction() {
     console.log('undoing action')
@@ -125,6 +126,90 @@ function setDeathPercentageSlider() {
     });
 }
 
+function setYearSlider() {
+    console.log('incidentMortality', incidentMortality)
+    var handleA = $(".year-rate-slider.lower-handle");
+    var handleB = $(".year-rate-slider.upper-handle");
+    if (incidentMortality == 'i') {
+        $('.year-slider').slider({
+            create: function (e, ui) {
+                handleA.text(2000);
+                handleB.text(2015);
+            },
+            slide: function (e, ui) {
+                if ($(ui.handle).hasClass("upper-handle")) {
+                    handleB.text(ui.value);
+                }
+                else {
+                    handleA.text(ui.value);
+                }
+            },
+            orientation: 'horizontal',
+            range: true,
+            min: 2000,
+            max: 2015,
+            step: 5,
+            values: [2000, 2015],
+            animate: true
+        });
+    } else {
+        $('.year-slider').slider({
+            create: function (e, ui) {
+                handleA.text(1990);
+                handleB.text(2015);
+            },
+            slide: function (e, ui) {
+                if ($(ui.handle).hasClass("upper-handle")) {
+                    handleB.text(ui.value);
+                }
+                else {
+                    handleA.text(ui.value);
+                }
+            },
+            orientation: 'horizontal',
+            range: true,
+            min: 1990,
+            max: 2015,
+            step: 1,
+            values: [1990, 2015],
+            animate: true
+        });
+    }
+}
+
+function refreshYearSlider(){
+    var handleA = $(".year-rate-slider.lower-handle");
+    var handleB = $(".year-rate-slider.upper-handle");
+    if (incidentMortality == 'i') {
+        $('.year-slider').slider('values', '0', 2000)
+        $('.year-slider').slider('values', '1', 2015)
+
+        handleA.text(2000);
+        handleB.text(2015);
+    }else{
+        $('.year-slider').slider('values', '0', 1990)
+        $('.year-slider').slider('values', '1', 2015)
+
+        handleA.text(1990);
+        handleB.text(2015);
+    }
+}
+
 setMortalitySlider()
 setIncidentsSlider()
 setDeathPercentageSlider()
+setYearSlider()
+
+$('.btn-toggle').click(function () {
+    $(this).find('.btn').toggleClass('active');
+
+    if ($(this).find('.btn-action').length > 0) {
+        $(this).find('.btn').toggleClass('btn-action !important');
+
+        incidentMortality = (incidentMortality == 'i' ? 'm' : 'i')
+        setYearSlider()
+        refreshYearSlider()
+    }
+
+    $(this).find('.btn').toggleClass('btn-default');
+});
