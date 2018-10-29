@@ -20,6 +20,9 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
 	 crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+	 crossorigin="anonymous">
+
 	<script src="https://d3js.org/d3.v5.min.js"></script>
 </head>
 
@@ -27,18 +30,72 @@
 	<nav class="navbar navbar-dark navbar-fixed-top sticky-top">
 		<span class="navbar-brand">MalariaVis: For all your Malaria Needs</span>
 	</nav>
-	<div class="main container-fluid">
+	<div class="main container-fluid" style='padding-top:0px; padding-bottom:0px;'>
 		<div class='row'>
 			<div class='col-sm-9'>
+				<div style='min-height:20px;'></div>
 				MAP AND GRAPH
-				<svg id="map" style='height:70%;width:100%' />
+				<svg id="map" style='height:600px;width:100%' /> YEAR FILTER THING
 				<svg id="line" style='height:30%;width:100%' />
 			</div>
-			<div class='col-sm-3'>
-				FILTERS
+			<div class='col-sm-3' style='border-left:2px solid black'>
+				<div style='min-height:20px;'></div>
+				<div>
+					<div class='row justify-content-center'>
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:20px;'>
+							<i class="fas fa-undo"></i> Undo</button>
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
+							<i class="fas fa-redo"></i> Redo</button>
+					</div>
+
+					<div class="form group slider-col col-sm-12 nonFirstContainer">
+						<label class="black">Minumum and Maximum Mortality</label>
+						<div class="mortality-slider">
+							<div class="mortality-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="mortality-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+
+					<div class="form group slider-col col-sm-12 nonFirstContainer">
+						<label class="black">Minumum and Maximum Incidents</label>
+						<div class="incidents-slider">
+							<div class="incidents-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="incidents-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+
+					<div class="form group slider-col col-sm-12 nonFirstContainer">
+						<label class="black">Percentage of Death (%)</label>
+						<div class="deathPercentage-slider">
+							<div class="deathPercentage-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="deathPercentage-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+
+
+					<div class='row justify-content-center nonFirstContainer'>
+						<button type="button" class="btn btn-primary btn-action save" onclick='clearFilters()' style='margin-right:20px;'>
+							Clear Filters</button>
+						<button type="button" class="btn btn-primary btn-action save" onclick='submit()'>
+							Submit Filters</button>
+					</div>
+				</div>
+				<div>
+					<div class='row justify-content-center nonFirstContainer'>
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary btn-action export" onclick='clearFilters()'>
+								Export Map</button>
+							<button type="button" class="btn btn-primary btn-action export" onclick='submit()'>
+								Export Graph</button>
+							<button type="button" class="btn btn-primary btn-action export" onclick='submit()'>
+								Export to CSV</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<script src='js/index.js'></script>
 	<script src="script.js"></script>
 </body>
 
