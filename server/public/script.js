@@ -26,65 +26,43 @@ function processData(data){
     mapData.features[i].properties.incidenceRates = incidence[mapData.features[i].properties.adm0_a3];
     mapData.features[i].properties.mortalityRates = mortality[mapData.features[i].properties.adm0_a3];
   }
-  console.log(incidence)
   drawMap()
 }
 
-
-
-function getColor(feature){
-  if(colorBy == "incidence"){
-    var data = feature.properties.incidenceRates;
-    if(!data){
-      return colorScale(0);
-    }
-    for(var i = 0; i < data.length; i++){
-      console.log(data[i].year)
-      if(data[i].year == year){
-        console.log(data[i].Value)
-        return colorScale(data[i].Value);
-      }
-    }
-  }
-}
-
-
-var colorScale = d3.scaleLinear()
-  .domain([0, 200, 1000])
-  .range(['#FFF', '#fc9272', '#de2d26'])
-
 function drawMap(){
   var mapsvg = d3.select("#map");
+  //Get svg dimensions
   var mapbbox = mapsvg.node().getBoundingClientRect();
   var mapWidth = mapbbox.width;
   var mapHeight = mapbbox.height;
   var margin = 5;
+
+  //Project map to fit in svg
   var masterProject = d3.geoMercator();
   masterProject.fitExtent([[margin, margin], [mapWidth, mapHeight]], mapData);
   path = d3.geoPath().projection(masterProject);
 
+  //TODO: rethink this
   var zoom = d3.zoom()
     .scaleExtent([1, 100])
     .on("zoom", zoomed)
 
+  function zoomed(){
+    mapsvg.select(".worldmap").selectAll("path")
+      .attr("transform", d3.event.transform);
+  }
+
+  //Rectangle mouse lister for handling dragging/zooming
   mapsvg.append("rect")
     .attr("id", "mouselistener")
-        .attr("x", 0)
-        .attr("y", 0)
-        .attr("width", mapWidth)
-        .attr("height", mapHeight)
-        .style("opacity", 0)
-        .call(zoom)
+    .attr("x", 0)
+    .attr("y", 0)
+    .attr("width", mapWidth)
+    .attr("height", mapHeight)
+    .style("opacity", 0)
+    .call(zoom)
 
-    //Transform the map and markers based on how it has been zoomed and translated.
-    function zoomed(){
-      console.log(d3.event.transform)
-      mapsvg.select(".worldmap").selectAll("path")
-        .attr("transform", d3.event.transform);
-    }
-
-
-
+  //Draw countries
   mapsvg.append("g")
    .attr("class", "worldmap")
    .selectAll("path")
@@ -93,14 +71,11 @@ function drawMap(){
    .append("path")
      .attr("d", path)
      .attr("class", "mapfeature")
-     .attr("fill", function(d){
-       return getColor(d)
-
-     })
      .attr("stroke-width", 0.5)
-     .attr("stroke", "#000")
+     .attr("fill", "#FFF")
+     .attr("stroke", "#777")
      .attr("pointer-events", "all")
-     .style("opacity", 0.6)
+     .style("opacity", 1)
      .on("mousemove", function(d){
        d3.select(this).style("opacity", 0.8);
        d3.select("#tooltip").style("display", "inline-block")
@@ -131,5 +106,38 @@ function drawMap(){
     e = data.filter(function(p){return p.year == year})[0];
     return Math.round(e.Value*100)/100 || nd;
   }
-
+  updateMap();
 }
+
+function updateMap(){
+  d3.selectAll(".mapfeature")
+    .attr("fill", function(d){
+      return getColor(d);
+    })
+}
+
+function getColor(feature, highlighted){
+  if(colorBy == "incidence"){
+    var data = feature.properties.incidenceRates;
+    if(!data){
+      return colorScale(0);
+    }
+    for(var i = 0; i < data.length; i++){
+      if(data[i].year == year){
+        return colorScale(data[i].Value);
+      }
+    }
+  }
+}
+
+function zoomMap(){
+  //Find bbox of selected countries
+  var countryList = 0;
+  for(var i = 0; i < mapData.length; i++){
+
+  }
+}
+
+var colorScale = d3.scaleLinear()
+  .domain([0, 200, 1000])
+  .range(['#FFF', '#fc9272', '#de2d26'])
