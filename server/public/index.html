@@ -38,19 +38,87 @@
 		<div class='row'>
 
 			<div class='col-sm-9 vis-col'>
-				<svg id="map"/>
-				<div class="form group slider-col col-sm-12 nonFirstContainer">
-					<div class="year-slider">
-						<div class="year-rate-slider ui-slider-handle"></div>
+				<div class="vis-container">
+					<svg id="map"/>
+					<div class="col-sm-12 map-controls">
+						<div class="year-slider">
+							<div class="year-rate-slider ui-slider-handle"></div>
+						</div>
 					</div>
+					<hr />
 				</div>
-				<svg id="line" style='height:30%;width:100%' />
+
+				<div class="vis-container">
+					<svg id=line></svg>
+
+				</div>
 			</div>
 
 			<div class='col-sm-3 filter-col' style='border-left:2px solid black'>
-				<div style='min-height:20px;'></div>
-				<div>
-					<div class='row justify-content-center'>
+				<div class="row filter-row">
+					<div class="col-sm-12 filter-label">
+						<h5 class="filter-label">Action Controls</h5>
+					</div>
+					<div class="center-buttons justify-content-center col-sm-12">
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:50px;'>
+							<i class="fas fa-undo"></i> Undo</button>
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
+							<i class="fas fa-redo"></i> Redo</button>
+					</div>
+				</div>
+				<div class="row filter-row">
+					<div class="col-sm-12">
+						<h5 class="filter-label">Map Display</h5>
+					</div>
+					<div class="center-buttons col-sm-12 justify-content-center">
+						<div class="btn-group btn-toggle">
+							<button class="btn btn-lg btn-default">Incidence Rate</button>
+							<button class="btn btn-lg btn-action !important active">Mortality Rate</button>
+						</div>
+					</div>
+
+				</div>
+				<div class="row filter-row">
+					<div class="col-sm-12 filter-label">
+						<h5 class="filter-label">Country Filters</h5>
+					</div>
+					<div class="slider-container col-sm-12">
+						<label class="black">Minumum and Maximum Mortality</label>
+						<div class="mortality-slider">
+							<div class="mortality-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="mortality-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+					<div class="slider-container col-sm-12">
+						<label class="black">Minumum and Maximum Incidents</label>
+						<div class="incidents-slider">
+							<div class="incidents-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="incidents-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+					<div class="slider-container col-sm-12">
+						<label class="black">Percentage of Death (%)</label>
+						<div class="deathPercentage-slider">
+							<div class="deathPercentage-rate-slider lower-handle ui-slider-handle"></div>
+							<div class="deathPercentage-rate-slider upper-handle ui-slider-handle"></div>
+						</div>
+					</div>
+					<div class='center-buttons col-sm-12 justify-content-center'>
+						<button type="button" class="btn btn-primary btn-action save" onclick='clearFilters()' style='margin-right:20px;'>
+							Clear Filters</button>
+						<button type="button" class="btn btn-primary btn-action save" onclick='submit()'>
+							Submit Filters</button>
+					</div>
+
+				</div>
+				<div class="row filter-row">
+					<div class="col-sm-12 filter-label">
+						<h5 class="filter-label">Export Controls</h5>
+					</div>
+				</div>
+
+						<!-- <div>
+					 <div class='row justify-content-center'>
 						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:20px;'>
 							<i class="fas fa-undo"></i> Undo</button>
 						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
@@ -62,7 +130,7 @@
 							<button class="btn btn-lg btn-default">Incidence Rate</button>
 							<button class="btn btn-lg btn-action !important active">Mortality Rate</button>
 						</div>
-					</div>
+					</div> -->
 
 					<!-- <div class="form group slider-col col-sm-12 nonFirstContainer">
 						<label class="black">Minumum and Maximum Mortality</label>
@@ -89,7 +157,7 @@
 					</div> -->
 
 
-					<div class='row justify-content-center nonFirstContainer'>
+					<!-- <div class='row justify-content-center nonFirstContainer'>
 						<button type="button" class="btn btn-primary btn-action save" onclick='clearFilters()' style='margin-right:20px;'>
 							Clear Filters</button>
 						<button type="button" class="btn btn-primary btn-action save" onclick='submit()'>
@@ -109,7 +177,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	<div id="tooltip">

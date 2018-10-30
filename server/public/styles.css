@@ -3,6 +3,8 @@ svg {
 	border-radius: 4px;
 }
 
+
+
 body{
 	/* overflow-y: hidden; */
 }
@@ -17,6 +19,11 @@ body{
   font-size: 24px;
 }
 
+.filter-row{
+	padding-bottom: 20px;
+	padding-top: 10px;
+	border-bottom: solid 1px black;
+}
 .vis-col{
 	padding-top: 20px;
 	height: -webkit-fill-available;
@@ -24,8 +31,12 @@ body{
 
 }
 
+.filter-label{
+	/* padding-left: 15px; */
+}
+
 .filter-col{
-	padding-top: 20px;
+	/* padding-top: 20px; */
 	height: -webkit-fill-available;
 }
 
@@ -33,6 +44,10 @@ body{
   /* padding: 20px 75px; */
 	height: -webkit-fill-available;
 	padding-top: 3%;
+}
+
+.map-controls{
+	padding-top: 10px;
 }
 
 .btn-action {
@@ -109,16 +124,21 @@ fieldset[disabled] .btn-action.active {
   background-color: #d3f6ff;
 }
 
-.slider-col{
-  margin-top: -28px;
+.center-buttons{
+	display:flex;
 }
 
+.slider-container{
+	padding-bottom: 20px;
+}
 .mortality-slider,
 .incidents-slider,
 .year-slider,
 .deathPercentage-slider{
   margin-top: 10px;
-  width:100%
+  width:90%;
+	margin-left: 5px;
+
 }
 
 
@@ -177,9 +197,13 @@ span.block{
 
 
 #map{
-	height:500px;
+	height:440px;
 	width:100%;
-	padding-top: 20px;
+}
+
+#line{
+	height: 380px;
+	width: 100%;
 }
 
 #tooltip {
