@@ -4,6 +4,10 @@ var mapData;
 var incidence;
 var mortality;
 
+var path;
+var mapWidth;
+var mapHeight;
+
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
 
@@ -33,8 +37,8 @@ function drawMap(){
   var mapsvg = d3.select("#map");
   //Get svg dimensions
   var mapbbox = mapsvg.node().getBoundingClientRect();
-  var mapWidth = mapbbox.width;
-  var mapHeight = mapbbox.height;
+  mapWidth = mapbbox.width;
+  mapHeight = mapbbox.height;
   var margin = 5;
 
   //Project map to fit in svg
@@ -60,7 +64,7 @@ function drawMap(){
     .attr("width", mapWidth)
     .attr("height", mapHeight)
     .style("opacity", 0)
-    .call(zoom)
+    // .call(zoom)
 
   //Draw countries
   mapsvg.append("g")
@@ -75,9 +79,9 @@ function drawMap(){
      .attr("fill", "#FFF")
      .attr("stroke", "#777")
      .attr("pointer-events", "all")
-     .style("opacity", 1)
+     .style("opacity", 0.8)
      .on("mousemove", function(d){
-       d3.select(this).style("opacity", 0.8);
+       d3.select(this).style("opacity", 1);
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
                             .style("top" , d3.event.pageY + 5 + "px");
@@ -94,7 +98,7 @@ function drawMap(){
        d3.selectAll("#tooltip > h1").html(d.properties.name);
      })
      .on("mouseout", function(d){
-       d3.select(this).style("opacity", 0.6);
+       d3.select(this).style("opacity", 0.8);
        d3.select("#tooltip").style("display", "none");
      })
 
@@ -107,6 +111,7 @@ function drawMap(){
     return Math.round(e.Value*100)/100 || nd;
   }
   updateMap();
+  zoomMap();
 }
 
 function updateMap(){
@@ -131,11 +136,48 @@ function getColor(feature, highlighted){
 }
 
 function zoomMap(){
-  //Find bbox of selected countries
-  var countryList = 0;
-  for(var i = 0; i < mapData.length; i++){
-
+  var bboxList = [];
+  for(var i = 0; i < mapData.features.length; i++){
+    var feat = mapData.features[i];
+    //check incidence
+    var incInRange = false;
+    if(!feat.properties.incidenceRates) continue;
+    for(var j = 0; j < feat.properties.incidenceRates.length; j++){
+      if(feat.properties.incidenceRates[j].Value > 0){
+        incInRange = true;
+        break;
+      }
+    }
+    //TODO Check other filters
+    if(incInRange){
+      bboxList.push(path.bounds(mapData.features[i]))
+    }
   }
+  var bbox = bboxList[0];
+  for(var i = 1; i < bboxList.length; i++){
+    if(bbox[0][0] > bboxList[i][0][0]) bbox[0][0] = bboxList[i][0][0];
+    if(bbox[0][1] > bboxList[i][0][1]) bbox[0][1] = bboxList[i][0][1];
+    if(bbox[1][0] < bboxList[i][1][0]) bbox[1][0] = bboxList[i][1][0];
+    if(bbox[1][1] < bboxList[i][1][1]) bbox[1][1] = bboxList[i][1][1];
+  }
+
+
+
+  var pathw = bbox[1][0] - bbox[0][0];
+  var pathh = bbox[1][1] - bbox[0][1];
+  var kx = mapWidth/pathw;
+  var ky = mapWidth/pathh;
+  k = 0.95*Math.min(kx, ky);
+
+  var x = bbox[0][0] + (pathw)/2;
+  var y = bbox[0][1] + (pathh)/2;
+
+
+  d3.selectAll(".mapfeature")
+    .transition()
+    .duration(750)
+    .attr("transform", "translate(" + mapWidth / 2 + "," + mapHeight / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
+    .style("stroke-width", 1 / k + "px");
 }
 
 var colorScale = d3.scaleLinear()
