@@ -30,24 +30,24 @@
 </head>
 
 <body>
-	<nav class="navbar navbar-dark navbar-fixed-top sticky-top">
+	<nav class="navbar navbar-dark">
 		<span class="navbar-brand">MalariaVis: For all your Malaria Needs</span>
 	</nav>
-	<div class="main container-fluid" style='padding-top:0px; padding-bottom:0px;'>
+
+	<div class="main container-fluid">
 		<div class='row'>
-			<div class='col-sm-9'>
-				<div style='min-height:20px;'></div>
-				MAP AND GRAPH
-				<svg id="map" style='height:600px;width:100%' />
+
+			<div class='col-sm-9 vis-col'>
+				<svg id="map"/>
 				<div class="form group slider-col col-sm-12 nonFirstContainer">
-					<label class="black">Year Select</label>
 					<div class="year-slider">
 						<div class="year-rate-slider ui-slider-handle"></div>
 					</div>
 				</div>
 				<svg id="line" style='height:30%;width:100%' />
 			</div>
-			<div class='col-sm-3' style='border-left:2px solid black'>
+
+			<div class='col-sm-3 filter-col' style='border-left:2px solid black'>
 				<div style='min-height:20px;'></div>
 				<div>
 					<div class='row justify-content-center'>
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 
-					<div class="form group slider-col col-sm-12 nonFirstContainer">
+					<!-- <div class="form group slider-col col-sm-12 nonFirstContainer">
 						<label class="black">Minumum and Maximum Mortality</label>
 						<div class="mortality-slider">
 							<div class="mortality-rate-slider lower-handle ui-slider-handle"></div>
@@ -86,7 +86,7 @@
 							<div class="deathPercentage-rate-slider lower-handle ui-slider-handle"></div>
 							<div class="deathPercentage-rate-slider upper-handle ui-slider-handle"></div>
 						</div>
-					</div>
+					</div> -->
 
 
 					<div class='row justify-content-center nonFirstContainer'>
@@ -96,6 +96,7 @@
 							Submit Filters</button>
 					</div>
 				</div>
+
 				<div>
 					<div class='row justify-content-center nonFirstContainer'>
 						<div class="btn-group">

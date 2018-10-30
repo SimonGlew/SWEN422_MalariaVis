@@ -1,19 +1,38 @@
 svg {
 	border: 2px solid #999;
-	border-radius: 100px;
-	box-shadow: 20px 20px 20px 20px #FF2A5E;
+	border-radius: 4px;
+}
+
+body{
+	/* overflow-y: hidden; */
 }
 
 .navbar{
   background-color: #ff285e;
+	position: absolute;
+	width: 100%;
+	height: 6%;
 }
 .navbar-brand{
   font-size: 24px;
 }
 
+.vis-col{
+	padding-top: 20px;
+	height: -webkit-fill-available;
+
+
+}
+
+.filter-col{
+	padding-top: 20px;
+	height: -webkit-fill-available;
+}
 
 .main{
-  padding: 20px 75px;
+  /* padding: 20px 75px; */
+	height: -webkit-fill-available;
+	padding-top: 3%;
 }
 
 .btn-action {
@@ -86,14 +105,6 @@ fieldset[disabled] .btn-action.active {
     shape-rendering: crispEdges;
 }
 
-.bar-away{
-  fill:#ff5959;
-}
-
-.bar-home{
-  fill:#70a7ff;
-}
-
 .clicked-row{
   background-color: #d3f6ff;
 }
@@ -156,10 +167,6 @@ thead{
   color: #000;
 }
 
-#venue-comparison-container{
-  height: 700px;
-}
-
 span.block{
   display:block;
 }
@@ -168,8 +175,11 @@ span.block{
   font-size: 0.75rem;
 }
 
-.winrate-label{
-  font-size:11px;
+
+#map{
+	height:500px;
+	width:100%;
+	padding-top: 20px;
 }
 
 #tooltip {
