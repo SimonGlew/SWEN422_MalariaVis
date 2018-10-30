@@ -185,27 +185,10 @@ function refreshYearSlider() {
 }
 
 function getFilteredData() {
-    let params = {
-        year: year,
-        minMortality: minMortality,
-        maxMortality: maxMortality,
-        minIncidents: minIncidents,
-        maxIncidents: maxIncidents,
-        minDeath: minDeath,
-        maxDeath: maxDeath,
-        countries: countries
-    }
-    if (incidentMortality == 'i') {
-        $.get("/api/incidenceRates", params)
-            .then(function (data) {
-                console.log(data)
-            })
-    } else {
-        $.get("/api/mortalityRates", params)
-            .then(function (data) {
-                console.log(data)
-            })
-    }
+    //REDRAW MAP
+    
+    //CLEAR LINE GRAPH MAYBE, WHO KNOWS
+
 }
 
 $('.btn-toggle').click(function () {
