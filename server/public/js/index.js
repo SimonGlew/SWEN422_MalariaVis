@@ -37,7 +37,7 @@ function clearFilters() {
 
 function submit() {
     console.log('submit')
-    getFilteredData()
+    applyFilter()
 }
 
 function exportCSV() {
@@ -150,6 +150,7 @@ function setYearSlider() {
             },
             slide: function (e, ui) {
                 handleA.text(ui.value);
+                year = ui.value
             },
             orientation: 'horizontal',
             min: 2000,
@@ -173,6 +174,7 @@ function setYearSlider() {
             animate: true
         });
     }
+    applyFilter()
 }
 
 function refreshYearSlider() {
@@ -184,7 +186,7 @@ function refreshYearSlider() {
     }
 }
 
-function getFilteredData() {
+function applyFilter() {
     //REDRAW MAP
     
     //CLEAR LINE GRAPH MAYBE, WHO KNOWS
