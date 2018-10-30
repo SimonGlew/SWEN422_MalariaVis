@@ -1,7 +1,15 @@
 var actionStack = [],
     index = 0
 
-var incidentMortality = 'm'
+var incidentMortality = 'm',
+    year = 1990,
+    minMortality = 0,
+    maxMortality = 250,
+    minIncidents = 0,
+    maxIncidents = 1000,
+    minDeath = 0,
+    maxDeath = 100,
+    countries = []
 
 function undoAction() {
     console.log('undoing action')
@@ -29,6 +37,7 @@ function clearFilters() {
 
 function submit() {
     console.log('submit')
+    getFilteredData()
 }
 
 function exportCSV() {
@@ -53,9 +62,11 @@ function setMortalitySlider() {
                 return false;
             if ($(ui.handle).hasClass("upper-handle")) {
                 handleB.text(ui.value);
+                maxMortality = ui.value
             }
             else {
                 handleA.text(ui.value);
+                minMortality = ui.value
             }
         },
         orientation: 'horizontal',
@@ -82,9 +93,11 @@ function setIncidentsSlider() {
                 return false;
             if ($(ui.handle).hasClass("upper-handle")) {
                 handleB.text(ui.value);
+                maxIncidents = ui.value
             }
             else {
                 handleA.text(ui.value);
+                minIncidents = ui.value
             }
         },
         orientation: 'horizontal',
@@ -111,9 +124,11 @@ function setDeathPercentageSlider() {
                 return false;
             if ($(ui.handle).hasClass("upper-handle")) {
                 handleB.text(ui.value);
+                maxDeath = ui.value
             }
             else {
                 handleA.text(ui.value);
+                minDeath = ui.value
             }
         },
         orientation: 'horizontal',
@@ -149,6 +164,7 @@ function setYearSlider() {
             },
             slide: function (e, ui) {
                 handleA.text(ui.value);
+                year = ui.value
             },
             orientation: 'horizontal',
             min: 1990,
@@ -159,29 +175,42 @@ function setYearSlider() {
     }
 }
 
-function refreshYearSlider(){
+function refreshYearSlider() {
     var handleA = $(".year-rate-slider");
     if (incidentMortality == 'i') {
-        $('.year-slider').slider('values', '0', 2000)
-
         handleA.text(2000);
-    }else{
-        $('.year-slider').slider('values', '0', 1990)
-
+    } else {
         handleA.text(1990);
     }
 }
 
-setMortalitySlider()
-setIncidentsSlider()
-setDeathPercentageSlider()
-setYearSlider()
+function getFilteredData() {
+    let params = {
+        year: year,
+        minMortality: minMortality,
+        maxMortality: maxMortality,
+        minIncidents: minIncidents,
+        maxIncidents: maxIncidents,
+        minDeath: minDeath,
+        maxDeath: maxDeath,
+        countries: countries
+    }
+    if (incidentMortality == 'i') {
+        $.get("/api/incidenceRates", params)
+            .then(function (data) {
+                console.log(data)
+            })
+    } else {
+        $.get("/api/mortalityRates", params)
+            .then(function (data) {
+                console.log(data)
+            })
+    }
+}
 
 $('.btn-toggle').click(function () {
-    $(this).find('.btn').toggleClass('active');
-
     if ($(this).find('.btn-action').length > 0) {
-        $(this).find('.btn').toggleClass('btn-action !important');
+        $(this).find('.btn').toggleClass('btn-action');
 
         incidentMortality = (incidentMortality == 'i' ? 'm' : 'i')
         setYearSlider()
@@ -190,3 +219,13 @@ $('.btn-toggle').click(function () {
 
     $(this).find('.btn').toggleClass('btn-default');
 });
+
+
+function init() {
+    setMortalitySlider()
+    setIncidentsSlider()
+    setDeathPercentageSlider()
+    setYearSlider()
+}
+
+init()

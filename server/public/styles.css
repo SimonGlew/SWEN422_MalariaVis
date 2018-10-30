@@ -27,8 +27,6 @@ body{
 .vis-col{
 	padding-top: 20px;
 	height: -webkit-fill-available;
-
-
 }
 
 .filter-label{
@@ -56,6 +54,10 @@ body{
   border-color: #000;
 }
 
+.btn-mapDisplay {
+  border-color: #000 !important;
+}
+
 .redoUndo {
   width:100px;
 }
@@ -69,13 +71,22 @@ body{
 }
 
 .btn-action:hover,
-.btn-action:focus,
-.btn-action:active,
-.btn-action.active,
 .open .dropdown-toggle.btn-action {
   color: #FFF;
   background-color: #D299B3;
   border-color: #000;
+  box-shadow:0 0 0 0.2rem rgba(0,0,0,0);
+}
+
+.btn-action:active {
+  color: #FFF !important;
+  background-color: #B95F89 !important;
+  border-color: #000 !important;
+}
+
+.btn-action:focus,
+.btn-mapDisplay:active:focus {
+  box-shadow:0 0 0 0.2rem rgba(0,0,0,0) !important;
 }
 
 .btn-action:active,
@@ -133,12 +144,17 @@ fieldset[disabled] .btn-action.active {
 }
 .mortality-slider,
 .incidents-slider,
-.year-slider,
 .deathPercentage-slider{
   margin-top: 10px;
   width:90%;
 	margin-left: 5px;
+}
 
+.year-slider {
+  margin-top: 10px;
+  width:95%;
+  margin-left: 25px;
+  margin-right: 25px;
 }
 
 
@@ -214,7 +230,8 @@ span.block{
 	background-color: #FF2A5E;
 	box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
 	border: 1px solid #dd0036;
-	border-radius: 4px;
+  border-radius: 4px;
+  z-index:3;
 }
 
 #tooltip h1 {
