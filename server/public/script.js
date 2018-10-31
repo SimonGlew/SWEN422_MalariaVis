@@ -49,8 +49,21 @@ function drawMap(){
     .on("zoom", zoomed)
 
   function zoomed(){
+    var t = [d3.event.transform.x,d3.event.transform.y];
+    var s = d3.event.transform.k;
+    var h = 0;
+
+    t[0] = Math.min(
+      (mapWidth/mapHeight)  * (s - 1),
+      Math.max( mapWidth * (1 - s), t[0] )
+    );
+
+    t[1] = Math.min(
+      h * (s - 1) + h * s,
+      Math.max(mapHeight  * (1 - s) - h * s, t[1])
+    );
     mapsvg.select(".worldmap").selectAll("path")
-      .attr("transform", d3.event.transform);
+      .attr("transform", "translate(" + t + ")scale(" + s + ")");
   }
 
   //Rectangle mouse lister for handling dragging/zooming
