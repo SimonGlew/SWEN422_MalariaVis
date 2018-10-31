@@ -81,7 +81,9 @@ function drawMap(){
      .attr("pointer-events", "all")
      .style("opacity", 0.8)
      .on("mousemove", function(d){
-       d3.select(this).style("opacity", 1);
+       d3.select(this)
+         .attr("stroke", "#ff0000")
+         .attr("stroke-width", 1);
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
                             .style("top" , d3.event.pageY + 5 + "px");
@@ -98,7 +100,10 @@ function drawMap(){
        d3.selectAll("#tooltip > h1").html(d.properties.name);
      })
      .on("mouseout", function(d){
-       d3.select(this).style("opacity", 0.8);
+       d3.select(this)
+         .style("opacity", 0.8)
+         .attr("stroke", "#777")
+         .attr("stroke-width", 0.5);
        d3.select("#tooltip").style("display", "none");
      })
 
