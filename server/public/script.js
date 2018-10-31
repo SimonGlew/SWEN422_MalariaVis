@@ -45,12 +45,25 @@ function drawMap(){
 
   //TODO: rethink this
   var zoom = d3.zoom()
-    .scaleExtent([1, 100])
+    .scaleExtent([1, 10])
     .on("zoom", zoomed)
 
   function zoomed(){
+    var t = [d3.event.transform.x,d3.event.transform.y];
+    var s = d3.event.transform.k;
+    var h = 0;
+
+    t[0] = Math.min(
+      (mapWidth/mapHeight)  * (s - 1),
+      Math.max( mapWidth * (1 - s), t[0] )
+    );
+
+    t[1] = Math.min(
+      h * (s - 1) + h * s,
+      Math.max(mapHeight  * (1 - s) - h * s, t[1])
+    );
     mapsvg.select(".worldmap").selectAll("path")
-      .attr("transform", d3.event.transform);
+      .attr("transform", "translate(" + t + ")scale(" + s + ")");
   }
 
   //Rectangle mouse lister for handling dragging/zooming
@@ -61,7 +74,9 @@ function drawMap(){
     .attr("width", mapWidth)
     .attr("height", mapHeight)
     .style("opacity", 0)
-    .call(zoom)
+
+  mapsvg.call(zoom)
+
 
   //Draw countries
   mapsvg.append("g")
@@ -123,15 +138,21 @@ function updateMap(){
 }
 
 function meetsFilters(feature){
+  //Check for incidence and mortality data
   var incidenceData = feature.properties.incidenceRates;
   var mortalityData = feature.properties.mortalityRates;
   if(!incidenceData || !mortalityData){
     return false;
   }
+
+  var incValue, mortValue;
+
+  //Check incidence data in range
   var yearInInc = false;
   for(var i = 0; i < incidenceData.length; i++){
     if(incidenceData[i].year == year){
       yearInInc = true;
+      incValue = incidenceData[i].Value;
       if(incidenceData[i].Value < minIncidents || incidenceData[i].Value > maxIncidents){
         return false;
       }
@@ -141,10 +162,12 @@ function meetsFilters(feature){
     return false;
   }
 
+  //Check mortality data in range
   var yearInMort = false;
   for(var i = 0; i < mortalityData.length; i++){
     if(mortalityData[i].year == year){
       yearInMort = true;
+      mortValue = mortalityData[i].Value;
       if(mortalityData[i].Value < minMortality || mortalityData[i].Value > maxMortality){
         return false;
       }
@@ -153,6 +176,14 @@ function meetsFilters(feature){
   if(!yearInMort){
     return false;
   }
+
+  //Check death percentage in range
+  var deathPercentage = mortValue / (incValue * 1000) * 100;
+  console.log(deathPercentage)
+  if(deathPercentage < minDeath || deathPercentage> maxDeath){
+    return false;
+  }
+
   return true;
 }
 

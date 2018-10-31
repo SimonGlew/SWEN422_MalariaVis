@@ -169,7 +169,7 @@ function setYearSlider() {
 
 function applyFilter(zoom) {
     //REDRAW MAP
-
+    updateMap();
     if(zoom){
       zoomMap();
     }
