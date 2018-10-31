@@ -45,7 +45,7 @@ function drawMap(){
 
   //TODO: rethink this
   var zoom = d3.zoom()
-    .scaleExtent([1, 100])
+    .scaleExtent([1, 10])
     .on("zoom", zoomed)
 
   function zoomed(){
@@ -61,7 +61,9 @@ function drawMap(){
     .attr("width", mapWidth)
     .attr("height", mapHeight)
     .style("opacity", 0)
-    .call(zoom)
+
+  mapsvg.call(zoom)
+
 
   //Draw countries
   mapsvg.append("g")
@@ -123,15 +125,21 @@ function updateMap(){
 }
 
 function meetsFilters(feature){
+  //Check for incidence and mortality data
   var incidenceData = feature.properties.incidenceRates;
   var mortalityData = feature.properties.mortalityRates;
   if(!incidenceData || !mortalityData){
     return false;
   }
+
+  var incValue, mortValue;
+
+  //Check incidence data in range
   var yearInInc = false;
   for(var i = 0; i < incidenceData.length; i++){
     if(incidenceData[i].year == year){
       yearInInc = true;
+      incValue = incidenceData[i].Value;
       if(incidenceData[i].Value < minIncidents || incidenceData[i].Value > maxIncidents){
         return false;
       }
@@ -141,10 +149,12 @@ function meetsFilters(feature){
     return false;
   }
 
+  //Check mortality data in range
   var yearInMort = false;
   for(var i = 0; i < mortalityData.length; i++){
     if(mortalityData[i].year == year){
       yearInMort = true;
+      mortValue = mortalityData[i].Value;
       if(mortalityData[i].Value < minMortality || mortalityData[i].Value > maxMortality){
         return false;
       }
@@ -153,6 +163,14 @@ function meetsFilters(feature){
   if(!yearInMort){
     return false;
   }
+
+  //Check death percentage in range
+  var deathPercentage = mortValue / (incValue * 1000) * 100;
+  console.log(deathPercentage)
+  if(deathPercentage < minDeath || deathPercentage> maxDeath){
+    return false;
+  }
+
   return true;
 }
 
