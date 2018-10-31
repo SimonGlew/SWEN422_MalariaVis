@@ -41,7 +41,13 @@ function submit() {
 }
 
 function exportCSV() {
+    let params = '?year=' + year + '&minMortality=' + minMortality + '&maxMortality=' + maxMortality + '&minIncidents=' + minIncidents + '&maxIncidents=' + maxIncidents + '&minDeath=' + minDeath + '&maxDeath=' + maxDeath + '&incidentMortality=' + incidentMortality
 
+    countries.forEach(function (country) {
+        params += '&countries=' + country
+    })
+
+    window.location = "/api/exportcsv" + params
 }
 
 function exportImage(htmlId) {
@@ -163,7 +169,7 @@ function setYearSlider() {
 
 function applyFilter(zoom) {
     //REDRAW MAP
-    updateMap();
+
     if(zoom){
       zoomMap();
     }

@@ -40,11 +40,64 @@ function getCountries(){
 }
 
 
+function getFilteredData(req, res){
+    let incidenceRates = this.getIncidences()
+	let mortalityRates = this.getMortality()
+
+	//filter countries out that arent in query and get their incidence rate
+	let filteredCountries = []
+	Object.keys(incidenceRates).forEach(r => {
+		let dat = Object.assign({ country: r }, { data: incidenceRates[r] })
+		if(req.query.countries){
+			if(req.query.countries.indexOf(r) != -1){
+				filteredCountries.push(dat)
+			}
+		}else{
+			filteredCountries.push(dat)
+		}
+	})
+
+	//add mortality rate for each year to filtered countries list
+	Object.keys(mortalityRates).forEach(r => {
+		let index = filteredCountries.map(c => c.country).indexOf(r)
+		if(index != -1){
+			let countryData = filteredCountries[index].data
+			let newData = []
+			countryData.forEach(incidence => {
+				mortalityRates[r].forEach(mortality => {
+					if(incidence.year == mortality.year){
+						newData.push({ year: incidence.year, incidence: parseFloat(incidence.Value), mortality: parseFloat(mortality.Value) })
+					}
+				})
+			})
+			filteredCountries[index].data = newData
+		}
+	})
+
+	//filter out years for countries that dont meet requirements
+	filteredCountries.forEach(country => {
+		country.data = country.data.filter(data => {
+			let death = data.incidence != 0 ? data.mortality / data.incidence : 0
+			return death >= parseInt(req.query.minDeath) && death <= parseInt(req.query.maxDeath) &&
+				data.incidence >= parseInt(req.query.minIncidents) && data.incidence <= parseInt(req.query.maxIncidents) &&
+				data.mortality >= parseInt(req.query.minMortality) && data.mortality <= parseInt(req.query.maxMortality);
+		})
+	})
+
+	//filter out countries that now have no data
+    filteredCountries = filteredCountries.filter(r => r.data.length > 0)
+    
+    return filteredCountries
+}
+
+
 module.exports = {
     addIncidenceToMap: addIncidenceToMap,
     addMortalityToMap: addMortalityToMap,
 
     getIncidences: getIncidences,
     getMortality: getMortality,
-    getCountries: getCountries
+    getCountries: getCountries,
+
+    getFilteredData: getFilteredData
 }
