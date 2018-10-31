@@ -83,14 +83,14 @@
 						<h5 class="filter-label">Country Filters</h5>
 					</div>
 					<div class="slider-container col-sm-12">
-						<label class="black">Minumum and Maximum Mortality</label>
+						<label class="black">Minumum and Maximum Mortality (per 1000 people)</label>
 						<div class="mortality-slider">
 							<div class="mortality-rate-slider lower-handle ui-slider-handle"></div>
 							<div class="mortality-rate-slider upper-handle ui-slider-handle"></div>
 						</div>
 					</div>
 					<div class="slider-container col-sm-12">
-						<label class="black">Minumum and Maximum Incidents</label>
+						<label class="black">Minumum and Maximum Incidents (per 1000 people effected)</label>
 						<div class="incidents-slider">
 							<div class="incidents-rate-slider lower-handle ui-slider-handle"></div>
 							<div class="incidents-rate-slider upper-handle ui-slider-handle"></div>
@@ -163,21 +163,21 @@
 						<button type="button" class="btn btn-primary btn-action save" onclick='submit()'>
 							Submit Filters</button>
 					</div>
-				</div>
+				</div>-->
 
 				<div>
 					<div class='row justify-content-center nonFirstContainer'>
 						<div class="btn-group">
-							<button type="button" class="btn btn-primary btn-action export" onclick='clearFilters()'>
+							<button type="button" class="btn btn-primary btn-action export" onclick='exportImage("map")'>
 								<i class="fas fa-globe-asia"></i> Export Map</button>
-							<button type="button" class="btn btn-primary btn-action export" onclick='submit()'>
+							<button type="button" class="btn btn-primary btn-action export" onclick='exportImage("line")'>
 								<i class="fas fa-chart-line"></i> Export Graph</button>
-							<button type="button" class="btn btn-primary btn-action export" onclick='submit()'>
+							<button type="button" class="btn btn-primary btn-action export" onclick='exportCSV()'>
 								<i class="fas fa-table"></i> Export to CSV</button>
 						</div>
 					</div>
 				</div>
-			</div> -->
+			</div> 
 		</div>
 	</div>
 	<div id="tooltip">
