@@ -4,7 +4,7 @@ const csv = require('fast-csv'),
     fs = require('fs')
 
 function parse(directoryName) {
-    let files = [{ type: 'incidence', path: '/data/incidence-of-malaria-fixed.csv' }, { type: 'death', path: '/data/malaria-death-rates-fixed.csv' }]
+    let files = [{ type: 'incidence', path: '/data/incidence-of-malaria-fixed.csv' }, { type: 'death', path: '/data/malaria-death-rates-filtered.csv' }]
     files.forEach(file => {
         let stream = fs.createReadStream(directoryName + file.path)
 

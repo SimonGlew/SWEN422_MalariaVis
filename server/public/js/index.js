@@ -2,7 +2,7 @@ var actionStack = [],
     index = 0
 
 var incidentMortality = 'm',
-    year = 1990,
+    year = 2000,
     minMortality = 0,
     maxMortality = 250,
     minIncidents = 0,
@@ -37,7 +37,7 @@ function clearFilters() {
 
 function submit() {
     console.log('submit')
-    applyFilter()
+    applyFilter(true)
 }
 
 function exportCSV() {
@@ -143,52 +143,30 @@ function setDeathPercentageSlider() {
 
 function setYearSlider() {
     var handleA = $(".year-rate-slider");
-    if (incidentMortality == 'i') {
-        $('.year-slider').slider({
-            create: function (e, ui) {
-                handleA.text(2000);
-            },
-            slide: function (e, ui) {
-                handleA.text(ui.value);
-                year = ui.value
-            },
-            orientation: 'horizontal',
-            min: 2000,
-            max: 2015,
-            step: 5,
-            animate: true
-        });
-    } else {
-        $('.year-slider').slider({
-            create: function (e, ui) {
-                handleA.text(1990);
-            },
-            slide: function (e, ui) {
-                handleA.text(ui.value);
-                year = ui.value
-            },
-            orientation: 'horizontal',
-            min: 1990,
-            max: 2015,
-            step: 1,
-            animate: true
-        });
-    }
-    applyFilter()
+      $('.year-slider').slider({
+          create: function (e, ui) {
+              handleA.text(2000);
+          },
+          slide: function (e, ui) {
+              handleA.text(ui.value);
+              year = ui.value
+              applyFilter()
+          },
+          orientation: 'horizontal',
+          min: 2000,
+          max: 2015,
+          step: 5,
+          animate: true
+      });
 }
 
-function refreshYearSlider() {
-    var handleA = $(".year-rate-slider");
-    if (incidentMortality == 'i') {
-        handleA.text(2000);
-    } else {
-        handleA.text(1990);
-    }
-}
 
-function applyFilter() {
+function applyFilter(zoom) {
     //REDRAW MAP
-    
+    updateMap();
+    if(zoom){
+      zoomMap();
+    }
     //CLEAR LINE GRAPH MAYBE, WHO KNOWS
 
 }
@@ -196,13 +174,11 @@ function applyFilter() {
 $('.btn-toggle').click(function () {
     if ($(this).find('.btn-action').length > 0) {
         $(this).find('.btn').toggleClass('btn-action');
-
         incidentMortality = (incidentMortality == 'i' ? 'm' : 'i')
         setYearSlider()
-        refreshYearSlider()
     }
-
     $(this).find('.btn').toggleClass('btn-default');
+    applyFilter()
 });
 
 

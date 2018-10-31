@@ -11,9 +11,6 @@ var mapHeight;
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
 
-var year = 2000;
-var colorBy = "incidence";
-
 files.forEach(function(url) {
     promises.push(d3.json(url))
 });
@@ -64,7 +61,7 @@ function drawMap(){
     .attr("width", mapWidth)
     .attr("height", mapHeight)
     .style("opacity", 0)
-    // .call(zoom)
+    .call(zoom)
 
   //Draw countries
   mapsvg.append("g")
@@ -111,7 +108,6 @@ function drawMap(){
     return Math.round(e.Value*100)/100 || nd;
   }
   updateMap();
-  zoomMap();
 }
 
 function updateMap(){
@@ -121,9 +117,59 @@ function updateMap(){
     })
 }
 
-function getColor(feature, highlighted){
-  if(colorBy == "incidence"){
+function meetsFilters(feature){
+  var incidenceData = feature.properties.incidenceRates;
+  var mortalityData = feature.properties.mortalityRates;
+  if(!incidenceData || !mortalityData){
+    return false;
+  }
+  var yearInInc = false;
+  for(var i = 0; i < incidenceData.length; i++){
+    if(incidenceData[i].year == year){
+      yearInInc = true;
+      if(incidenceData[i].Value < minIncidents || incidenceData[i].Value > maxIncidents){
+        return false;
+      }
+    }
+  }
+  if(!yearInInc){
+    return false;
+  }
+
+  var yearInMort = false;
+  for(var i = 0; i < mortalityData.length; i++){
+    if(mortalityData[i].year == year){
+      yearInMort = true;
+      if(mortalityData[i].Value < minMortality || mortalityData[i].Value > maxMortality){
+        return false;
+      }
+    }
+  }
+  if(!yearInMort){
+    return false;
+  }
+  return true;
+}
+
+function getColor(feature){
+
+  if(!meetsFilters(feature)){
+    return "#EEE"
+  }
+
+  if(incidentMortality == "i"){
     var data = feature.properties.incidenceRates;
+    if(!data){
+      return colorScale(0);
+    }
+    for(var i = 0; i < data.length; i++){
+      if(data[i].year == year){
+        return colorScale(data[i].Value);
+      }
+    }
+  }
+  if(incidentMortality == "m"){
+    var data = feature.properties.mortalityRates;
     if(!data){
       return colorScale(0);
     }
@@ -136,22 +182,14 @@ function getColor(feature, highlighted){
 }
 
 function zoomMap(){
+  if(!mapData) return;
   var bboxList = [];
   for(var i = 0; i < mapData.features.length; i++){
     var feat = mapData.features[i];
     //check incidence
     var incInRange = false;
-    if(!feat.properties.incidenceRates) continue;
-    for(var j = 0; j < feat.properties.incidenceRates.length; j++){
-      if(feat.properties.incidenceRates[j].Value > 0){
-        incInRange = true;
-        break;
-      }
-    }
-    //TODO Check other filters
-    if(incInRange){
-      bboxList.push(path.bounds(mapData.features[i]))
-    }
+    if(!meetsFilters(feat)) continue;
+    bboxList.push(path.bounds(mapData.features[i]))
   }
   var bbox = bboxList[0];
   for(var i = 1; i < bboxList.length; i++){
@@ -166,7 +204,7 @@ function zoomMap(){
   var pathw = bbox[1][0] - bbox[0][0];
   var pathh = bbox[1][1] - bbox[0][1];
   var kx = mapWidth/pathw;
-  var ky = mapWidth/pathh;
+  var ky = mapHeight/pathh;
   k = 0.95*Math.min(kx, ky);
 
   var x = bbox[0][0] + (pathw)/2;
