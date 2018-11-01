@@ -27,6 +27,11 @@
 	 crossorigin="anonymous">
 
 	<script src="https://d3js.org/d3.v5.min.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvg/1.4/rgbcolor.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stackblur-canvas/1.4.1/stackblur.min.js"></script>
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvg/dist/browser/canvg.min.js"></script>
+
 </head>
 
 <body>
@@ -39,7 +44,7 @@
 
 			<div class='col-sm-9 vis-col'>
 				<div class="vis-container">
-					<svg id="map"/>
+					<svg id="map" />
 					<div class="col-sm-12 map-controls">
 						<div class="year-slider">
 							<div class="year-rate-slider ui-slider-handle"></div>
@@ -114,66 +119,13 @@
 				<div class="row filter-row">
 					<div class="col-sm-12 filter-label">
 						<h5 class="filter-label">Export Controls</h5>
-					</div>
-				</div>
-
-						<!-- <div>
-					 <div class='row justify-content-center'>
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:20px;'>
-							<i class="fas fa-undo"></i> Undo</button>
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
-							<i class="fas fa-redo"></i> Redo</button>
-					</div>
-
-					<div class='row justify-content-center nonFirstContainer'>
-						<div class="btn-group btn-toggle">
-							<button class="btn btn-lg btn-default">Incidence Rate</button>
-							<button class="btn btn-lg btn-action !important active">Mortality Rate</button>
-						</div>
-					</div> -->
-
-					<!-- <div class="form group slider-col col-sm-12 nonFirstContainer">
-						<label class="black">Minumum and Maximum Mortality</label>
-						<div class="mortality-slider">
-							<div class="mortality-rate-slider lower-handle ui-slider-handle"></div>
-							<div class="mortality-rate-slider upper-handle ui-slider-handle"></div>
-						</div>
-					</div>
-
-					<div class="form group slider-col col-sm-12 nonFirstContainer">
-						<label class="black">Minumum and Maximum Incidents</label>
-						<div class="incidents-slider">
-							<div class="incidents-rate-slider lower-handle ui-slider-handle"></div>
-							<div class="incidents-rate-slider upper-handle ui-slider-handle"></div>
-						</div>
-					</div>
-
-					<div class="form group slider-col col-sm-12 nonFirstContainer">
-						<label class="black">Percentage of Death (%)</label>
-						<div class="deathPercentage-slider">
-							<div class="deathPercentage-rate-slider lower-handle ui-slider-handle"></div>
-							<div class="deathPercentage-rate-slider upper-handle ui-slider-handle"></div>
-						</div>
-					</div> -->
-
-
-					<!-- <div class='row justify-content-center nonFirstContainer'>
-						<button type="button" class="btn btn-primary btn-action save" onclick='clearFilters()' style='margin-right:20px;'>
-							Clear Filters</button>
-						<button type="button" class="btn btn-primary btn-action save" onclick='submit()'>
-							Submit Filters</button>
-					</div>
-				</div>-->
-
-				<div>
-					<div class='row justify-content-center nonFirstContainer'>
-						<div class="btn-group">
-							<button type="button" class="btn btn-primary btn-action export" onclick='exportImage("map")'>
+						<div class="row justify-content-center">
+							<button type="button" class="btn btn-primary btn-action" onclick='exportImage("map")' style='margin-right:5px;'>
 								<i class="fas fa-globe-asia"></i> Export Map</button>
-							<button type="button" class="btn btn-primary btn-action export" onclick='exportImage("line")'>
+							<button type="button" class="btn btn-primary btn-action" onclick='exportImage("line")' style='margin-right:5px;'>
 								<i class="fas fa-chart-line"></i> Export Graph</button>
-							<button type="button" class="btn btn-primary btn-action export" onclick='exportCSV()'>
-								<i class="fas fa-table"></i> Export to CSV</button>
+							<button type="button" class="btn btn-primary btn-action" onclick='exportCSV()'>
+								<i class="fas fa-table"></i> Export CSV</button>
 						</div>
 					</div>
 				</div>
@@ -182,9 +134,14 @@
 	</div>
 	<div id="tooltip">
 		<h1></h1>
-		<p>Mortality: <span class="mortality"></span></p>
-		<p>Incidence: <span class="incidence"></span></p>
-		<p>Percentage: <span class="percentage"></span>%</p>
+		<p>Mortality:
+			<span class="mortality"></span>
+		</p>
+		<p>Incidence:
+			<span class="incidence"></span>
+		</p>
+		<p>Percentage:
+			<span class="percentage"></span>%</p>
 	</div>
 	<script src='script.js'></script>
 	<script src='js/index.js'></script>
