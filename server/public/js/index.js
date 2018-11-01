@@ -61,7 +61,7 @@ function setMortalitySlider() {
     $('.mortality-slider').slider({
         create: function (e, ui) {
             handleA.text(0);
-            handleB.text(250);
+            handleB.text(120);
         },
         slide: function (e, ui) {
             if (ui.values[0] == ui.values[1])
@@ -78,9 +78,9 @@ function setMortalitySlider() {
         orientation: 'horizontal',
         range: true,
         min: 0,
-        max: 250,
+        max: 120,
         step: 5,
-        values: [0, 250],
+        values: [0, 120],
         animate: true
     });
 }
