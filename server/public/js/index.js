@@ -4,39 +4,149 @@ var actionStack = [],
 var incidentMortality = 'm',
     year = 2000,
     minMortality = 0,
-    maxMortality = 250,
+    maxMortality = 120,
     minIncidents = 0,
     maxIncidents = 1000,
     minDeath = 0,
-    maxDeath = 100,
+    maxDeath = 0.70,
     countries = []
 
 function undoAction() {
     console.log('undoing action')
-    if (index > 0) {
-        let action = actionStack[index]
-        index--;
+    if (index >= 0) {
+        let action = JSON.parse(actionStack[index--])
 
-        //do something with action
+        $('.mortality-slider').slider("values", 0, action.minMortality)
+        $(".mortality-rate-slider.lower-handle").text(action.minMortality)
+        $('.mortality-slider').slider("values", 1, action.maxMortality)
+        $(".mortality-rate-slider.upper-handle").text(action.maxMortality)
+
+
+        $('.incidents-slider').slider("values", 0, action.minIncidents)
+        $(".incidents-rate-slider.lower-handle").text(action.minIncidents)
+        $('.incidents-slider').slider("values", 1, action.maxIncidents)
+        $(".incidents-rate-slider.upper-handle").text(action.maxIncidents)
+
+        $('.deathPercentage-slider').slider("values", 0, action.minDeath)
+        $(".deathPercentage-rate-slider.lower-handle").text(action.minDeath)
+        $('.deathPercentage-slider').slider("values", 1, action.maxDeath)
+        $(".deathPercentage-rate-slider.upper-handle").text(action.maxDeath)
+
+
+        $('.year-slider').slider('value', action.year)
+        $(".year-rate-slider").text(action.year)
+
+        //Do something with incidentMortality
+
+        year = action.year
+        minMortality = action.minMortality
+        maxMortality = action.maxMortality
+        minIncidents = action.minIncidents
+        maxIncidents = action.maxIncidents
+        minDeath = action.minDeath
+        maxDeath = action.maxDeath
+
+        countries = action.countries
+        incidentMortality = action.incidentMortality
+
+        //redraw things
+        applyFilter(true)
+
     }
 }
 
 function redoAction() {
-    if (index < actionStack.length) {
-        let action = actionStack[index]
-        index++;
+    if (index < actionStack.length - 1) {
+        let action = JSON.parse(actionStack[++index])
 
-        //do something with action
+        $('.mortality-slider').slider("values", 0, action.minMortality)
+        $(".mortality-rate-slider.lower-handle").text(action.minMortality)
+        $('.mortality-slider').slider("values", 1, action.maxMortality)
+        $(".mortality-rate-slider.upper-handle").text(action.maxMortality)
+
+
+        $('.incidents-slider').slider("values", 0, action.minIncidents)
+        $(".incidents-rate-slider.lower-handle").text(action.minIncidents)
+        $('.incidents-slider').slider("values", 1, action.maxIncidents)
+        $(".incidents-rate-slider.upper-handle").text(action.maxIncidents)
+
+        $('.deathPercentage-slider').slider("values", 0, action.minDeath)
+        $(".deathPercentage-rate-slider.lower-handle").text(action.minDeath)
+        $('.deathPercentage-slider').slider("values", 1, action.maxDeath)
+        $(".deathPercentage-rate-slider.upper-handle").text(action.maxDeath)
+
+
+        $('.year-slider').slider('value', action.year)
+        $(".year-rate-slider").text(action.year)
+
+        //Do something with incidentMortality
+
+        year = action.year
+        minMortality = action.minMortality
+        maxMortality = action.maxMortality
+        minIncidents = action.minIncidents
+        maxIncidents = action.maxIncidents
+        minDeath = action.minDeath
+        maxDeath = action.maxDeath
+
+        countries = action.countries
+        incidentMortality = action.incidentMortality
+
+        //redraw things
+        applyFilter(true)
     }
     console.log('redoing action')
 }
 
 function clearFilters() {
-    console.log('clearing filtes')
+    $('.mortality-slider').slider("values", 0, 0)
+    $(".mortality-rate-slider.lower-handle").text(0)
+    $('.mortality-slider').slider("values", 1, 120)
+    $(".mortality-rate-slider.upper-handle").text(120)
+
+
+    $('.incidents-slider').slider("values", 0, 0)
+    $(".incidents-rate-slider.lower-handle").text(0)
+    $('.incidents-slider').slider("values", 1, 1000)
+    $(".incidents-rate-slider.upper-handle").text(1000)
+
+    $('.deathPercentage-slider').slider("values", 0, 0)
+    $(".deathPercentage-rate-slider.lower-handle").text(0)
+    $('.deathPercentage-slider').slider("values", 1, 0.70)
+    $(".deathPercentage-rate-slider.upper-handle").text(0.70)
+
+
+    $('.year-slider').slider('value', 2000)
+    $(".year-rate-slider").text(2000)
+
+    year = 2000
+    minMortality = 0
+    maxMortality = 120
+    minIncidents = 0
+    maxIncidents = 1000
+    minDeath = 0
+    maxDeath = 0.70
+
+    countries = []
 }
 
 function submit() {
     console.log('submit')
+
+    actionStack.push(JSON.stringify({
+        incidentMortality: incidentMortality,
+        year: year,
+        minMortality: minMortality,
+        maxMortality: maxMortality,
+        minIncidents: minIncidents,
+        maxIncidents: maxIncidents,
+        minDeath: minDeath,
+        maxDeath: maxDeath,
+        countries: countries
+    }))
+
+    index = actionStack.length - 1
+
     applyFilter(true)
 }
 
@@ -123,7 +233,7 @@ function setDeathPercentageSlider() {
     $('.deathPercentage-slider').slider({
         create: function (e, ui) {
             handleA.text(0);
-            handleB.text(0.25);
+            handleB.text(0.70);
         },
         slide: function (e, ui) {
             if (ui.values[0] == ui.values[1])
@@ -140,38 +250,38 @@ function setDeathPercentageSlider() {
         orientation: 'horizontal',
         range: true,
         min: 0,
-        max: 0.25,
+        max: 0.70,
         step: 0.05,
-        values: [0, 0.25],
+        values: [0, 0.70],
         animate: true
     });
 }
 
 function setYearSlider() {
     var handleA = $(".year-rate-slider");
-      $('.year-slider').slider({
-          create: function (e, ui) {
-              handleA.text(2000);
-          },
-          slide: function (e, ui) {
-              handleA.text(ui.value);
-              year = ui.value
-              applyFilter()
-          },
-          orientation: 'horizontal',
-          min: 2000,
-          max: 2015,
-          step: 5,
-          animate: true
-      });
+    $('.year-slider').slider({
+        create: function (e, ui) {
+            handleA.text(2000);
+        },
+        slide: function (e, ui) {
+            handleA.text(ui.value);
+            year = ui.value
+            applyFilter()
+        },
+        orientation: 'horizontal',
+        min: 2000,
+        max: 2015,
+        step: 5,
+        animate: true
+    });
 }
 
 
 function applyFilter(zoom) {
     //REDRAW MAP
     updateMap();
-    if(zoom){
-      zoomMap();
+    if (zoom) {
+        zoomMap();
     }
     //CLEAR LINE GRAPH MAYBE, WHO KNOWS
 
