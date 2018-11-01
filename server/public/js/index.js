@@ -123,7 +123,7 @@ function setDeathPercentageSlider() {
     $('.deathPercentage-slider').slider({
         create: function (e, ui) {
             handleA.text(0);
-            handleB.text(100);
+            handleB.text(0.25);
         },
         slide: function (e, ui) {
             if (ui.values[0] == ui.values[1])
@@ -140,9 +140,9 @@ function setDeathPercentageSlider() {
         orientation: 'horizontal',
         range: true,
         min: 0,
-        max: 100,
-        step: 5,
-        values: [0, 100],
+        max: 0.25,
+        step: 0.05,
+        values: [0, 0.25],
         animate: true
     });
 }

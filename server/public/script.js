@@ -8,6 +8,8 @@ var path;
 var mapWidth;
 var mapHeight;
 
+var zoom;
+
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
 
@@ -30,6 +32,26 @@ function processData(data){
   drawMap()
 }
 
+function zoomed(){
+  var t = [d3.event.transform.x,d3.event.transform.y];
+  var s = d3.event.transform.k;
+  var h = 0;
+
+
+
+  t[0] = Math.min(
+    (mapWidth/mapHeight)  * (s - 1),
+    Math.max( mapWidth * (1 - s), t[0] )
+  );
+
+  t[1] = Math.min(
+    h * (s - 1) + h * s,
+    Math.max(mapHeight  * (1 - s) - h * s, t[1])
+  );
+  d3.select("#map").select(".worldmap").selectAll("path")
+    .attr("transform", "translate(" + t + ")scale(" + s + ")");
+}
+
 function drawMap(){
   var mapsvg = d3.select("#map");
   //Get svg dimensions
@@ -44,27 +66,11 @@ function drawMap(){
   path = d3.geoPath().projection(masterProject);
 
   //TODO: rethink this
-  var zoom = d3.zoom()
+  zoom = d3.zoom()
     .scaleExtent([1, 10])
     .on("zoom", zoomed)
 
-  function zoomed(){
-    var t = [d3.event.transform.x,d3.event.transform.y];
-    var s = d3.event.transform.k;
-    var h = 0;
 
-    t[0] = Math.min(
-      (mapWidth/mapHeight)  * (s - 1),
-      Math.max( mapWidth * (1 - s), t[0] )
-    );
-
-    t[1] = Math.min(
-      h * (s - 1) + h * s,
-      Math.max(mapHeight  * (1 - s) - h * s, t[1])
-    );
-    mapsvg.select(".worldmap").selectAll("path")
-      .attr("transform", "translate(" + t + ")scale(" + s + ")");
-  }
 
   //Rectangle mouse lister for handling dragging/zooming
   mapsvg.append("rect")
@@ -102,7 +108,8 @@ function drawMap(){
        currentYearMortality = getDataPointRounded(d.properties.mortalityRates);
        currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
        if (Number.isFinite(currentYearIncidence)) {
-           currentYearPerc = Math.round(100*currentYearMortality / currentYearIncidence);
+
+           currentYearPerc = 100*currentYearMortality / (currentYearIncidence*100);
        } else {
          currentYearPerc = "-";
        }
@@ -127,6 +134,9 @@ function drawMap(){
     e = data.filter(function(p){return p.year == year})[0];
     return Math.round(e.Value*100)/100 || nd;
   }
+
+  drawScale();
+
   updateMap();
 }
 
@@ -135,6 +145,7 @@ function updateMap(){
     .attr("fill", function(d){
       return getColor(d);
     })
+  updateScale()
 }
 
 function meetsFilters(feature){
@@ -178,8 +189,7 @@ function meetsFilters(feature){
   }
 
   //Check death percentage in range
-  var deathPercentage = mortValue / (incValue * 1000) * 100;
-  console.log(deathPercentage)
+  var deathPercentage = mortValue / (incValue * 100) * 100;
   if(deathPercentage < minDeath || deathPercentage> maxDeath){
     return false;
   }
@@ -196,25 +206,109 @@ function getColor(feature){
   if(incidentMortality == "i"){
     var data = feature.properties.incidenceRates;
     if(!data){
-      return colorScale(0);
+      return incidenceScale(0);
     }
     for(var i = 0; i < data.length; i++){
       if(data[i].year == year){
-        return colorScale(data[i].Value);
+        return incidenceScale(data[i].Value);
       }
     }
   }
   if(incidentMortality == "m"){
     var data = feature.properties.mortalityRates;
     if(!data){
-      return colorScale(0);
+      return mortalityScale(0);
     }
     for(var i = 0; i < data.length; i++){
       if(data[i].year == year){
-        return colorScale(data[i].Value);
+        return mortalityScale(data[i].Value);
       }
     }
   }
+}
+
+function drawScale(){
+  var mapsvg = d3.select("#map");
+  var margin = 30, scaleHeight = 20;
+  var x = margin;
+  var y = mapHeight - margin - scaleHeight;
+
+  mapsvg.append("g").attr("id", "scaleg")
+  for(var i = 0; i < 200; i+= 2){
+    mapsvg.select("#scaleg").append("rect")
+      .datum(i)
+      .attr("class", "scalerect")
+      .attr("x", x + i)
+      .attr("y", y)
+      .attr("width", 2)
+      .attr("height", scaleHeight)
+  }
+
+  mapsvg.append("rect")
+    .attr("x", x)
+    .attr("y", y)
+    .attr("width", 200)
+    .attr("height", scaleHeight)
+    .attr("fill", "none")
+    .attr("stroke", "#000")
+    .attr("stroke-width", 1)
+
+  mapsvg.append("text")
+    .attr("id", "scalelabel")
+    .attr("x", x)
+    .attr("y", y - 25)
+
+    mapsvg.append("text")
+      .attr("id", "scaleunits")
+      .attr("x", x)
+      .attr("y", y - 10)
+      .attr("font-size", 12)
+
+    mapsvg.append("g")
+      .attr("id", "scaleaxis")
+      .attr("transform", "translate(" + x + ", " + (y + scaleHeight) + ")")
+
+  updateScale()
+}
+
+
+
+function updateScale(){
+  d3.selectAll(".scalerect")
+    .attr("fill", function(d){
+      if(incidentMortality == "m"){
+        return mortalityScale((d/200)*250);
+      }else if(incidentMortality == "i"){
+        return incidenceScale((d/200)*1000);
+      }
+    })
+
+  d3.select("#scaleunits")
+  .text(function(){
+    if(incidentMortality == "m"){
+      return "(per 100,000 population)";
+    }else if(incidentMortality == "i"){
+      return "(per 1,000 at risk)"
+    }
+  })
+
+  d3.select("#scalelabel")
+  .text(function(){
+    if(incidentMortality == "m"){
+      return "Mortality Rate";
+    }else if(incidentMortality == "i"){
+      return "Incidence Rate"
+    }
+  })
+
+  if(incidentMortality == "m"){
+    d3.select("#scaleaxis")
+      .call(mortalityAxis);
+  }else if(incidentMortality == "i"){
+    d3.select("#scaleaxis")
+      .call(incidenceAxis)
+  }
+
 }
 
 function zoomMap(){
@@ -235,8 +329,6 @@ function zoomMap(){
     if(bbox[1][1] < bboxList[i][1][1]) bbox[1][1] = bboxList[i][1][1];
   }
 
-
-
   var pathw = bbox[1][0] - bbox[0][0];
   var pathh = bbox[1][1] - bbox[0][1];
   var kx = mapWidth/pathw;
@@ -246,14 +338,33 @@ function zoomMap(){
   var x = bbox[0][0] + (pathw)/2;
   var y = bbox[0][1] + (pathh)/2;
 
+  var t = d3.zoomIdentity.translate(mapWidth/2, mapHeight/2).scale(k).translate(-x, -y)
 
-  d3.selectAll(".mapfeature")
-    .transition()
-    .duration(750)
-    .attr("transform", "translate(" + mapWidth / 2 + "," + mapHeight / 2 + ")scale(" + k + ")translate(" + -x + "," + -y + ")")
-    .style("stroke-width", 1 / k + "px");
+  d3.select("#map").call(zoom).transition()
+      .duration(750)
+      .call(zoom.transform, t);
 }
 
-var colorScale = d3.scaleLinear()
+var incidenceScale = d3.scaleLinear()
   .domain([0, 200, 1000])
   .range(['#FFF', '#fc9272', '#de2d26'])
+
+var incidenceScaleLegend = d3.scaleLinear()
+  .domain([0, 200, 1000])
+  .range([0, 100, 200])
+
+var incidenceAxis = d3.axisBottom()
+  .scale(incidenceScaleLegend)
+  .tickValues([0, 200, 1000])
+
+var mortalityScale = d3.scaleLinear()
+  .domain([0, 100, 250])
+  .range(['#FFF', '#fc9272', '#de2d26'])
+
+var mortalityScaleLegend = d3.scaleLinear()
+  .domain([0, 100, 250])
+  .range([0, 100, 200])
+
+var mortalityAxis = d3.axisBottom()
+  .scale(mortalityScaleLegend)
+  .tickValues([0, 100, 250])
