@@ -79,7 +79,8 @@ function drawMap(){
     .attr("y", 0)
     .attr("width", mapWidth)
     .attr("height", mapHeight)
-    .style("opacity", 0)
+    .style("fill", "white")
+    .style("opacity", 1)
 
   mapsvg.call(zoom)
 
