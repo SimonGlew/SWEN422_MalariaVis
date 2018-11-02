@@ -143,7 +143,8 @@ function clearFilters() {
 
     countries = []
 
-    applyFilter(true)
+    applyFilter()
+    zoomMapToFull()
 }
 
 function submit() {
