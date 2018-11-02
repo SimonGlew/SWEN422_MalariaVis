@@ -60,17 +60,7 @@
 			</div>
 
 			<div class='col-sm-3 filter-col' style='border-left:2px solid black'>
-				<div class="row filter-row">
-					<div class="col-sm-12 filter-label">
-						<h5 class="filter-label">Action Controls</h5>
-					</div>
-					<div class="center-buttons justify-content-center col-sm-12">
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:50px;'>
-							<i class="fas fa-undo"></i> Undo</button>
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
-							<i class="fas fa-redo"></i> Redo</button>
-					</div>
-				</div>
+
 				<div class="row filter-row">
 					<div class="col-sm-12">
 						<h5 class="filter-label">Map Display</h5>
@@ -118,6 +108,17 @@
 				</div>
 				<div class="row filter-row">
 					<div class="col-sm-12 filter-label">
+						<h5 class="filter-label">Action Controls</h5>
+					</div>
+					<div class="center-buttons justify-content-center col-sm-12">
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:50px;'>
+							<i class="fas fa-undo"></i> Undo</button>
+						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
+							<i class="fas fa-redo"></i> Redo</button>
+					</div>
+				</div>
+				<div class="row filter-row">
+					<div class="col-sm-12 filter-label">
 						<h5 class="filter-label">Export Controls</h5>
 						<div class="row justify-content-center">
 							<button type="button" class="btn btn-primary btn-action" onclick='exportImage("map")' style='margin-right:5px;'>
@@ -143,7 +144,7 @@
 		<p>Percentage:
 			<span class="percentage"></span>%</p>
 	</div>
-	<canvas id="saveCanvas" style="display:none; position:absolute; left:0; top:0;"></canvas>
+	<canvas id="saveCanvas" style="display:none; position:absolute; left:0; top:0; background-color:white;"></canvas>
 	<script src='script.js'></script>
 	<script src='js/linegraph.js'></script>
 	<script src='js/index.js'></script>
