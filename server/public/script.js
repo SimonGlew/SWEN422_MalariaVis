@@ -119,6 +119,17 @@ function drawMap(){
        d3.select("#tooltip").style("display", "none");
      })
 
+/*  mapsvg.append("g")
+    .attr("class", "worldmap")
+    .selectAll("path")
+    .data(mapData.features)
+    .enter()
+    .attr("x", function(d) {
+      console.log(d)
+    })
+    .append("text");*/
+
+
   function getDataPointRounded(data) {
     nd = "No data";
     if (!data) {
@@ -179,7 +190,7 @@ function meetsFilters(feature){
 
   //Check death percentage in range
   var deathPercentage = mortValue / (incValue * 1000) * 100;
-  console.log(deathPercentage)
+  // console.log(deathPercentage)
   if(deathPercentage < minDeath || deathPercentage> maxDeath){
     return false;
   }

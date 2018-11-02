@@ -61,7 +61,6 @@ body{
 .redoUndo {
   width:100px;
 }
-
 .save {
   width:150px;
 }
@@ -155,11 +154,10 @@ fieldset[disabled] .btn-action.active {
 	margin-left: 5px;
 }
 
-.year-slider {
+.year-slider{
   margin-top: 10px;
-  width:95%;
+  width:90%;
   margin-left: 25px;
-  margin-right: 25px;
 }
 
 

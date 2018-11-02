@@ -146,25 +146,68 @@ function setDeathPercentageSlider() {
         animate: true
     });
 }
+var x = 0;
 
 function setYearSlider() {
-    var handleA = $(".year-rate-slider");
-      $('.year-slider').slider({
-          create: function (e, ui) {
-              handleA.text(2000);
-          },
-          slide: function (e, ui) {
-              handleA.text(ui.value);
-              year = ui.value
-              applyFilter()
-          },
-          orientation: 'horizontal',
-          min: 2000,
-          max: 2015,
-          step: 5,
-          animate: true
-      });
+
+  var handleA = $(".year-rate-slider");
+
+  var slider = $('.year-slider').slider({
+      create: function (e, ui) {
+          handleA.text(2000);
+      },
+      slide: function (e, ui) {
+          handleA.text(ui.value);
+          year = ui.value;
+          applyFilter()
+      },
+      orientation: 'horizontal',
+      min: 2000,
+      max: 2015,
+      step: 5,
+      animate: true
+  });
+
+
+  function go() {
+    slider.slider('value', slider.slider('value') + 5);
+    handleA.text(slider.slider('value'));
+    year = slider.slider('value');
+    applyFilter();
+
+    if (slider.slider('value') >= 2015) {
+      moving = false;
+      clearInterval(x);
+      $('#playBtn').html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+    }
+  }
+  var moving = false;
+  var x = 0;
+
+  $('#playBtn').click(function(){
+
+    var btn = $('#playBtn');
+
+    if(moving) {
+      moving = false;
+      clearInterval(x);
+      btn.html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+
+    } else {
+      moving = true;
+      if(slider.slider('value') >= 2015) {
+        slider.slider('value', 2000);
+        handleA.text(2000);
+        year = 2000;
+        applyFilter();
+      }
+      x = setInterval(go, 1000);
+      btn.html("<i id=\"playIcon\" class=\"fas fa-pause\"></i> Pause")
+
+    }
+  });
 }
+
 
 
 function applyFilter(zoom) {
