@@ -13,8 +13,8 @@ var incidentMortality = 'm',
 
 function undoAction() {
     console.log('undoing action')
-    if (index >= 0) {
-        let action = JSON.parse(actionStack[index--])
+    if (index > 0) {
+        let action = JSON.parse(actionStack[--index])
 
         $('.mortality-slider').slider("values", 0, action.minMortality)
         $(".mortality-rate-slider.lower-handle").text(action.minMortality)
@@ -37,6 +37,13 @@ function undoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
+        if(action.incidentMortality == 'i'){
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+        }else{
+            $('#incidence').removeClass('btn-action')
+            $('#mortality').addClass('btn-action')
+        }
 
         year = action.year
         minMortality = action.minMortality
@@ -80,6 +87,13 @@ function redoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
+        if(action.incidentMortality == 'i'){
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+        }else{
+            $('#incidence').removeClass('btn-action')
+            $('#mortality').addClass('btn-action')
+        }
 
         year = action.year
         minMortality = action.minMortality
@@ -128,6 +142,8 @@ function clearFilters() {
     maxDeath = 0.70
 
     countries = []
+
+    applyFilter(true)
 }
 
 function submit() {
