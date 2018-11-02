@@ -4,7 +4,7 @@ var actionStack = [],
 var incidentMortality = 'm',
     year = 2000,
     minMortality = 0,
-    maxMortality = 120,
+    maxMortality = 250,
     minIncidents = 0,
     maxIncidents = 1000,
     minDeath = 0,
@@ -131,8 +131,8 @@ function redoAction() {
 function clearFilters() {
     $('.mortality-slider').slider("values", 0, 0)
     $(".mortality-rate-slider.lower-handle").text(0)
-    $('.mortality-slider').slider("values", 1, 120)
-    $(".mortality-rate-slider.upper-handle").text(120)
+    $('.mortality-slider').slider("values", 1, 250)
+    $(".mortality-rate-slider.upper-handle").text(250)
 
 
     $('.incidents-slider').slider("values", 0, 0)
@@ -151,7 +151,7 @@ function clearFilters() {
 
     year = 2000
     minMortality = 0
-    maxMortality = 120
+    maxMortality = 250
     minIncidents = 0
     maxIncidents = 1000
     minDeath = 0
@@ -249,7 +249,7 @@ function setMortalitySlider() {
     $('.mortality-slider').slider({
         create: function (e, ui) {
             handleA.text(0);
-            handleB.text(120);
+            handleB.text(250);
         },
         slide: function (e, ui) {
             if (ui.values[0] == ui.values[1])
@@ -266,9 +266,9 @@ function setMortalitySlider() {
         orientation: 'horizontal',
         range: true,
         min: 0,
-        max: 120,
+        max: 250,
         step: 5,
-        values: [0, 120],
+        values: [0, 250],
         animate: true
     });
 }
