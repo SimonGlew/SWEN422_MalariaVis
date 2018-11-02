@@ -142,6 +142,8 @@ function clearFilters() {
     maxDeath = 0.70
 
     countries = []
+
+    applyFilter(true)
 }
 
 function submit() {
