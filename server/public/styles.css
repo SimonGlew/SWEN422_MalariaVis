@@ -65,10 +65,6 @@ body{
   width:150px;
 }
 
-.export {
-  width:120px;
-}
-
 .btn-action:hover,
 .open .dropdown-toggle.btn-action {
   color: #FFF;
