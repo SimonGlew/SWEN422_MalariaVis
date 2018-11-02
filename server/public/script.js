@@ -109,7 +109,8 @@ function drawMap(){
        currentYearMortality = getDataPointRounded(d.properties.mortalityRates);
        currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
        if (Number.isFinite(currentYearIncidence)) {
-           currentYearPerc = (100*currentYearMortality / (currentYearIncidence*100)).toFixed(2);
+
+           currentYearPerc = 100*currentYearMortality / (currentYearIncidence*100);
        } else {
          currentYearPerc = "-";
        }
@@ -125,6 +126,17 @@ function drawMap(){
          .attr("stroke-width", 0.5);
        d3.select("#tooltip").style("display", "none");
      })
+
+/*  mapsvg.append("g")
+    .attr("class", "worldmap")
+    .selectAll("path")
+    .data(mapData.features)
+    .enter()
+    .attr("x", function(d) {
+      console.log(d)
+    })
+    .append("text");*/
+
 
   function getDataPointRounded(data) {
     nd = "No data";
@@ -310,6 +322,15 @@ function updateScale(){
   }
 
 }
+
+function zoomMapToFull(){
+  if(!mapData) return;
+  var t = d3.zoomIdentity.translate(0, 0).scale(1)
+  d3.select("#map").call(zoom).transition()
+      .duration(750)
+      .call(zoom.transform, t);
+}
+
 
 function zoomMap(){
   if(!mapData) return;

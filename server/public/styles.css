@@ -54,6 +54,10 @@ body{
   border-color: #000;
 }
 
+.btn-action-disabled {
+  opacity: 0.65;
+}
+
 .btn-mapDisplay {
   border-color: #000 !important;
 }
@@ -61,7 +65,6 @@ body{
 .redoUndo {
   width:100px;
 }
-
 .save {
   width:150px;
 }
@@ -76,6 +79,10 @@ body{
 
 .btn-mapDisplay:active:focus {
   background-color: #D299B3 !important;
+}
+
+.btn:focus {
+  box-shadow:0 0 0 0.2rem rgba(0,0,0,0) !important;
 }
 
 
@@ -151,11 +158,10 @@ fieldset[disabled] .btn-action.active {
 	margin-left: 5px;
 }
 
-.year-slider {
+.year-slider{
   margin-top: 10px;
-  width:95%;
+  width:90%;
   margin-left: 25px;
-  margin-right: 25px;
 }
 
 
