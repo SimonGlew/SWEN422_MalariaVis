@@ -160,7 +160,43 @@ function exportCSV() {
     window.location = "/api/exportcsv" + params
 }
 
+function triggerDownload (imgURI) {
+  var evt = new MouseEvent('click', {
+    view: window,
+    bubbles: false,
+    cancelable: true
+  });
+
+  var a = document.createElement('a');
+  a.setAttribute('download', 'Export.png');
+  a.setAttribute('href', imgURI);
+  a.setAttribute('target', '_blank');
+
+  a.dispatchEvent(evt);
+}
+
 function exportImage(htmlId) {
+  var svg = document.getElementById(htmlId);
+  var canvas = document.getElementById('saveCanvas');
+  canvas.height = svg.clientHeight;
+  canvas.width = svg.clientWidth;
+  var ctx = canvas.getContext('2d');
+  var data = (new XMLSerializer()).serializeToString(svg);
+  var DOMURL = window.URL || window.webkitURL || window;
+
+  var img = new Image();
+  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
+  var url = DOMURL.createObjectURL(svgBlob);
+  img.src = url;
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0);
+    var imgURI = canvas
+        .toDataURL('image/png')
+        .replace('image/png', 'image/octet-stream');
+
+    triggerDownload(imgURI);
+  };
 
 }
 
