@@ -61,10 +61,13 @@ function undoAction() {
 
         $('#redo').removeClass('btn-action-disabled')
         $('#redo').removeAttr('disabled')
-        if (index == 0) {
-            $('#undo').attr('disabled')
-            $('#undo').addClass('btn-action-disabled')
-        }
+
+    }
+    else if(index == 0){
+      clearFilters();
+      $('#undo').attr('disabled')
+      $('#undo').addClass('btn-action-disabled')
+
     }
 }
 
@@ -344,7 +347,7 @@ function setYearSlider() {
         slide: function (e, ui) {
             handleA.text(ui.value);
             year = ui.value;
-            applyFilter()
+            applyFilter(true)
         },
         orientation: 'horizontal',
         min: 2000,
