@@ -126,6 +126,7 @@ fieldset[disabled] .btn-action:active,
 fieldset[disabled] .btn-action.active {
   background-color: #B95F89;
   border-color: #000;
+  cursor: not-allowed;
 }
 
 .btn-action .badge {
