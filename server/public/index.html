@@ -61,16 +61,17 @@
 			</div>
 
 			<div class='col-sm-3 filter-col' style='border-left:2px solid black'>
-				<div class="row filter-row">
+				<div class="row filter-row justify-content-center">
 					<div class="col-sm-12">
 						<h5 class="filter-label">Map Display</h5>
 					</div>
 					<div class="center-buttons col-sm-12 justify-content-center">
 						<div class="btn-group btn-toggle">
-							<button id='incidence' class="btn btn-lg btn-mapDisplay btn-default">Incidence Rate</button>
-							<button id='mortality' class="btn btn-lg btn-mapDisplay btn-action">Mortality Rate</button>
+							<button id='incidence' class="btn btn-lg btn-mapDisplay btn-action">Incidence Rate</button>
+							<button id='mortality' class="btn btn-lg btn-mapDisplay btn-action btn-action-disabled-switch">Mortality Rate</button>
 						</div>
 					</div>
+					<span id='mapDisplayLabel' class="black displayLabel">You have selected: Mortality Rate</span>
 
 				</div>
 				<div class="row filter-row">
