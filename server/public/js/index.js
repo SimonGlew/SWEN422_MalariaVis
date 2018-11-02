@@ -65,7 +65,7 @@ function undoAction() {
     }
     else if(index == 0){
       clearFilters();
-      $('#undo').attr('disabled')
+      $('#undo').attr('disabled','disabled')
       $('#undo').addClass('btn-action-disabled')
 
     }
@@ -122,7 +122,7 @@ function redoAction() {
         $('#undo').removeAttr('disabled')
         if (index == actionStack.length - 1) {
             $('#redo').addClass('btn-action-disabled')
-            $('#redo').attr('disabled')
+            $('#redo').attr('disabled','disabled')
         }
     }
     console.log('redoing action')
@@ -163,9 +163,9 @@ function clearFilters() {
     zoomMapToFull()
 
     $('#redo').addClass('btn-action-disabled')
-    $('#redo').attr('disabled')
+    $('#redo').attr('disabled','disabled')
     $('#undo').addClass('btn-action-disabled')
-    $('#undo').attr('disabled')
+    $('#undo').attr('disabled','disabled')
 
 }
 
@@ -347,7 +347,7 @@ function setYearSlider() {
         slide: function (e, ui) {
             handleA.text(ui.value);
             year = ui.value;
-            applyFilter(true)
+            applyFilter()
         },
         orientation: 'horizontal',
         min: 2000,
