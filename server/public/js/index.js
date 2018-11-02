@@ -37,10 +37,10 @@ function undoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
-        if(action.incidentMortality == 'i'){
+        if (action.incidentMortality == 'i') {
             $('#incidence').addClass('btn-action')
             $('#mortality').removeClass('btn-action')
-        }else{
+        } else {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
         }
@@ -59,6 +59,12 @@ function undoAction() {
         //redraw things
         applyFilter(true)
 
+        $('#redo').removeClass('btn-action-disabled')
+        $('#redo').removeAttr('disabled')
+        if (index == 0) {
+            $('#undo').attr('disabled')
+            $('#undo').addClass('btn-action-disabled')
+        }
     }
 }
 
@@ -87,10 +93,10 @@ function redoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
-        if(action.incidentMortality == 'i'){
+        if (action.incidentMortality == 'i') {
             $('#incidence').addClass('btn-action')
             $('#mortality').removeClass('btn-action')
-        }else{
+        } else {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
         }
@@ -108,6 +114,13 @@ function redoAction() {
 
         //redraw things
         applyFilter(true)
+
+        $('#undo').removeClass('btn-action-disabled')
+        $('#undo').removeAttr('disabled')
+        if (index == actionStack.length - 1) {
+            $('#redo').addClass('btn-action-disabled')
+            $('#redo').attr('disabled')
+        }
     }
     console.log('redoing action')
 }
@@ -145,6 +158,12 @@ function clearFilters() {
 
     applyFilter()
     zoomMapToFull()
+
+    $('#redo').addClass('btn-action-disabled')
+    $('#redo').attr('disabled')
+    $('#undo').addClass('btn-action-disabled')
+    $('#undo').attr('disabled')
+
 }
 
 function submit() {
@@ -162,6 +181,9 @@ function submit() {
         countries: countries
     }))
 
+    $('#undo').removeClass('btn-action-disabled')
+    $('#undo').removeAttr('disabled')
+
     index = actionStack.length - 1
 
     applyFilter(true)
@@ -177,43 +199,43 @@ function exportCSV() {
     window.location = "/api/exportcsv" + params
 }
 
-function triggerDownload (imgURI) {
-  var evt = new MouseEvent('click', {
-    view: window,
-    bubbles: false,
-    cancelable: true
-  });
+function triggerDownload(imgURI) {
+    var evt = new MouseEvent('click', {
+        view: window,
+        bubbles: false,
+        cancelable: true
+    });
 
-  var a = document.createElement('a');
-  a.setAttribute('download', 'Export.png');
-  a.setAttribute('href', imgURI);
-  a.setAttribute('target', '_blank');
+    var a = document.createElement('a');
+    a.setAttribute('download', 'Export.png');
+    a.setAttribute('href', imgURI);
+    a.setAttribute('target', '_blank');
 
-  a.dispatchEvent(evt);
+    a.dispatchEvent(evt);
 }
 
 function exportImage(htmlId) {
-  var svg = document.getElementById(htmlId);
-  var canvas = document.getElementById('saveCanvas');
-  canvas.height = svg.clientHeight;
-  canvas.width = svg.clientWidth;
-  var ctx = canvas.getContext('2d');
-  var data = (new XMLSerializer()).serializeToString(svg);
-  var DOMURL = window.URL || window.webkitURL || window;
+    var svg = document.getElementById(htmlId);
+    var canvas = document.getElementById('saveCanvas');
+    canvas.height = svg.clientHeight;
+    canvas.width = svg.clientWidth;
+    var ctx = canvas.getContext('2d');
+    var data = (new XMLSerializer()).serializeToString(svg);
+    var DOMURL = window.URL || window.webkitURL || window;
 
-  var img = new Image();
-  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-  var url = DOMURL.createObjectURL(svgBlob);
-  img.src = url;
+    var img = new Image();
+    var svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+    var url = DOMURL.createObjectURL(svgBlob);
+    img.src = url;
 
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0);
-    var imgURI = canvas
-        .toDataURL('image/png')
-        .replace('image/png', 'image/octet-stream');
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+        var imgURI = canvas
+            .toDataURL('image/png')
+            .replace('image/png', 'image/octet-stream');
 
-    triggerDownload(imgURI);
-  };
+        triggerDownload(imgURI);
+    };
 
 }
 
@@ -313,62 +335,62 @@ var x = 0;
 
 function setYearSlider() {
 
-  var handleA = $(".year-rate-slider");
+    var handleA = $(".year-rate-slider");
 
-  var slider = $('.year-slider').slider({
-      create: function (e, ui) {
-          handleA.text(2000);
-      },
-      slide: function (e, ui) {
-          handleA.text(ui.value);
-          year = ui.value;
-          applyFilter()
-      },
-      orientation: 'horizontal',
-      min: 2000,
-      max: 2015,
-      step: 5,
-      animate: true
-  });
+    var slider = $('.year-slider').slider({
+        create: function (e, ui) {
+            handleA.text(2000);
+        },
+        slide: function (e, ui) {
+            handleA.text(ui.value);
+            year = ui.value;
+            applyFilter()
+        },
+        orientation: 'horizontal',
+        min: 2000,
+        max: 2015,
+        step: 5,
+        animate: true
+    });
 
 
-  function go() {
-    slider.slider('value', slider.slider('value') + 5);
-    handleA.text(slider.slider('value'));
-    year = slider.slider('value');
-    applyFilter();
-
-    if (slider.slider('value') >= 2015) {
-      moving = false;
-      clearInterval(x);
-      $('#playBtn').html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
-    }
-  }
-  var moving = false;
-  var x = 0;
-
-  $('#playBtn').click(function(){
-
-    var btn = $('#playBtn');
-
-    if(moving) {
-      moving = false;
-      clearInterval(x);
-      btn.html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
-
-    } else {
-      moving = true;
-      if(slider.slider('value') >= 2015) {
-        slider.slider('value', 2000);
-        handleA.text(2000);
-        year = 2000;
+    function go() {
+        slider.slider('value', slider.slider('value') + 5);
+        handleA.text(slider.slider('value'));
+        year = slider.slider('value');
         applyFilter();
-      }
-      x = setInterval(go, 1000);
-      btn.html("<i id=\"playIcon\" class=\"fas fa-pause\"></i> Pause")
 
+        if (slider.slider('value') >= 2015) {
+            moving = false;
+            clearInterval(x);
+            $('#playBtn').html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+        }
     }
-  });
+    var moving = false;
+    var x = 0;
+
+    $('#playBtn').click(function () {
+
+        var btn = $('#playBtn');
+
+        if (moving) {
+            moving = false;
+            clearInterval(x);
+            btn.html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+
+        } else {
+            moving = true;
+            if (slider.slider('value') >= 2015) {
+                slider.slider('value', 2000);
+                handleA.text(2000);
+                year = 2000;
+                applyFilter();
+            }
+            x = setInterval(go, 1000);
+            btn.html("<i id=\"playIcon\" class=\"fas fa-pause\"></i> Pause")
+
+        }
+    });
 }
 
 
@@ -376,7 +398,7 @@ function applyFilter(zoom) {
     //REDRAW MAP
     updateMap();
     if (zoom) {
-      zoomMap();
+        zoomMap();
     }
     //CLEAR LINE GRAPH MAYBE, WHO KNOWS
 

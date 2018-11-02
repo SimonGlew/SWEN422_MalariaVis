@@ -66,9 +66,9 @@
 						<h5 class="filter-label">Action Controls</h5>
 					</div>
 					<div class="center-buttons justify-content-center col-sm-12">
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='undoAction()' style='margin-right:50px;'>
+						<button type="button" id='undo' class="btn btn-primary btn-action redoUndo btn-action-disabled" disabled onclick='undoAction()' style='margin-right:50px;'>
 							<i class="fas fa-undo"></i> Undo</button>
-						<button type="button" class="btn btn-primary btn-action redoUndo" onclick='redoAction()'>
+						<button type="button" id='redo' class="btn btn-primary btn-action redoUndo btn-action-disabled" disabled onclick='redoAction()'>
 							<i class="fas fa-redo"></i> Redo</button>
 					</div>
 				</div>
