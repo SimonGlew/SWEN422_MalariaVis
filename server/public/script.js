@@ -110,7 +110,7 @@ function drawMap(){
        currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
        if (Number.isFinite(currentYearIncidence)) {
 
-           currentYearPerc = 100*currentYearMortality / (currentYearIncidence*100);
+           currentYearPerc = (100*currentYearMortality / (currentYearIncidence*100)).toFixed(2);
        } else {
          currentYearPerc = "-";
        }
