@@ -126,17 +126,6 @@ function drawMap(){
        d3.select("#tooltip").style("display", "none");
      })
 
-/*  mapsvg.append("g")
-    .attr("class", "worldmap")
-    .selectAll("path")
-    .data(mapData.features)
-    .enter()
-    .attr("x", function(d) {
-      console.log(d)
-    })
-    .append("text");*/
-
-
   function getDataPointRounded(data) {
     nd = "No data";
     if (!data) {
@@ -340,6 +329,10 @@ function zoomMap(){
     var incInRange = false;
     if(!meetsFilters(feat)) continue;
     bboxList.push(path.bounds(mapData.features[i]))
+  }
+  if(bboxList.length == 0){
+    zoomMapToFull();
+    return;
   }
   var bbox = bboxList[0];
   for(var i = 1; i < bboxList.length; i++){
