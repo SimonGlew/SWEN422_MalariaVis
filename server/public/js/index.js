@@ -38,12 +38,19 @@ function undoAction() {
 
         //Do something with incidentMortality
         if (action.incidentMortality == 'i') {
-            $('#incidence').addClass('btn-action')
-            $('#mortality').removeClass('btn-action')
-        } else {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
+            $('#mortality').removeClass('btn-action-disabled-switch')
+
+            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+        } else {
+            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+
+            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
+
 
         year = action.year
         minMortality = action.minMortality
@@ -97,12 +104,19 @@ function redoAction() {
 
         //Do something with incidentMortality
         if (action.incidentMortality == 'i') {
-            $('#incidence').addClass('btn-action')
-            $('#mortality').removeClass('btn-action')
-        } else {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
+            $('#mortality').removeClass('btn-action-disabled-switch')
+
+            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+        } else {
+            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+
+            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
+
 
         year = action.year
         minMortality = action.minMortality
@@ -408,12 +422,22 @@ function applyFilter(zoom) {
 }
 
 $('.btn-toggle').click(function () {
-    if ($(this).find('.btn-action').length > 0) {
-        $(this).find('.btn').toggleClass('btn-action');
-        incidentMortality = (incidentMortality == 'i' ? 'm' : 'i')
-        setYearSlider()
+    if(incidentMortality == 'i'){
+        incidentMortality = 'm'
+        $('#mortality').addClass('btn-action-disabled-switch')
+        $('#incidence').removeClass('btn-action-disabled-switch')
+
+        $('#mapDisplayLabel').text('You have selected: Mortality Rate')
+    }else{
+        incidentMortality = 'i'
+        $('#mortality').removeClass('btn-action-disabled-switch')
+        $('#incidence').addClass('btn-action-disabled-switch')
+
+        $('#mapDisplayLabel').text('You have selected: Incidence Rate')
     }
-    $(this).find('.btn').toggleClass('btn-default');
+
+
+    setYearSlider()
     applyFilter()
 });
 

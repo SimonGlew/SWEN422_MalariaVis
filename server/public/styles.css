@@ -54,7 +54,8 @@ body{
   border-color: #000;
 }
 
-.btn-action-disabled {
+.btn-action-disabled,
+.btn-action-disabled-switch {
   opacity: 0.65;
 }
 
@@ -67,6 +68,11 @@ body{
 }
 .save {
   width:150px;
+}
+
+.displayLabel {
+  display:block;
+  padding-top:10px;
 }
 
 .btn-action:hover,
