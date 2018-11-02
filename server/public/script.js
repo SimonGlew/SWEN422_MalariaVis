@@ -21,6 +21,8 @@ Promise.all(promises).then(function(values) {
     processData(values);
 });
 
+var mapsvg = d3.select("#map");
+
 function processData(data){
   mapData = data[0]
   incidence = data[1];
@@ -37,8 +39,6 @@ function zoomed(){
   var s = d3.event.transform.k;
   var h = 0;
 
-
-
   t[0] = Math.min(
     (mapWidth/mapHeight)  * (s - 1),
     Math.max( mapWidth * (1 - s), t[0] )
@@ -48,12 +48,90 @@ function zoomed(){
     h * (s - 1) + h * s,
     Math.max(mapHeight  * (1 - s) - h * s, t[1])
   );
+
+  // Only show labels with filter information
+  var meetsFiltered = mapData.features.filter(function(element) {
+    return meetsFilters(element);
+  });
+  //contains all the data
+  var zoomFiltered1 = meetsFiltered.filter(function(element) {
+    var c = path.bounds(element);
+    var x = Math.abs(c[0][0] - c[1][0]);
+    var y = Math.abs(c[0][1] - c[1][1]);
+    var area = x * y;
+    return area > 0;
+  });
+
+  var zoomFiltered2 = meetsFiltered.filter(function(element) {
+    var c = path.bounds(element);
+    var x = Math.abs(c[0][0] - c[1][0]);
+    var y = Math.abs(c[0][1] - c[1][1]);
+    var area = x * y;
+    return area > 300;
+  });
+  // Largest area countries are displayed
+  var zoomFiltered3 = meetsFiltered.filter(function(element) {
+    var c = path.bounds(element);
+    var x = Math.abs(c[0][0] - c[1][0]);
+    var y = Math.abs(c[0][1] - c[1][1]);
+    var area = x * y;
+    return area > 500;
+  });
+
+  if(s > 2.1 && s <=3) {
+    removeLabels();
+    drawLabels(zoomFiltered3)
+  } else if(s > 3 && s <=8) {
+    removeLabels();
+    drawLabels(zoomFiltered2)
+  } else if(s > 8) {
+    removeLabels();
+    drawLabels(zoomFiltered1)
+  } else {
+    removeLabels()
+  }
+
   d3.select("#map").select(".worldmap").selectAll("path")
     .attr("transform", "translate(" + t + ")scale(" + s + ")");
+  d3.select("#map").select(".worldmap").selectAll("text")
+    .attr("transform", "translate(" + t + ")scale(" + s + ")");
+
+  function drawLabels(data) {
+    mapsvg.select(".worldmap")
+      .selectAll("text")
+      .data(data)
+      .enter()
+      .append("text")
+      .attr("x", function(d) {
+        var c = path.bounds(d);
+        var x = c[0][0] + (Math.abs(c[0][0] - c[1][0])/2);
+        var y = c[0][1] + (Math.abs(c[0][1] - c[1][1])/2);
+        return x;
+      })
+      .attr("y", function(d) {
+        var c = path.bounds(d);
+        var y = c[0][1] + (Math.abs(c[0][1] - c[1][1])/1.5);
+        return y;
+      })
+      .text(function(d) {
+        return d.properties.name;
+      })
+      .style("font-size", function(d) {
+        return 2.5 + "px";
+      })
+      .attr("text-anchor", "middle");
+  }
+
+  function removeLabels() {
+    mapsvg
+      .select(".worldmap")
+      .selectAll("text")
+      .remove()
+  }
 }
 
 function drawMap(){
-  var mapsvg = d3.select("#map");
+
   //Get svg dimensions
   var mapbbox = mapsvg.node().getBoundingClientRect();
   mapWidth = mapbbox.width;
@@ -124,17 +202,7 @@ function drawMap(){
          .attr("stroke", "#777")
          .attr("stroke-width", 0.5);
        d3.select("#tooltip").style("display", "none");
-     })
-
-/*  mapsvg.append("g")
-    .attr("class", "worldmap")
-    .selectAll("path")
-    .data(mapData.features)
-    .enter()
-    .attr("x", function(d) {
-      console.log(d)
-    })
-    .append("text");*/
+     });
 
 
   function getDataPointRounded(data) {
