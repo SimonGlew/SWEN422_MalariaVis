@@ -9,6 +9,7 @@ var mapWidth;
 var mapHeight;
 
 var zoom;
+var mapsvg = d3.select("#map");
 
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
@@ -20,8 +21,6 @@ files.forEach(function(url) {
 Promise.all(promises).then(function(values) {
     processData(values);
 });
-
-var mapsvg = d3.select("#map");
 
 function processData(data){
   mapData = data[0]
@@ -131,7 +130,7 @@ function zoomed(){
 }
 
 function drawMap(){
-
+  var mapsvg = d3.select("#map");
   //Get svg dimensions
   var mapbbox = mapsvg.node().getBoundingClientRect();
   mapWidth = mapbbox.width;
@@ -157,7 +156,8 @@ function drawMap(){
     .attr("y", 0)
     .attr("width", mapWidth)
     .attr("height", mapHeight)
-    .style("opacity", 0)
+    .style("fill", "white")
+    .style("opacity", 1)
 
   mapsvg.call(zoom)
 
@@ -187,7 +187,7 @@ function drawMap(){
        currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
        if (Number.isFinite(currentYearIncidence)) {
 
-           currentYearPerc = 100*currentYearMortality / (currentYearIncidence*100);
+           currentYearPerc = (100*currentYearMortality / (currentYearIncidence*100)).toFixed(2);
        } else {
          currentYearPerc = "-";
        }
@@ -307,7 +307,6 @@ function getColor(feature){
 }
 
 function drawScale(){
-  var mapsvg = d3.select("#map");
   var margin = 30, scaleHeight = 20;
   var x = margin;
   var y = mapHeight - margin - scaleHeight;
@@ -408,6 +407,10 @@ function zoomMap(){
     var incInRange = false;
     if(!meetsFilters(feat)) continue;
     bboxList.push(path.bounds(mapData.features[i]))
+  }
+  if(bboxList.length == 0){
+    zoomMapToFull();
+    return;
   }
   var bbox = bboxList[0];
   for(var i = 1; i < bboxList.length; i++){

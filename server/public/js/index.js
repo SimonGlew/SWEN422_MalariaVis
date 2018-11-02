@@ -4,7 +4,7 @@ var actionStack = [],
 var incidentMortality = 'm',
     year = 2000,
     minMortality = 0,
-    maxMortality = 120,
+    maxMortality = 250,
     minIncidents = 0,
     maxIncidents = 1000,
     minDeath = 0,
@@ -37,13 +37,20 @@ function undoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
-        if(action.incidentMortality == 'i'){
-            $('#incidence').addClass('btn-action')
-            $('#mortality').removeClass('btn-action')
-        }else{
+        if (action.incidentMortality == 'i') {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
+            $('#mortality').removeClass('btn-action-disabled-switch')
+
+            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+        } else {
+            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+
+            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
+
 
         year = action.year
         minMortality = action.minMortality
@@ -58,6 +65,15 @@ function undoAction() {
 
         //redraw things
         applyFilter(true)
+
+        $('#redo').removeClass('btn-action-disabled')
+        $('#redo').removeAttr('disabled')
+
+    }
+    else if(index == 0){
+      clearFilters();
+      $('#undo').attr('disabled','disabled')
+      $('#undo').addClass('btn-action-disabled')
 
     }
 }
@@ -87,13 +103,20 @@ function redoAction() {
         $(".year-rate-slider").text(action.year)
 
         //Do something with incidentMortality
-        if(action.incidentMortality == 'i'){
-            $('#incidence').addClass('btn-action')
-            $('#mortality').removeClass('btn-action')
-        }else{
+        if (action.incidentMortality == 'i') {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
+            $('#mortality').removeClass('btn-action-disabled-switch')
+
+            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+        } else {
+            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').addClass('btn-action')
+            $('#mortality').removeClass('btn-action')
+
+            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
+
 
         year = action.year
         minMortality = action.minMortality
@@ -108,6 +131,13 @@ function redoAction() {
 
         //redraw things
         applyFilter(true)
+
+        $('#undo').removeClass('btn-action-disabled')
+        $('#undo').removeAttr('disabled')
+        if (index == actionStack.length - 1) {
+            $('#redo').addClass('btn-action-disabled')
+            $('#redo').attr('disabled','disabled')
+        }
     }
     console.log('redoing action')
 }
@@ -115,8 +145,8 @@ function redoAction() {
 function clearFilters() {
     $('.mortality-slider').slider("values", 0, 0)
     $(".mortality-rate-slider.lower-handle").text(0)
-    $('.mortality-slider').slider("values", 1, 120)
-    $(".mortality-rate-slider.upper-handle").text(120)
+    $('.mortality-slider').slider("values", 1, 250)
+    $(".mortality-rate-slider.upper-handle").text(250)
 
 
     $('.incidents-slider').slider("values", 0, 0)
@@ -135,7 +165,7 @@ function clearFilters() {
 
     year = 2000
     minMortality = 0
-    maxMortality = 120
+    maxMortality = 250
     minIncidents = 0
     maxIncidents = 1000
     minDeath = 0
@@ -145,6 +175,12 @@ function clearFilters() {
 
     applyFilter()
     zoomMapToFull()
+
+    $('#redo').addClass('btn-action-disabled')
+    $('#redo').attr('disabled','disabled')
+    $('#undo').addClass('btn-action-disabled')
+    $('#undo').attr('disabled','disabled')
+
 }
 
 function submit() {
@@ -162,6 +198,9 @@ function submit() {
         countries: countries
     }))
 
+    $('#undo').removeClass('btn-action-disabled')
+    $('#undo').removeAttr('disabled')
+
     index = actionStack.length - 1
 
     applyFilter(true)
@@ -177,43 +216,43 @@ function exportCSV() {
     window.location = "/api/exportcsv" + params
 }
 
-function triggerDownload (imgURI) {
-  var evt = new MouseEvent('click', {
-    view: window,
-    bubbles: false,
-    cancelable: true
-  });
+function triggerDownload(imgURI) {
+    var evt = new MouseEvent('click', {
+        view: window,
+        bubbles: false,
+        cancelable: true
+    });
 
-  var a = document.createElement('a');
-  a.setAttribute('download', 'Export.png');
-  a.setAttribute('href', imgURI);
-  a.setAttribute('target', '_blank');
+    var a = document.createElement('a');
+    a.setAttribute('download', 'Export.png');
+    a.setAttribute('href', imgURI);
+    a.setAttribute('target', '_blank');
 
-  a.dispatchEvent(evt);
+    a.dispatchEvent(evt);
 }
 
 function exportImage(htmlId) {
-  var svg = document.getElementById(htmlId);
-  var canvas = document.getElementById('saveCanvas');
-  canvas.height = svg.clientHeight;
-  canvas.width = svg.clientWidth;
-  var ctx = canvas.getContext('2d');
-  var data = (new XMLSerializer()).serializeToString(svg);
-  var DOMURL = window.URL || window.webkitURL || window;
+    var svg = document.getElementById(htmlId);
+    var canvas = document.getElementById('saveCanvas');
+    canvas.height = svg.clientHeight;
+    canvas.width = svg.clientWidth;
+    var ctx = canvas.getContext('2d');
+    var data = (new XMLSerializer()).serializeToString(svg);
+    var DOMURL = window.URL || window.webkitURL || window;
 
-  var img = new Image();
-  var svgBlob = new Blob([data], {type: 'image/svg+xml;charset=utf-8'});
-  var url = DOMURL.createObjectURL(svgBlob);
-  img.src = url;
+    var img = new Image();
+    var svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+    var url = DOMURL.createObjectURL(svgBlob);
+    img.src = url;
 
-  img.onload = function () {
-    ctx.drawImage(img, 0, 0);
-    var imgURI = canvas
-        .toDataURL('image/png')
-        .replace('image/png', 'image/octet-stream');
+    img.onload = function () {
+        ctx.drawImage(img, 0, 0);
+        var imgURI = canvas
+            .toDataURL('image/png')
+            .replace('image/png', 'image/octet-stream');
 
-    triggerDownload(imgURI);
-  };
+        triggerDownload(imgURI);
+    };
 
 }
 
@@ -224,7 +263,7 @@ function setMortalitySlider() {
     $('.mortality-slider').slider({
         create: function (e, ui) {
             handleA.text(0);
-            handleB.text(120);
+            handleB.text(250);
         },
         slide: function (e, ui) {
             if (ui.values[0] == ui.values[1])
@@ -241,9 +280,9 @@ function setMortalitySlider() {
         orientation: 'horizontal',
         range: true,
         min: 0,
-        max: 120,
+        max: 250,
         step: 5,
-        values: [0, 120],
+        values: [0, 250],
         animate: true
     });
 }
@@ -313,62 +352,62 @@ var x = 0;
 
 function setYearSlider() {
 
-  var handleA = $(".year-rate-slider");
+    var handleA = $(".year-rate-slider");
 
-  var slider = $('.year-slider').slider({
-      create: function (e, ui) {
-          handleA.text(2000);
-      },
-      slide: function (e, ui) {
-          handleA.text(ui.value);
-          year = ui.value;
-          applyFilter()
-      },
-      orientation: 'horizontal',
-      min: 2000,
-      max: 2015,
-      step: 5,
-      animate: true
-  });
+    var slider = $('.year-slider').slider({
+        create: function (e, ui) {
+            handleA.text(2000);
+        },
+        slide: function (e, ui) {
+            handleA.text(ui.value);
+            year = ui.value;
+            applyFilter()
+        },
+        orientation: 'horizontal',
+        min: 2000,
+        max: 2015,
+        step: 5,
+        animate: true
+    });
 
 
-  function go() {
-    slider.slider('value', slider.slider('value') + 5);
-    handleA.text(slider.slider('value'));
-    year = slider.slider('value');
-    applyFilter();
-
-    if (slider.slider('value') >= 2015) {
-      moving = false;
-      clearInterval(x);
-      $('#playBtn').html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
-    }
-  }
-  var moving = false;
-  var x = 0;
-
-  $('#playBtn').click(function(){
-
-    var btn = $('#playBtn');
-
-    if(moving) {
-      moving = false;
-      clearInterval(x);
-      btn.html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
-
-    } else {
-      moving = true;
-      if(slider.slider('value') >= 2015) {
-        slider.slider('value', 2000);
-        handleA.text(2000);
-        year = 2000;
+    function go() {
+        slider.slider('value', slider.slider('value') + 5);
+        handleA.text(slider.slider('value'));
+        year = slider.slider('value');
         applyFilter();
-      }
-      x = setInterval(go, 1000);
-      btn.html("<i id=\"playIcon\" class=\"fas fa-pause\"></i> Pause")
 
+        if (slider.slider('value') >= 2015) {
+            moving = false;
+            clearInterval(x);
+            $('#playBtn').html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+        }
     }
-  });
+    var moving = false;
+    var x = 0;
+
+    $('#playBtn').click(function () {
+
+        var btn = $('#playBtn');
+
+        if (moving) {
+            moving = false;
+            clearInterval(x);
+            btn.html("<i id=\"playIcon\" class=\"fas fa-play\"></i> Play")
+
+        } else {
+            moving = true;
+            if (slider.slider('value') >= 2015) {
+                slider.slider('value', 2000);
+                handleA.text(2000);
+                year = 2000;
+                applyFilter();
+            }
+            x = setInterval(go, 1000);
+            btn.html("<i id=\"playIcon\" class=\"fas fa-pause\"></i> Pause")
+
+        }
+    });
 }
 
 
@@ -376,19 +415,29 @@ function applyFilter(zoom) {
     //REDRAW MAP
     updateMap();
     if (zoom) {
-      zoomMap();
+        zoomMap();
     }
     //CLEAR LINE GRAPH MAYBE, WHO KNOWS
 
 }
 
 $('.btn-toggle').click(function () {
-    if ($(this).find('.btn-action').length > 0) {
-        $(this).find('.btn').toggleClass('btn-action');
-        incidentMortality = (incidentMortality == 'i' ? 'm' : 'i')
-        setYearSlider()
+    if(incidentMortality == 'i'){
+        incidentMortality = 'm'
+        $('#mortality').addClass('btn-action-disabled-switch')
+        $('#incidence').removeClass('btn-action-disabled-switch')
+
+        $('#mapDisplayLabel').text('You have selected: Mortality Rate')
+    }else{
+        incidentMortality = 'i'
+        $('#mortality').removeClass('btn-action-disabled-switch')
+        $('#incidence').addClass('btn-action-disabled-switch')
+
+        $('#mapDisplayLabel').text('You have selected: Incidence Rate')
     }
-    $(this).find('.btn').toggleClass('btn-default');
+
+
+    setYearSlider()
     applyFilter()
 });
 
