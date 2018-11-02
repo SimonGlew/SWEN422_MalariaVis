@@ -4,7 +4,7 @@ var lineWidth;
 var xScale, yScale;
 
 function drawChart(){
-  var margin = 20;
+  var margin = 50;
   var chartBbox = linesvg.node().getBoundingClientRect();
   svgWidth = chartBbox.width;
   svgHeight = chartBbox.height;
@@ -22,7 +22,6 @@ function drawChart(){
     .domain([0, 1000])
     .range([0, svgHeight - margin*2])
 
-
   var yAxis = d3.axisLeft()
     .scale(yScale);
 
@@ -31,10 +30,14 @@ function drawChart(){
     .attr("transform", "translate( " + 2*margin + ", " + margin + ")")
     .call(yAxis);
 
+  //TODO: Format ticks
   linesvg.append("g")
     .attr("class", "xAxis")
-    .attr("transform", "translate( " + 2*margin + ", " + margin + ")")
+    .attr("transform", "translate( " + 2*margin + ", " + (svgHeight - margin) + ")")
     .call(xAxis);
+}
+
+function addToChart(){
 
 }
 
