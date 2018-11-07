@@ -40,15 +40,11 @@ function undoAction() {
         if (action.incidentMortality == 'i') {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
-            $('#mortality').removeClass('btn-action-disabled-switch')
-
-            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+            $('#mortality').removeClass('btn-action-selected-switch')
         } else {
-            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').removeClass('btn-action-selected-switch')
             $('#incidence').addClass('btn-action')
             $('#mortality').removeClass('btn-action')
-
-            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
 
 
@@ -106,15 +102,11 @@ function redoAction() {
         if (action.incidentMortality == 'i') {
             $('#incidence').removeClass('btn-action')
             $('#mortality').addClass('btn-action')
-            $('#mortality').removeClass('btn-action-disabled-switch')
-
-            $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+            $('#mortality').removeClass('btn-action-selected-switch')
         } else {
-            $('#incidence').removeClass('btn-action-disabled-switch')
+            $('#incidence').removeClass('btn-action-selected-switch')
             $('#incidence').addClass('btn-action')
             $('#mortality').removeClass('btn-action')
-
-            $('#mapDisplayLabel').text('You have selected: Mortality Rate')
         }
 
 
@@ -424,16 +416,12 @@ function applyFilter(zoom) {
 $('.btn-toggle').click(function () {
     if(incidentMortality == 'i'){
         incidentMortality = 'm'
-        $('#mortality').addClass('btn-action-disabled-switch')
-        $('#incidence').removeClass('btn-action-disabled-switch')
-
-        $('#mapDisplayLabel').text('You have selected: Mortality Rate')
+        $('#mortality').addClass('btn-action-selected-switch')
+        $('#incidence').removeClass('btn-action-selected-switch')
     }else{
         incidentMortality = 'i'
-        $('#mortality').removeClass('btn-action-disabled-switch')
-        $('#incidence').addClass('btn-action-disabled-switch')
-
-        $('#mapDisplayLabel').text('You have selected: Incidence Rate')
+        $('#mortality').removeClass('btn-action-selected-switch')
+        $('#incidence').addClass('btn-action-selected-switch')
     }
 
 

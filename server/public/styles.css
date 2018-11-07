@@ -48,15 +48,21 @@ body{
 	padding-top: 10px;
 }
 
-.btn-action {
+.btn-action,
+.btn-action-selected-switch {
   color: #FFF;
   background-color: #B95F89;
   border-color: #000;
 }
 
-.btn-action-disabled,
-.btn-action-disabled-switch {
+.btn-action-disabled {
   opacity: 0.65;
+}
+
+/* non-active buttons in toggle are uncoloured */
+.btn-toggle > button:not(.btn-action-selected-switch) {
+	background-color: rgba(0,0,0,0);
+	color: #B95F89;
 }
 
 .btn-mapDisplay {
