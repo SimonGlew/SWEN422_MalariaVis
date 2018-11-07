@@ -413,22 +413,24 @@ function applyFilter(zoom) {
 
 }
 
-$('.btn-toggle').click(function () {
-    if(incidentMortality == 'i'){
-        incidentMortality = 'm'
-        $('#mortality').addClass('btn-action-selected-switch')
-        $('#incidence').removeClass('btn-action-selected-switch')
-    }else{
-        incidentMortality = 'i'
+function doSwitch(selected) {
+    /* Do nothing (don't toggle) if already selected */
+    if (incidentMortality == selected) {
+        return;
+    }
+    incidentMortality = selected
+    if (selected == 'i'){
         $('#mortality').removeClass('btn-action-selected-switch')
         $('#incidence').addClass('btn-action-selected-switch')
+    } else {
+        $('#mortality').addClass('btn-action-selected-switch')
+        $('#incidence').removeClass('btn-action-selected-switch')
     }
-
 
     setYearSlider()
     applyFilter()
-});
 
+}
 
 function init() {
     setMortalitySlider()
