@@ -3,7 +3,6 @@ var webdriver = require('selenium-webdriver'),
 
 // Input capabilities
 var capabilities = {
-    'browserstack.local':'true',
     'browserName': 'Chrome',
     'browser_version': '62.0',
     'os': 'Windows',
