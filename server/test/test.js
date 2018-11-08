@@ -25,15 +25,20 @@ assert.equalFalse = function (condition){
     assert.equal(condition, false)
 }
 
+const waitFind = (locator) => {
+    return driver.findElement(async () => {
+        await driver.wait(webdriver.until.elementLocated(webdriver.By.id(locator)));
+        return driver.findElement(webdriver.By.id(locator));
+    });
+}
+
 describe('#scenarioOne', async () => {
     it('runs scenario one', async () => {
         await driver.manage().window().maximize();
 
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
         await driver.findElement(webdriver.By.id('incidence')).click()
-        let indonesiaElement = await driver.findElement(webdriver.By.id('feature-IDN'))
-        await driver.wait(webdriver.until.elementIsVisible(indonesiaElement),100);
-        await driver.findElement(webdriver.By.id('feature-IDN')).click()
+        await waitFind('feature-IDN').click()
         let year = await driver.findElement(webdriver.By.id('yearSliderLabel'))
         let yearText = await year.getText()
         assert.equalTrue(yearText == '2000')
