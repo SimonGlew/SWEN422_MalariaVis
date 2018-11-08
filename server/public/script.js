@@ -193,7 +193,7 @@ function drawMap(){
        d3.select(this)
          .attr("stroke", "#00F")
          .attr("stroke-width", 1);
-       d3.selectAll("path").moveToFront();
+       d3.select(this).moveToFront();
        d3.selectAll('text').moveToFront();
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
