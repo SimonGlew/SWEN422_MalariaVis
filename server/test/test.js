@@ -32,10 +32,21 @@ const waitFind = (locator) => {
     });
 }
 
+const parseTranslation = (translate) =>{
+  console.log('translate', translate)
+  let s = translate.substring(translate.indexOf('(')+1, translate.indexOf(')'));
+  console.log('s', s);
+  let split = s.split(',');
+  console.log('split', split);
+  return {x:parseFloat(split[0]), y:parseFloat(split[1])};
+
+}
+
 describe('hooks', async () => {
     after(async () => {
+        this.timeout(0)
         await driver.quit()
-    }).timeout(0)
+    })
 
     describe('#TolTipCheck', async () => {
         it('check tooltip on Iran with year 2000 and download map and csv', async () => {
@@ -115,6 +126,24 @@ describe('hooks', async () => {
             assert.equalTrue(elemHeight > oldElemHeight)
             assert.equalTrue(elemWidth > oldElemWidth)
         }).timeout(0);
+  })
+  describe('#mapDraggingTestOne', async () =>{
+    it('Check that dragging works', async () =>{
+      await driver.manage().window().maximize();
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+
+      await waitFind('feature-IRN') //check map loaded first
+
+      await driver.findElement(webdriver.By.id('submit')).click()
+      await driver.sleep(2000)
+
+      let elem = await waitFind('feature-IRN')
+      let t1 = parseTranslation(await elem.getAttribute('transform'));
+      console.log('t1',t1);
+
+
+
+    })
   })
 })
 
