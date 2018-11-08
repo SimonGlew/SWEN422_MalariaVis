@@ -1,4 +1,5 @@
-var server = "http://localhost:52724";
+var path = window.location.href.split(':52724')[0]
+var server =  path+":52724";
 
 var mapData;
 var incidence;
