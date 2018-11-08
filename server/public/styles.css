@@ -8,7 +8,7 @@ body{
 }
 
 .navbar{
-  background-color: #ff285e;
+  background-color: #B95F89;
   width: 100%;
 }
 .navbar-brand{
@@ -18,7 +18,7 @@ body{
 .filter-row{
 	padding-bottom: 20px;
 	padding-top: 10px;
-	border-bottom: solid 1px black;
+	border-bottom: solid 1px #5D3045;
 }
 
 .vis-col{
@@ -42,7 +42,7 @@ body{
 .btn-action-selected-switch {
   color: #FFF;
   background-color: #B95F89;
-  border-color: #000;
+  border-color: #5D3045;
 }
 
 /* kill hover effects for selected; it's not clickable */
@@ -61,7 +61,7 @@ body{
 }
 
 .btn-mapDisplay {
-  border-color: #000 !important;
+  border-color: #5D3045 !important;
 }
 
 .redoUndo {
@@ -81,7 +81,7 @@ body{
 .btn-toggle > button:not(.btn-action-selected-switch):hover {
   color: #FFF;
   background-color: #D299B3;
-  border-color: #000;
+  border-color: #5D3045;
   box-shadow:0 0 0 0.2rem rgba(0,0,0,0);
 }
 
@@ -97,7 +97,7 @@ body{
 .btn-action:active {
   color: #FFF !important;
   background-color: #D299B3 !important;
-  border-color: #000 !important;
+  border-color: #5D3045 !important;
 }
 
 .btn-action:focus,
@@ -127,7 +127,7 @@ fieldset[disabled] .btn-action:active,
 .btn-action[disabled].active,
 fieldset[disabled] .btn-action.active {
   background-color: #B95F89;
-  border-color: #000;
+  border-color: #5D3045;
   cursor: not-allowed;
 }
 
@@ -246,9 +246,10 @@ span.block{
 	position: absolute;
 	display: none;
 	color: #FFF;
-	background-color: #FF2A5E;
+	background-color: #B95F89;
+	opacity: 0.9;
 	box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
-	border: 1px solid #dd0036;
+	border: 1px solid #5D3045;
   border-radius: 4px;
   z-index:3;
 }
