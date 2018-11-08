@@ -46,9 +46,11 @@ describe('#scenarioOne', async () => {
         assert.equalTrue(yearText == '2000')
 
         let elem = await waitFind('feature-IRN')
-        let elemDimensions = await elem.getSize()
+        let elemHeight = await elem.getAttribute('height')
+        let elemWidth = await elem.getAttribute('width')
+
         
-        await actions.move({ duration: 1000, origin: elem, x: (elemDimensions.width / 2), y: (elemDimensions.width / 2) }).perform();
+        await actions.move({ duration: 1000, origin: elem, x: (elemWidth / 2), y: (elemHeight / 2) }).perform();
 
         let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
         let mortalityText = await mortalityTooltip.getText()
