@@ -123,12 +123,19 @@ describe('hooks', async () => {
             let elemHeight = await elem.getAttribute('height')
             let elemWidth = await elem.getAttribute('width')
 
+            console.log('oHeight', oldElemHeight)
+            console.log('oWidth', oldElemWidth)
+            console.log('eHeight',elemHeight)
+            console.log('eWidth',elemWidth)
+
             assert.equalTrue(elemHeight > oldElemHeight)
             assert.equalTrue(elemWidth > oldElemWidth)
         }).timeout(0);
   })
   describe('#mapDraggingTestOne', async () =>{
     it('Check that dragging works', async () =>{
+      const actions = driver.actions({ bridge: true });
+
       await driver.manage().window().maximize();
       await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
 
