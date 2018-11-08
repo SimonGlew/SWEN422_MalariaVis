@@ -52,6 +52,7 @@ describe('#scenarioOne', async () => {
         
         await actions.move({ duration: 1000, origin: elem, x: (elemWidth / 2), y: (elemHeight / 2) }).perform();
 
+        await waitFind('mortalityTooltip')
         let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
         let mortalityText = await mortalityTooltip.getText()
 
@@ -60,6 +61,8 @@ describe('#scenarioOne', async () => {
 
         let percentageTooltip = await driver.findElement(webdriver.By.id('percentageTooltip'))
         let percentageText = await incidenceTooltip.getText()
+
+        console.log(mortalityText, incidenceText, percentageText)
 
 
         assert.equalTrue(mortalityText == '0.02')
