@@ -14,6 +14,9 @@ var mapsvg = d3.select("#map");
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
 
+/* FIXME this list of selected countries is just that; nothing is done with it */
+var selected = [];
+
 // Following is lifted from https://stackoverflow.com/questions/14167863/how-can-i-bring-a-circle-to-the-front-with-d3
 d3.selection.prototype.moveToFront = function() {
     return this.each(function(){
@@ -213,6 +216,14 @@ function drawMap(){
          .attr("stroke", "#777")
          .attr("stroke-width", 0.5);
        d3.select("#tooltip").style("display", "none");
+     })
+     .on("click", function(d) {
+       /* toggle item's presence in selection */
+       if (!selected.includes(d)) {
+         selected.push(d);
+       } else {
+         selected = selected.filter(function(e){return e != d;});
+       }
      });
 
 
