@@ -38,10 +38,13 @@ describe('#scenarioOne', async () => {
 
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
         await driver.findElement(webdriver.By.id('incidence')).click()
-        await waitFind('feature-IDN').click()
-        let year = await driver.findElement(webdriver.By.id('yearSliderLabel'))
+
+        let year = await waitFind('yearSliderLabel')
         let yearText = await year.getText()
         assert.equalTrue(yearText == '2000')
+
+        await waitFind('feature-IDN').sendKeys('')
+
 
         let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
         let mortalityText = await mortalityTooltip.getText()
