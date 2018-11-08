@@ -29,22 +29,28 @@ describe('#scenarioOne', async () => {
     it('runs scenario one', async () => {
         await driver.manage().window().maximize();
 
-
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
         await driver.findElement(webdriver.By.id('incidence')).click()
         let indonesiaElement = await driver.findElement(webdriver.By.id('feature-IDN'))
         await driver.wait(webdriver.until.elementIsVisible(indonesiaElement),100);
-        await driver.findElement(indonesiaElement).click()
-        let year = (await driver.findElement(webdriver.By.id('yearSliderLabel'))).getText()
-        assert.equalTrue(year == '2000')
+        await driver.findElement(webdriver.By.id('feature-IDN')).click()
+        let year = await driver.findElement(webdriver.By.id('yearSliderLabel'))
+        let yearText = await year.getText()
+        assert.equalTrue(yearText == '2000')
 
-        let mortalityText = (await driver.findElement(webdriver.By.id('mortalityTooltip'))).getText()
-        let incidenceText = (await driver.findElement(webdriver.By.id('incidenceTooltip'))).getText()
-        let percentageText = (await driver.findElement(webdriver.By.id('percentageTooltip'))).getText()
+        let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
+        let mortalityText = await mortalityTooltip.getText()
+
+        let incidenceTooltip = await driver.findElement(webdriver.By.id('incidenceTooltip'))
+        let incidenceText = await incidenceTooltip.getText()
+
+        let percentageTooltip = await driver.findElement(webdriver.By.id('percentageTooltip'))
+        let percentageText = await incidenceTooltip.getText()
+
 
         assert.equalTrue(mortalityText == '4.13')
-        assert.equalTrue(year == '99')
-        assert.equalTrue(year == '0.04')
+        assert.equalTrue(incidenceText == '99')
+        assert.equalTrue(percentageText == '0.04')
 
         await driver.findElement(webdriver.By.id('exportMapBtn')).click()
         await driver.findElement(webdriver.By.id('exportCSVBtn')).click()
