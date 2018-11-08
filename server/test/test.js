@@ -122,6 +122,7 @@ describe('hooks', async () => {
             console.log('afew')
 
             let elem = await waitFind('feature-COD')
+            console.log(elem);
             let t1 = parseScale(await elem.getAttribute('transform'));
 
             await driver.findElement(webdriver.By.id('submit')).click()
