@@ -122,8 +122,6 @@ describe('hooks', async () => {
             console.log('afew')
 
             let elem = await waitFind('feature-COD')
-            console.log(elem);
-            let t1 = parseScale(await elem.getAttribute('transform'));
 
             await driver.findElement(webdriver.By.id('submit')).click()
             await driver.sleep(2000)
@@ -131,10 +129,9 @@ describe('hooks', async () => {
             elem = await waitFind('feature-COD')
             let t2 = parseScale(await elem.getAttribute('transform'));
 
-            console.log('t1',t1);
             console.log('t2',t2);
 
-            assert.equalTrue(t2 > t1);
+            assert.equalTrue(t2 > 1);
         }).timeout(0);
   })
   describe('#mapDraggingTestOne', async () =>{
