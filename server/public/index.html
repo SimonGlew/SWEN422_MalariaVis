@@ -48,7 +48,7 @@
 					<div class="col-sm-12 map-controls row">
 						<button type="button" id="playBtn" class="btn btn-primary btn-action play"><i id="playIcon" class="fas fa-play"></i> Play</button>
 						<div class="year-slider">
-							<div class="year-rate-slider ui-slider-handle"></div>
+							<div id='yearSliderLabel' class="year-rate-slider ui-slider-handle"></div>
 						</div>
 					</div>
 					<hr />
@@ -120,11 +120,11 @@
 					<div class="col-sm-12 filter-label">
 						<h5 class="filter-label">Export Controls</h5>
 						<div class="row justify-content-center">
-							<button type="button" class="btn btn-primary btn-action" onclick='exportImage("map")' style='margin-right:5px;'>
+							<button id='exportMapBtn' type="button" class="btn btn-primary btn-action" onclick='exportImage("map")' style='margin-right:5px;'>
 								<i class="fas fa-globe-asia"></i> Export Map</button>
-							<button type="button" class="btn btn-primary btn-action" onclick='exportImage("line")' style='margin-right:5px;'>
+							<button id='exportLineBtn' type="button" class="btn btn-primary btn-action" onclick='exportImage("line")' style='margin-right:5px;'>
 								<i class="fas fa-chart-line"></i> Export Graph</button>
-							<button type="button" class="btn btn-primary btn-action" onclick='exportCSV()'>
+							<button id='exportCSVBtn' type="button" class="btn btn-primary btn-action" onclick='exportCSV()'>
 								<i class="fas fa-table"></i> Export CSV</button>
 						</div>
 					</div>
@@ -135,13 +135,13 @@
 	<div id="tooltip">
 		<h1></h1>
 		<p>Mortality:
-			<span class="mortality"></span>
+			<span id='mortalityTooltip' class="mortality"></span>
 		</p>
 		<p>Incidence:
-			<span class="incidence"></span>
+			<span id='incidenceTooltip' class="incidence"></span>
 		</p>
 		<p>Percentage:
-			<span class="percentage"></span>%</p>
+			<span id='percentageTooltip' class="percentage"></span>%</p>
 	</div>
 	<canvas id="saveCanvas" style="display:none; position:absolute; left:0; top:0; background-color:white;"></canvas>
 	<script src='script.js'></script>
