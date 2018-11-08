@@ -45,8 +45,10 @@ describe('#scenarioOne', async () => {
         let yearText = await year.getText()
         assert.equalTrue(yearText == '2000')
 
-        let elem = await waitFind('feature-IDN')
-        await actions.move({ duration: 1000, origin: elem, x: 0, y: 0 }).perform();
+        let elem = await waitFind('feature-IRN')
+        let elemDimensions = await elem.getSize()
+        
+        await actions.move({ duration: 1000, origin: elem, x: (elemDimensions.width / 2), y: (elemDimensions.width / 2) }).perform();
 
         let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
         let mortalityText = await mortalityTooltip.getText()
@@ -58,9 +60,9 @@ describe('#scenarioOne', async () => {
         let percentageText = await incidenceTooltip.getText()
 
 
-        assert.equalTrue(mortalityText == '4.13')
-        assert.equalTrue(incidenceText == '99')
-        assert.equalTrue(percentageText == '0.04')
+        assert.equalTrue(mortalityText == '0.02')
+        assert.equalTrue(incidenceText == '39.9')
+        assert.equalTrue(percentageText == '0.00')
 
         await driver.findElement(webdriver.By.id('exportMapBtn')).click()
         await driver.findElement(webdriver.By.id('exportCSVBtn')).click()
