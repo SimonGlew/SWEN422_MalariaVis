@@ -231,8 +231,10 @@ function drawMap() {
       /* toggle item's presence in selection */
       if (!selected.includes(d)) {
         selected.push(d);
+        addToChart(d)
       } else {
         selected = selected.filter(function (e) { return e != d; });
+        removeFromChart(d)
       }
     });
 
