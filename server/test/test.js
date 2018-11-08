@@ -35,7 +35,7 @@ const waitFind = (locator) => {
 describe('hooks', async () => {
     after(async () => {
         await driver.quit()
-    })
+    }).timeout(0)
 
     describe('#TolTipCheck', async () => {
         it('check tooltip on Iran with year 2000 and download map and csv', async () => {
