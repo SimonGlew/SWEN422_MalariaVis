@@ -57,24 +57,24 @@ function zoomed(){
     var c = path.bounds(element);
     var x = Math.abs(c[0][0] - c[1][0]);
     var y = Math.abs(c[0][1] - c[1][1]);
-    var area = x * y;
-    return area > 0;
+    var area = x;
+    return x * y > 10;
   });
 
   var zoomFiltered2 = meetsFiltered.filter(function(element) {
     var c = path.bounds(element);
     var x = Math.abs(c[0][0] - c[1][0]);
     var y = Math.abs(c[0][1] - c[1][1]);
-    var area = x * y;
-    return area > 300;
+    var area = x;
+    return area > 10;
   });
   // Largest area countries are displayed
   var zoomFiltered3 = meetsFiltered.filter(function(element) {
     var c = path.bounds(element);
     var x = Math.abs(c[0][0] - c[1][0]);
     var y = Math.abs(c[0][1] - c[1][1]);
-    var area = x * y;
-    return area > 500;
+    var area = x;
+    return area > 30;
   });
 
   if(s > 2.1 && s <=3) {
@@ -101,14 +101,15 @@ function zoomed(){
       .data(data)
       .enter()
       .append("text")
+        .attr("class", "map-text")
       .attr("x", function(d) {
-        var c = path.bounds(d);
+        let c = path.bounds(d);
         var x = c[0][0] + (Math.abs(c[0][0] - c[1][0])/2);
         var y = c[0][1] + (Math.abs(c[0][1] - c[1][1])/2);
         return x;
       })
       .attr("y", function(d) {
-        var c = path.bounds(d);
+        let c = path.bounds(d);
         var y = c[0][1] + (Math.abs(c[0][1] - c[1][1])/1.5);
         return y;
       })
@@ -116,9 +117,12 @@ function zoomed(){
         return d.properties.name;
       })
       .style("font-size", function(d) {
-        return 2.5 + "px";
+        var min = 2;
+        var size = ((Math.abs((path.bounds(d))[0][0] - (path.bounds(d))[1][0]) / (d.properties.name).length *0.5));
+          return min > size ? min + "px"  : size + "px";
       })
-      .attr("text-anchor", "middle");
+      .attr("text-anchor", "middle")
+      .style("text-shadow", "stroke: white");
   }
 
   function removeLabels() {

@@ -173,6 +173,9 @@ fieldset[disabled] .btn-action.active {
   margin-left: 25px;
 }
 
+.map-text {
+    text-shadow: 1px 1px white;
+}
 
 .mortality-rate-slider,
 .incidents-rate-slider,
