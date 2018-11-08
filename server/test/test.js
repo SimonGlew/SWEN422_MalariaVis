@@ -140,7 +140,7 @@ describe('hooks', async () => {
       let elem = await waitFind('feature-IRN')
       let t1 = parseTranslation(await elem.getAttribute('transform'));
       console.log('t1',t1);
-      await actions.dragAndDrop(elem,{x:50});
+      await actions.dragAndDrop(elem,{x:50, y:0});
       let t2 = parseTranslation(await elem.getAttribute('transform'));
 
       console.log('t2', t2);
@@ -148,7 +148,7 @@ describe('hooks', async () => {
 
 
 
-    })
+    }).timeout(0);
   })
 })
 
