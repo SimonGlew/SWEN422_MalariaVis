@@ -1,4 +1,4 @@
-var server = "http://localhost:8000";
+var server = "http://localhost:52724";
 
 var mapData;
 var incidence;

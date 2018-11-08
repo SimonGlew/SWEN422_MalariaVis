@@ -17,12 +17,12 @@ var driver = new webdriver.Builder().
     withCapabilities(capabilities).
     build();
 
-describe('#firstTest', async () => {
-    it('runs a first test', async () => {
-        await driver.get('http://www.google.com')
-        await driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack\n')
-        let title = await driver.getTitle()
-        console.log(title);
+describe('#scenarioOne', async () => {
+    it('runs scenario one', async () => {
+        await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+        // await driver.findElement(webdriver.By.name('q')).sendKeys('BrowserStack\n')
+        // let title = await driver.getTitle()
+        // console.log(title);
         assert.equal(1 == 1, true)
         driver.quit();
     }).timeout(0);
