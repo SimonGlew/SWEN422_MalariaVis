@@ -32,13 +32,21 @@ const waitFind = (locator) => {
     });
 }
 
-const parseTranslation = (translate) =>{
-  console.log('translate', translate)
-  let s = translate.substring(translate.indexOf('(')+1, translate.indexOf(')'));
+const parseTranslation = (transform) =>{
+  console.log('transform', transform)
+  let s = transform.substring(transform.indexOf('(')+1, transform.indexOf(')'));
   console.log('s', s);
   let split = s.split(',');
   console.log('split', split);
   return {x:parseFloat(split[0]), y:parseFloat(split[1])};
+
+}
+const parseScale = (transform) =>{
+  console.log('transform', transform)
+  let s = transform.substring(transform.indexOf('scale(')+6, transform.lastIndexOf(')'));
+
+  return {scale:parseFloat(s)};
+
 
 }
 
@@ -113,25 +121,19 @@ describe('hooks', async () => {
             await driver.sleep(2000)
             console.log('afew')
 
-            let elem = await waitFind('feature-IRN')
-            let oldElemHeight = await elem.getAttribute('height')
-            let oldElemWidth = await elem.getAttribute('width')
+            let elem = await waitFind('feature-COD')
+            let t1 = parseScale(await elem.getAttribute('transform'));
 
             await driver.findElement(webdriver.By.id('submit')).click()
             await driver.sleep(2000)
 
-            elem = await waitFind('feature-IRN')
-            console.log('gmiroengrioe')
-            let elemHeight = await elem.getAttribute('height')
-            let elemWidth = await elem.getAttribute('width')
+            elem = await waitFind('feature-COD')
+            let t2 = parseScale(await elem.getAttribute('transform'));
 
-            console.log('oHeight', oldElemHeight)
-            console.log('oWidth', oldElemWidth)
-            console.log('eHeight',elemHeight)
-            console.log('eWidth',elemWidth)
+            console.log('t1',t1);
+            console.log('t2',t2);
 
-            assert.equalTrue(elemHeight > oldElemHeight)
-            assert.equalTrue(elemWidth > oldElemWidth)
+            assert.equalTrue(t2 > t1);
         }).timeout(0);
   })
   describe('#mapDraggingTestOne', async () =>{
@@ -155,7 +157,7 @@ describe('hooks', async () => {
       let t2 = parseTranslation(await elem.getAttribute('transform'));
 
       console.log('t2', t2);
-      assert.equalTrue(t1 != t2);
+      assert.equalTrue(t1.x != t2.x);
 
 
 
