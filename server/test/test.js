@@ -119,7 +119,6 @@ describe('hooks', async () => {
 
             await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
             await driver.sleep(2000)
-            console.log('afew')
 
             let elem = await waitFind('feature-COD')
 
@@ -129,9 +128,8 @@ describe('hooks', async () => {
             elem = await waitFind('feature-COD')
             let t2 = parseScale(await elem.getAttribute('transform'));
 
-            console.log('t2',t2);
 
-            assert.equalTrue(t2 > 1);
+            assert.equalTrue(t2.scale > 1);
         }).timeout(0);
   })
   describe('#mapDraggingTestOne', async () =>{
@@ -148,13 +146,11 @@ describe('hooks', async () => {
 
       let elem = await waitFind('feature-IRN')
       let t1 = parseTranslation(await elem.getAttribute('transform'));
-      console.log('t1',t1);
       await actions.dragAndDrop(elem,{x:50, y:0}).perform();
 
       elem = await waitFind('feature-IRN')
       let t2 = parseTranslation(await elem.getAttribute('transform'));
 
-      console.log('t2', t2);
       assert.equalTrue(t1.x != t2.x);
 
 
