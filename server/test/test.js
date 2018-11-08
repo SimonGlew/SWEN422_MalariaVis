@@ -17,11 +17,11 @@ var driver = new webdriver.Builder().
     withCapabilities(capabilities).
     build();
 
-assert.equalTrue = function (condition){
+assert.equalTrue = function (condition) {
     assert.equal(condition, true)
 }
 
-assert.equalFalse = function (condition){
+assert.equalFalse = function (condition) {
     assert.equal(condition, false)
 }
 
@@ -34,6 +34,8 @@ const waitFind = (locator) => {
 
 describe('#scenarioOne', async () => {
     it('runs scenario one', async () => {
+        const actions = driver.actions({ bridge: true });
+
         await driver.manage().window().maximize();
 
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
@@ -43,8 +45,8 @@ describe('#scenarioOne', async () => {
         let yearText = await year.getText()
         assert.equalTrue(yearText == '2000')
 
-        await waitFind('feature-IDN').sendKeys('')
-
+        let elem = await waitFind('feature-IDN')
+        await actions.move({ duration: 1000, origin: elem, x: 0, y: 0 }).perform();
 
         let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
         let mortalityText = await mortalityTooltip.getText()
