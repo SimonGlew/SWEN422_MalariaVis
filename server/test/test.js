@@ -33,7 +33,7 @@ describe('#scenarioOne', async () => {
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
         await driver.findElement(webdriver.By.id('incidence')).click()
         let indonesiaElement = await driver.findElement(webdriver.By.id('feature-IDN'))
-        await driver.wait(until.elementIsVisible(indonesiaElement),100);
+        await driver.wait(webdriver.until.elementIsVisible(indonesiaElement),100);
         await driver.actions().move(indonesiaElement).perform();
         let year = (await driver.findElement(webdriver.By.id('yearSliderLabel'))).getText()
         assert.equalTrue(year == '2000')
