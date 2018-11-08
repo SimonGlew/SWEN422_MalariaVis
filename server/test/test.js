@@ -60,10 +60,7 @@ describe('#scenarioOne', async () => {
         let incidenceText = await incidenceTooltip.getText()
 
         let percentageTooltip = await driver.findElement(webdriver.By.id('percentageTooltip'))
-        let percentageText = await incidenceTooltip.getText()
-
-        console.log(mortalityText, incidenceText, percentageText)
-
+        let percentageText = await percentageTooltip.getText()
 
         assert.equalTrue(mortalityText == '0.02')
         assert.equalTrue(incidenceText == '39.9')
