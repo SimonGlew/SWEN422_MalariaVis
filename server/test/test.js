@@ -110,7 +110,8 @@ describe('hooks', async () => {
             await driver.manage().window().maximize();
 
             await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-            await driver.findElement(webdriver.By.id('incidence')).click()
+            await driver.sleep(2000)
+            console.log('afew')
 
             let elem = await waitFind('feature-IRN')
             let oldElemHeight = await elem.getAttribute('height')
@@ -120,6 +121,7 @@ describe('hooks', async () => {
             await driver.sleep(2000)
 
             elem = await waitFind('feature-IRN')
+            console.log('gmiroengrioe')
             let elemHeight = await elem.getAttribute('height')
             let elemWidth = await elem.getAttribute('width')
 
