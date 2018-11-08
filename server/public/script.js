@@ -191,7 +191,7 @@ function drawMap(){
      .style("opacity", 0.8)
      .on("mousemove", function(d){
        d3.select(this)
-         .attr("stroke", "#ff0000")
+         .attr("stroke", "#00F")
          .attr("stroke-width", 1);
        d3.select(this).moveToFront();
        d3.select("#tooltip").style("display", "inline-block")
@@ -200,7 +200,6 @@ function drawMap(){
        currentYearMortality = getDataPointRounded(d.properties.mortalityRates);
        currentYearIncidence = getDataPointRounded(d.properties.incidenceRates);
        if (Number.isFinite(currentYearIncidence)) {
-
            currentYearPerc = (100*currentYearMortality / (currentYearIncidence*100)).toFixed(2);
        } else {
          currentYearPerc = "-";
@@ -211,10 +210,16 @@ function drawMap(){
        d3.selectAll("#tooltip > h1").html(d.properties.name);
      })
      .on("mouseout", function(d){
-       d3.select(this)
-         .style("opacity", 0.8)
+       if (selected.includes(d)) {
+         d3.select(this)
+         .attr("stroke", "#00F")
+         .attr("stroke-width", 1);
+       } else {
+         d3.select(this)
          .attr("stroke", "#777")
+         .style("opacity", 0.8)
          .attr("stroke-width", 0.5);
+       }
        d3.select("#tooltip").style("display", "none");
      })
      .on("click", function(d) {
