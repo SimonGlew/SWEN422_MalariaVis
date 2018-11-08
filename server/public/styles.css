@@ -3,8 +3,6 @@ svg {
 	border-radius: 4px;
 }
 
-
-
 body{
 	/* overflow-y: hidden; */
 }
@@ -55,6 +53,11 @@ body{
   border-color: #000;
 }
 
+/* kill hover effects for selected; it's not clickable */
+.btn-action-selected-switch:hover {
+	background-color: #B95F89 !important;
+}
+
 .btn-action-disabled {
   opacity: 0.65;
 }
@@ -82,7 +85,8 @@ body{
 }
 
 .btn-action:hover,
-.open .dropdown-toggle.btn-action {
+.open .dropdown-toggle.btn-action,
+.btn-toggle > button:not(.btn-action-selected-switch):hover {
   color: #FFF;
   background-color: #D299B3;
   border-color: #000;
