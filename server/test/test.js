@@ -32,89 +32,90 @@ const waitFind = (locator) => {
     });
 }
 
-describe('#TolTipCheck', async () => {
-    it('check tooltip on Iran with year 2000 and download map and csv', async () => {
-        const actions = driver.actions({ bridge: true });
+describe('hooks', async () => {
+    after(async () => {
+        await driver.quit()
+    })
 
-        await driver.manage().window().maximize();
+    describe('#TolTipCheck', async () => {
+        it('check tooltip on Iran with year 2000 and download map and csv', async () => {
+            const actions = driver.actions({ bridge: true });
 
-        await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-        await driver.findElement(webdriver.By.id('incidence')).click()
+            await driver.manage().window().maximize();
 
-        let year = await waitFind('yearSliderLabel')
-        let yearText = await year.getText()
-        assert.equalTrue(yearText == '2000')
+            await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+            await driver.findElement(webdriver.By.id('incidence')).click()
 
-        let elem = await waitFind('feature-IRN')
-        let elemHeight = await elem.getAttribute('height')
-        let elemWidth = await elem.getAttribute('width')
+            let year = await waitFind('yearSliderLabel')
+            let yearText = await year.getText()
+            assert.equalTrue(yearText == '2000')
 
-        await actions.move({ duration: 1000, origin: elem, x: (elemWidth / 2), y: (elemHeight / 2) }).perform();
+            let elem = await waitFind('feature-IRN')
+            let elemHeight = await elem.getAttribute('height')
+            let elemWidth = await elem.getAttribute('width')
 
-        await waitFind('mortalityTooltip')
-        let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
-        let mortalityText = await mortalityTooltip.getText()
+            await actions.move({ duration: 1000, origin: elem, x: (elemWidth / 2), y: (elemHeight / 2) }).perform();
 
-        let incidenceTooltip = await driver.findElement(webdriver.By.id('incidenceTooltip'))
-        let incidenceText = await incidenceTooltip.getText()
+            await waitFind('mortalityTooltip')
+            let mortalityTooltip = await driver.findElement(webdriver.By.id('mortalityTooltip'))
+            let mortalityText = await mortalityTooltip.getText()
 
-        let percentageTooltip = await driver.findElement(webdriver.By.id('percentageTooltip'))
-        let percentageText = await percentageTooltip.getText()
+            let incidenceTooltip = await driver.findElement(webdriver.By.id('incidenceTooltip'))
+            let incidenceText = await incidenceTooltip.getText()
 
-        assert.equalTrue(mortalityText == '0.02')
-        assert.equalTrue(incidenceText == '39.9')
-        assert.equalTrue(percentageText == '0.00')
+            let percentageTooltip = await driver.findElement(webdriver.By.id('percentageTooltip'))
+            let percentageText = await percentageTooltip.getText()
 
-        await driver.findElement(webdriver.By.id('exportMapBtn')).click()
-        await driver.findElement(webdriver.By.id('exportCSVBtn')).click()
+            assert.equalTrue(mortalityText == '0.02')
+            assert.equalTrue(incidenceText == '39.9')
+            assert.equalTrue(percentageText == '0.00')
 
-        driver.quit();
-    }).timeout(0);
-})
+            await driver.findElement(webdriver.By.id('exportMapBtn')).click()
+            await driver.findElement(webdriver.By.id('exportCSVBtn')).click()
+        }).timeout(0);
+    })
 
-describe('#yearSliderCheck', async () => {
-    it('Check that year slider animation works', async () => {
-        await driver.manage().window().maximize();
+    describe('#yearSliderCheck', async () => {
+        it('Check that year slider animation works', async () => {
+            await driver.manage().window().maximize();
 
-        await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-        let year = await waitFind('yearSliderLabel')
-        let yearText = await year.getText()
+            await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+            let year = await waitFind('yearSliderLabel')
+            let yearText = await year.getText()
 
-        assert.equalTrue(yearText == '2000')
+            assert.equalTrue(yearText == '2000')
 
-        await driver.findElement(webdriver.By.id('playBtn')).click()
-        await driver.sleep(5000)
-        year = await waitFind('yearSliderLabel')
-        yearText = await year.getText()
+            await driver.findElement(webdriver.By.id('playBtn')).click()
+            await driver.sleep(5000)
+            year = await waitFind('yearSliderLabel')
+            yearText = await year.getText()
 
-        assert.equalTrue(yearText == '2015')
-        driver.quit();
-    }).timeout(0);
-})
+            assert.equalTrue(yearText == '2015')
+        }).timeout(0);
+    })
 
-describe('#mapZoomingWorks', async () => {
-    it('Check that year slider animation works', async () => {
-        await driver.manage().window().maximize();
+    describe('#mapZoomingWorks', async () => {
+        it('Check that year slider animation works', async () => {
+            await driver.manage().window().maximize();
 
-        await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-        await driver.findElement(webdriver.By.id('incidence')).click()
+            await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+            await driver.findElement(webdriver.By.id('incidence')).click()
 
-        let elem = await waitFind('feature-IRN')
-        let oldElemHeight = await elem.getAttribute('height')
-        let oldElemWidth = await elem.getAttribute('width')
+            let elem = await waitFind('feature-IRN')
+            let oldElemHeight = await elem.getAttribute('height')
+            let oldElemWidth = await elem.getAttribute('width')
 
-        await driver.findElement(webdriver.By.id('submit')).click()
-        await driver.sleep(2000)
+            await driver.findElement(webdriver.By.id('submit')).click()
+            await driver.sleep(2000)
 
-        elem = await waitFind('feature-IRN')
-        let elemHeight = await elem.getAttribute('height')
-        let elemWidth = await elem.getAttribute('width')
+            elem = await waitFind('feature-IRN')
+            let elemHeight = await elem.getAttribute('height')
+            let elemWidth = await elem.getAttribute('width')
 
-        assert.equalTrue(elemHeight > oldElemHeight)
-        assert.equalTrue(elemWidth > oldElemWidth)
-
-        driver.quit();
-    }).timeout(0);
+            assert.equalTrue(elemHeight > oldElemHeight)
+            assert.equalTrue(elemWidth > oldElemWidth)
+        }).timeout(0);
+  })
 })
 
 
