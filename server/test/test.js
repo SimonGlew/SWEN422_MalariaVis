@@ -27,6 +27,9 @@ assert.equalFalse = function (condition){
 
 describe('#scenarioOne', async () => {
     it('runs scenario one', async () => {
+        await driver.manage().window().maximize();
+
+
         await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
         await driver.findElement(webdriver.By.id('incidence')).click()
         let indonesiaElement = await driver.findElement(webdriver.By.id('feature-IDN'))
