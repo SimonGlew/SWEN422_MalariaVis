@@ -14,6 +14,13 @@ var mapsvg = d3.select("#map");
 var files = [server + "/worldmap.json", server + "/api/incidenceRates", server + "/api/mortalityRates"];
 var promises = [];
 
+// Following is lifted from https://stackoverflow.com/questions/14167863/how-can-i-bring-a-circle-to-the-front-with-d3
+d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+        this.parentNode.appendChild(this);
+    });
+};
+
 files.forEach(function(url) {
     promises.push(d3.json(url))
 });
@@ -165,7 +172,6 @@ function drawMap(){
 
   mapsvg.call(zoom)
 
-
   //Draw countries
   mapsvg.append("g")
    .attr("class", "worldmap")
@@ -183,7 +189,8 @@ function drawMap(){
      .on("mousemove", function(d){
        d3.select(this)
          .attr("stroke", "#ff0000")
-         .attr("stroke-width", 1);
+         .attr("stroke-width", 1)
+       d3.select(this).moveToFront();
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
                             .style("top" , d3.event.pageY + 5 + "px");
