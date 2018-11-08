@@ -189,7 +189,7 @@ function drawMap(){
      .on("mousemove", function(d){
        d3.select(this)
          .attr("stroke", "#ff0000")
-         .attr("stroke-width", 1)
+         .attr("stroke-width", 1);
        d3.select(this).moveToFront();
        d3.select("#tooltip").style("display", "inline-block")
                             .style("left", d3.event.pageX + 5 + "px")
