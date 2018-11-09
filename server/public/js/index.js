@@ -1,6 +1,9 @@
+//action stack maintains a history of filters used in order to give undo/redo functionality
+//index is cursor for actionstack
 var actionStack = [],
     index = -1
 
+//values being used for filters
 var incidentMortality = 'm',
     year = 2000,
     minMortality = 0,
@@ -11,6 +14,7 @@ var incidentMortality = 'm',
     maxDeath = 0.70,
     countries = []
 
+//function for undoing previous action, look at previous actionstack, apply it, shift index
 function undoAction() {
     console.log('undoing action')
     if (index > 0) {
@@ -27,11 +31,11 @@ function undoAction() {
     }
 }
 
+//function for redoing previos action, look at actionstack next action, apply it, shit index
 function redoAction() {
     console.log('redoing action');
     if (index < actionStack.length - 1) {
         let action = JSON.parse(actionStack[++index])
-        //Do something with incidentMortality
         loadAction(action)
         //redraw things
         applyFilter(true)
@@ -39,6 +43,7 @@ function redoAction() {
     }
 }
 
+//function that takes in an action and applies its values to the data filters
 function loadAction(action){
   year = action.year
   minMortality = action.minMortality
@@ -71,8 +76,8 @@ function loadAction(action){
   $(".year-rate-slider").text(action.year)
 }
 
-
-
+//function for clearing the data filters, counts as an action unless it is
+//the first action on the stack (right at the start of interaction)
 function clearFilters() {
     setDefaults();
     if(index != -1){
@@ -80,6 +85,8 @@ function clearFilters() {
     }
 }
 
+//function for settings the undo and redo button statuses based on the current index position
+//essentially setting the buttons to available if there is a a possible undo/redo avaialable
 function setUndoRedo(){
   if(index == -1){
     $('#undo').attr('disabled','disabled')
@@ -100,6 +107,8 @@ function setUndoRedo(){
 
 }
 
+//function for setting the data filters back to their default values
+//does NOT push an action to the actionstack
 function setDefaults(){
   updateMortalitySlider(0, 250);
   updateIncidenceSlider(0, 1000);
@@ -122,6 +131,8 @@ function setDefaults(){
   zoomMapToFull()
 }
 
+//funciton for setting the mortalityrate sliders values and handler values
+//valA = lower handle, valB = upper handle
 function updateMortalitySlider(valA, valB){
     $('.mortality-slider').slider("values", 0, valA)
     $(".mortality-rate-slider.lower-handle").text(valA)
@@ -129,6 +140,8 @@ function updateMortalitySlider(valA, valB){
     $(".mortality-rate-slider.upper-handle").text(valB)
 }
 
+//funciton for setting the incidencerate sliders values and handler values
+//valA = lower handle, valB = upper handle
 function updateIncidenceSlider(valA, valB){
     $('.incidents-slider').slider("values", 0, valA)
     $(".incidents-rate-slider.lower-handle").text(valA)
@@ -136,6 +149,8 @@ function updateIncidenceSlider(valA, valB){
     $(".incidents-rate-slider.upper-handle").text(valB)
 }
 
+//funciton for setting the deathpercentage sliders values and handler values
+//valA = lower handle, valB = upper handle
 function updateDeathPrecentSlider(valA, valB){
     $('.deathPercentage-slider').slider("values", 0, valA)
     $(".deathPercentage-rate-slider.lower-handle").text(valA)
@@ -143,6 +158,8 @@ function updateDeathPrecentSlider(valA, valB){
     $(".deathPercentage-rate-slider.upper-handle").text(valB)
 }
 
+//function for taking the current values of the filters, and pushing an action to the actionStack
+//representing them. Checks the current action on the stack and will not push if has not changed
 function submit() {
     var action = JSON.stringify({
         incidentMortality: incidentMortality,
@@ -159,7 +176,6 @@ function submit() {
     console.log('action',action);
     if(!(action === actionStack[index])){
       actionStack.push(action);
-
       index = actionStack.length - 1;
       applyFilter(true)
       setUndoRedo();
@@ -169,9 +185,10 @@ function submit() {
     else{
       console.log("action duplicate")
     }
-
 }
 
+//function used to retrieve the current dataset being represented in the visualization
+//and downloads it as a csv
 function exportCSV() {
     let params = '?year=' + year + '&minMortality=' + minMortality + '&maxMortality=' + maxMortality + '&minIncidents=' + minIncidents + '&maxIncidents=' + maxIncidents + '&minDeath=' + minDeath + '&maxDeath=' + maxDeath + '&incidentMortality=' + incidentMortality
 
@@ -182,6 +199,7 @@ function exportCSV() {
     window.location = "/api/exportcsv" + params
 }
 
+//function that triggers the download of a url as an image
 function triggerDownload(imgURI) {
     var evt = new MouseEvent('click', {
         view: window,
@@ -197,6 +215,7 @@ function triggerDownload(imgURI) {
     a.dispatchEvent(evt);
 }
 
+//function for exporting images, takes an element ID, draws it onto an invisible canvas and then out puts to a png
 function exportImage(htmlId) {
     var svg = document.getElementById(htmlId);
     var canvas = document.getElementById('saveCanvas');
@@ -221,7 +240,7 @@ function exportImage(htmlId) {
     };
 
 }
-
+//function for setting up the mortality slider, required by JQueryUI to attach handlers
 function setMortalitySlider() {
     var handleA = $(".mortality-rate-slider.lower-handle");
     var handleB = $(".mortality-rate-slider.upper-handle");
@@ -253,6 +272,7 @@ function setMortalitySlider() {
     });
 }
 
+//function for setting up the incidence slider, required by JQueryUI to attach handlers
 function setIncidentsSlider() {
     var handleA = $(".incidents-rate-slider.lower-handle");
     var handleB = $(".incidents-rate-slider.upper-handle");
@@ -284,6 +304,7 @@ function setIncidentsSlider() {
     });
 }
 
+//function for setting up the deathPercentage slider, required by JQueryUI to attach handlers
 function setDeathPercentageSlider() {
     var handleA = $(".deathPercentage-rate-slider.lower-handle");
     var handleB = $(".deathPercentage-rate-slider.upper-handle");
@@ -316,6 +337,8 @@ function setDeathPercentageSlider() {
 }
 var x = 0;
 
+//function for setting up the year slider, required by JQueryUI to attach handlers
+//also sets up the play button used for stepping through the available years of the data set
 function setYearSlider() {
 
     var handleA = $(".year-rate-slider");
@@ -376,7 +399,8 @@ function setYearSlider() {
     });
 }
 
-
+//function for applying the current page filter values to the map and line chart
+//connection point to script.js
 function applyFilter(zoom) {
     //REDRAW MAP
     redrawChart()
@@ -384,10 +408,18 @@ function applyFilter(zoom) {
     if (zoom) {
         zoomMap();
     }
-    //CLEAR LINE GRAPH MAYBE, WHO KNOWS
-
 }
 
+//funciton called on init
+function init() {
+    setMortalitySlider()
+    setIncidentsSlider()
+    setDeathPercentageSlider()
+    setYearSlider()
+}
+
+
+//onclick action for toggling whether user is currently looking at mortality rate, or incidence rate
 $('.btn-toggle').click(function () {
     if(incidentMortality == 'i'){
         incidentMortality = 'm'
@@ -407,13 +439,5 @@ $('.btn-toggle').click(function () {
     setYearSlider()
     applyFilter()
 });
-
-
-function init() {
-    setMortalitySlider()
-    setIncidentsSlider()
-    setDeathPercentageSlider()
-    setYearSlider()
-}
 
 init()
