@@ -8,8 +8,8 @@ var capabilities = {
     'os': 'Windows',
     'os_version': '10',
     'resolution': '1920x1080',
-    'browserstack.user': 'markharris16',
-    'browserstack.key': '1Qxh5CEZexSskYyGuGTc'
+    'browserstack.user': 'mark1755',
+    'browserstack.key': '23Be9rwGvsGSNhbaZbND'
 }
 
 var driver = new webdriver.Builder().
@@ -157,11 +157,94 @@ describe('hooks', async () => {
 
     }).timeout(0);
   })
+
+  describe('#countryClickTestOne', async () =>{
+    it('Check that map click works', async () =>{
+      const actions = driver.actions({ bridge: true });
+
+      await driver.manage().window().maximize();
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+
+      let iran = await waitFind('feature-IRN') //check map loaded first
+
+      await driver.findElement(webdriver.By.id('feature-IRN')).click();
+      await driver.sleep(2000)
+
+      let stroke = await iran.getAttribute('stroke');
+      console.log("stroke after click", stroke);
+
+      let legendVal = await waitFind('legendtext-IRN');
+      console.log("legendval", legendVal);
+      assert.equalTrue(stroke == "#00F");
+
+
+    }).timeout(0);
+  })
+
+  describe('#undoTest', async () =>{
+    it('Check that undo works', async () =>{
+      await driver.manage().window().maximize();
+
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+      await driver.sleep(2000)
+
+      let elem = await waitFind('feature-COD')
+
+      await driver.findElement(webdriver.By.id('submit')).click()
+      await driver.sleep(2000)
+
+      elem = await waitFind('feature-COD')
+      let t2 = parseScale(await elem.getAttribute('transform'));
+
+
+      assert.equalTrue(t2.scale > 1);
+
+      await driver.findElement(webdriver.By.id('undo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t3 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t2.scale > t3.scale);
+
+    }).timeout(0);
+  })
+
+  describe('#redoTest', async () =>{
+    it('Check that filtering and submit works', async () =>{
+      await driver.manage().window().maximize();
+
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+      await driver.sleep(2000)
+
+      let elem = await waitFind('feature-COD')
+
+      await driver.findElement(webdriver.By.id('submit')).click()
+      await driver.sleep(2000)
+
+      elem = await waitFind('feature-COD')
+      let t2 = parseScale(await elem.getAttribute('transform'));
+
+
+      assert.equalTrue(t2.scale > 1);
+
+      await driver.findElement(webdriver.By.id('undo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t3 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t2.scale > t3.scale);
+
+      await driver.findElement(webdriver.By.id('redo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t4 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t4.scale > t3.scale);
+
+    }).timeout(0);
+  })
 })
 
 
 
 //BROWSER STACK LOGIN DETAILS
 
-//email: t5.swen422@gmail.com
+//email: t5a.swen422@gmail.com
 //password: BQBhWeaK
