@@ -10,11 +10,13 @@ router.get('/', (req, res) => {
 	res.render('index');
 });
 
+//Get countries
 router.get('/api/countriesList', (req, res) => {
 	let data = dataHandler.getCountries()
 	res.send(data)
 })
 
+//Get incidences from countries or all
 router.get('/api/incidenceRates', (req, res) => {
 	requested_countries = req.query.countries
 	if (requested_countries == undefined) {
@@ -33,6 +35,7 @@ router.get('/api/incidenceRates', (req, res) => {
 	}
 })
 
+//Get mortality from countries or all
 router.get('/api/mortalityRates', (req, res) => {
 	requested_countries = req.query.countries
 	if (requested_countries == undefined) {
@@ -51,6 +54,7 @@ router.get('/api/mortalityRates', (req, res) => {
 	}
 })
 
+//CSV download for filtered data
 router.get('/api/exportcsv', (req, res) => {
 	console.log(req.query)
 	let data = dataHandler.getFilteredData(req, res)

@@ -1,6 +1,15 @@
+/**
+ * Defining cached variables for data to be stored within
+ */
 var incidenceMap = {},
     mortalityMap = {},
-    listOfCountries = []
+	listOfCountries = []
+	
+/**
+ * Adds a CSV row Object containing the values into the incidence map and country list if required
+ * 
+ * @param {Row} blob - row to be added 
+ */
 function addIncidenceToMap(blob) {
     let index = listOfCountries.map(r => r.entity).indexOf(blob.Entity)
 
@@ -14,6 +23,11 @@ function addIncidenceToMap(blob) {
     incidenceMap[blob.Code].push({ year: blob.Year, Value: blob.Value })
 }
 
+/**
+ * Adds a CSV row Object containing the values into the mortality map and country list if required
+ * 
+ * @param {Row} blob - row to be added 
+ */
 function addMortalityToMap(blob) {
     let index = listOfCountries.map(r => r.entity).indexOf(blob.Entity)
 
@@ -27,19 +41,33 @@ function addMortalityToMap(blob) {
     mortalityMap[blob.Code].push({ year: blob.Year, Value: blob.Value })
 }
 
+/**
+ * Returns the map of incidences
+ */
 function getIncidences(){
     return incidenceMap
 }
 
+/**
+ * Returns the map of mortality
+ */
 function getMortality(){
     return mortalityMap
 }
 
+/**
+ * Returns the list of countries
+ */
 function getCountries(){
     return listOfCountries
 }
 
-
+/**
+ * Gets the CSV download from the filters
+ * 
+ * @param {*} req - Request of express 
+ * @param {*} res - Response of express
+ */
 function getFilteredData(req, res){
     let incidenceRates = this.getIncidences()
 	let mortalityRates = this.getMortality()
