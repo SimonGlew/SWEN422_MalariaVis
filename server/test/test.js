@@ -8,8 +8,8 @@ var capabilities = {
     'os': 'Windows',
     'os_version': '10',
     'resolution': '1920x1080',
-    'browserstack.user': 'markharris16',
-    'browserstack.key': '1Qxh5CEZexSskYyGuGTc'
+    'browserstack.user': 'mark1755',
+    'browserstack.key': '23Be9rwGvsGSNhbaZbND'
 }
 
 var driver = new webdriver.Builder().
@@ -163,5 +163,5 @@ describe('hooks', async () => {
 
 //BROWSER STACK LOGIN DETAILS
 
-//email: t5.swen422@gmail.com
+//email: t5a.swen422@gmail.com
 //password: BQBhWeaK
