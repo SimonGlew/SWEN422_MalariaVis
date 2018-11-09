@@ -1,0 +1,6 @@
+Unzip folder
+From base directory e.g. here run the following:
+	npm install
+	npm start
+
+This will start the application on port 52724
