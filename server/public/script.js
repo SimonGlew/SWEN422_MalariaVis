@@ -191,11 +191,22 @@ function drawMap() {
     .attr("stroke-width", 0.5)
     .attr("fill", "#FFF")
     .attr("stroke", "#777")
+    .style("cursor", function(d){
+      if(d.properties.incidenceRates){
+        return "pointer"
+      }
+      return "default"
+    })
     .attr("pointer-events", "all")
     .style("opacity", 0.8)
     .on("mousemove", function (d) {
       d3.select(this)
-        .attr("stroke", "#00F")
+        .attr("stroke", function(d){
+          if(d.properties.incidenceRates){
+            return "#00F"
+          }
+          return "#777"
+        })
         .attr("stroke-width", 1);
       d3.select(this).moveToFront();
       d3.selectAll('text').moveToFront();
@@ -230,8 +241,10 @@ function drawMap() {
     .on("click", function (d) {
       /* toggle item's presence in selection */
       if (!selected.includes(d)) {
-        selected.push(d);
-        addToChart(d)
+        if(selected.length < 8 && d.properties.incidenceRates){
+          selected.push(d);
+          addToChart(d);
+        }
       } else {
         selected = selected.filter(function (e) { return e != d; });
         removeFromChart(d)
