@@ -157,6 +157,29 @@ describe('hooks', async () => {
 
     }).timeout(0);
   })
+
+  describe('#countryClickTestOne', async () =>{
+    it('Check that dragging works', async () =>{
+      const actions = driver.actions({ bridge: true });
+
+      await driver.manage().window().maximize();
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+
+      let iran = await waitFind('feature-IRN') //check map loaded first
+
+      await driver.findElement(webdriver.By.id('feature-IRN')).click();
+      await driver.sleep(2000)
+
+      let stroke = await iran.getAttribute('stroke');
+      console.log("stroke after click", stroke);
+
+      let legendVal = await waitFind('legendtext-IRN');
+      console.log("legendval", legendVal);
+      assert.equalTrue(stroke == "#00F");
+
+
+    }).timeout(0);
+  })
 })
 
 
