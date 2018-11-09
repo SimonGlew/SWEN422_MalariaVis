@@ -3,6 +3,11 @@ const dataHandler = require('./dataHandler')
 const csv = require('fast-csv'),
     fs = require('fs')
 
+/**
+ * Parses the two csv files from streams
+ * 
+ * @param {String} directoryName - Base directory name of the csv files
+ */
 function parse(directoryName) {
     let files = [{ type: 'incidence', path: '/data/incidence-of-malaria-fixed.csv' }, { type: 'death', path: '/data/malaria-death-rates-filtered.csv' }]
     files.forEach(file => {
@@ -18,6 +23,11 @@ function parse(directoryName) {
 
 }
 
+/**
+ * Turns data rows into a csv download
+ * 
+ * @param {Object[]} data - objects to turn into csv rows
+ */
 function turnDataToCSV(data){
     let csv = 'Country,Year,Incidence (per 1000 at risk),Mortality (per 1000 effected),Death(%)\n'
     data.forEach(c => {
