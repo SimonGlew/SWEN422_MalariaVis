@@ -8,8 +8,16 @@ var legendColors = ['#e41a1c','#377eb8','#4daf4a','#984ea3','#ff7f00','#ffff33',
 var data = [];
 
 var line = d3.line()
-  .x(function(d, i) { return xScale(parseInt(d.year)); })
-  .y(function(d) { return yScale(d.Value); })
+  .x(function(d, i) {
+    return xScale(parseInt(d.year));
+  })
+  .y(function(d) {
+    if(incidentMortality == "m"){
+      return mortalityYScale(d.mortality)
+    }else if(incidentMortality == "i"){
+      return incidenceYScale(d.incidence);
+    }
+  })
   .curve(d3.curveMonotoneX)
 
 var zeroLine = d3.line()
@@ -43,16 +51,26 @@ function drawChart(){
     .domain([1000, 0])
     .range([0, svgHeight - margin*2])
 
+
+  incidenceYScale = d3.scaleLinear()
+    .domain([1000, 0])
+    .range([0, svgHeight - margin*2])
+
+
+  mortalityYScale = d3.scaleLinear()
+    .domain([250, 0])
+    .range([0, svgHeight - margin*2])
+
   var yAxis = d3.axisLeft()
-    .scale(yScale);
+    .scale(mortalityYScale);
 
   linesvg.append("g")
-    .attr("class", "yAxis")
+    .attr("id", "yAxis")
     .attr("transform", "translate( " + 2*margin + ", " + margin + ")")
     .call(yAxis);
 
   linesvg.append("g")
-    .attr("class", "xAxis")
+    .attr("id", "xAxis")
     .attr("transform", "translate( " + 2*margin + ", " + (svgHeight - margin) + ")")
     .call(xAxis);
 
@@ -62,7 +80,7 @@ function drawChart(){
     .attr("y", margin/2)
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "central")
-    .text("Malaria Incidence Rates, 2000 - 2015")
+    .text("Malaria Mortality Rates, 2000 - 2015")
 
   linesvg.append("text")
     .attr("id", "line-xLabel")
@@ -79,10 +97,10 @@ function drawChart(){
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "central")
     .attr("transform", "rotate(-90)translate(" + (-svgHeight/2) + "," + (margin/2) + ")")
-    .text("Incidence Rate")
+    .text("Mortality Rate")
 
   linesvg.append("text")
-    .attr("id", "line-yLabel")
+    .attr("id", "line-ySubLabel")
     .attr("x", 0)
     .attr("y", 0)
     .attr("text-anchor", "middle")
@@ -133,9 +151,24 @@ function addToChart(feature){
     .style("alignment-baseline", "central")
     .style("opacity", 0);
 
+  //combine incidence and mortality data
+  var points = [];
+  for(var i = 0; i < feature.properties.incidenceRates.length; i++){
+    for(var j = 0; j < feature.properties.mortalityRates.length; j++){
+      if(feature.properties.incidenceRates[i].year == feature.properties.mortalityRates[j].year){
+        points.push({
+          "name" : feature.properties.brk_name,
+          "year" : feature.properties.incidenceRates[i].year,
+          "incidence" : feature.properties.incidenceRates[i].Value,
+          "mortality" : feature.properties.mortalityRates[i].Value
+        })
+      }
+    }
+  }
+
   //Add line
   linesvg.append("path")
-    .datum(feature.properties.incidenceRates)
+    .datum(points)
     .attr("class", "line")
     .attr("id", "line-" + feature.properties.adm0_a3)
     .attr("transform", "translate(" + (2*margin) + "," + (margin) + ")")
@@ -152,13 +185,20 @@ function addToChart(feature){
   linesvg.append("g")
     .attr("id", "markers-" + feature.properties.adm0_a3)
     .selectAll("circle")
-    .data(feature.properties.incidenceRates)
+    .data(points)
     .enter()
     .append("circle")
+      .attr("class", "linepoint")
       .attr("cx", function(d){
         return margin * 2 + xScale(d.year)
       })
-      .attr("cy", margin + yScale(0))
+      .attr("cy", function(d){
+        if(incidentMortality == 'm'){
+          return margin + mortalityYScale(0)
+        }else if(incidentMortality == 'i'){
+          return margin + incidenceYScale(0);
+        }
+      })
       .attr("r", 5)
       .attr("fill", color)
       .attr("stroke", "#FFF")
@@ -166,7 +206,11 @@ function addToChart(feature){
       .style("opacity", 0)
       .transition()
       .attr("cy", function(d){
-        return margin + yScale(d.Value)
+        if(incidentMortality == 'm'){
+          return margin + mortalityYScale(d.mortality)
+        }else if(incidentMortality == 'i'){
+          return margin + incidenceYScale(d.incidence);
+        }
       })
       .style("opacity", 1)
 
@@ -225,6 +269,28 @@ function redrawLegend(){
       }
     })
     .style("opacity", 1)
+}
+
+function redrawChart(){
+  if(incidentMortality == "m"){
+    d3.select("#line-yLabel").text("Mortality Rate")
+    d3.select("#line-ySubLabel").text("(Per 100,000 Population)");
+    d3.select("#line-title").text("Malaria Mortality Rates, 2000 - 2015")
+    d3.select("#yAxis").call(d3.axisLeft().scale(mortalityYScale).ticks(10));
+  }else if(incidentMortality == "i"){
+    d3.select("#line-yLabel").text("Incidence Rate")
+    d3.select("#line-ySubLabel").text("(Per 1,000 Population)");
+    d3.select("#line-title").text("Malaria Incidence Rates, 2000 - 2015")
+    d3.select("#yAxis").call(d3.axisLeft().scale(incidenceYScale).ticks(10));
+  }
+  d3.selectAll(".line").transition().attr("d", line)
+  d3.selectAll(".linepoint").transition().attr("cy", function(d){
+    if(incidentMortality == 'm'){
+      return margin + mortalityYScale(d.mortality)
+    }else if(incidentMortality == 'i'){
+      return margin + incidenceYScale(d.incidence);
+    }
+  })
 }
 
 

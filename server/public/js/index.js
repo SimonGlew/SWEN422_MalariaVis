@@ -379,6 +379,7 @@ function setYearSlider() {
 
 function applyFilter(zoom) {
     //REDRAW MAP
+    redrawChart()
     updateMap();
     if (zoom) {
         zoomMap();
