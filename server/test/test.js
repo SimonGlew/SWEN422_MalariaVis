@@ -186,7 +186,6 @@ describe('hooks', async () => {
       await driver.manage().window().maximize();
 
       await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-      await driver.sleep(2000)
 
       let elem = await waitFind('feature-COD')
 
@@ -213,7 +212,6 @@ describe('hooks', async () => {
       await driver.manage().window().maximize();
 
       await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
-      await driver.sleep(2000)
 
       let elem = await waitFind('feature-COD')
 
@@ -237,6 +235,72 @@ describe('hooks', async () => {
       elem = await waitFind('feature-COD')
       let t4 = parseScale(await elem.getAttribute('transform'));
       assert.equalTrue(t4.scale > t3.scale);
+
+    }).timeout(0);
+  })
+
+  describe('#testFilterSliders', async () =>{
+    it('Check that filtering and submit works', async () =>{
+      await driver.manage().window().maximize();
+
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+      await driver.sleep(2000)
+
+      let mortalitySlider = await waitFind('mortality-slider');
+      let mortalityLower = await waitFind('mortality-lower-handle');
+      let mortalityUpper = await waitFind('mortality-upper-handle');
+      console.log('mortalitySlider', mortalitySlider, mortalityLower, mortalityUpper);
+
+
+      let incidenceSlider = await waitFind('incidence-slider');
+      let incidenceLower = await waitFind('incidence-lower-handle');
+      let incidenceUpper = await waitFind('incidence-upper-handle');
+      console.log('incidenceslider', incidenceSlider, incidenceLower, incidenceUpper);
+
+
+      let deathPercentageSlider = await waitFind('deathPercentage-slider');
+      let deathPercentageLower = await waitFind('deathPercentage-lower-handle');
+      let deathPercentageUpper = await waitFind('deathPercentage-upper-handle');
+      console.log('deathslider', deathPercentageSlider, deathPercentageLower, deathPercentageUpper);
+
+      //drag each one, check it is now greater than 0
+      await actions.dragAndDrop(mortalityLower,{x:200, y:0}).perform();
+      await actions.dragAndDrop(incidenceLower,{x:200, y:0}).perform();
+      await actions.dragAndDrop(deathPercentageLower,{x:200, y:0}).perform();
+
+      assert.equalTrue(parseFloat(mortalityLower.innerText) > 0);
+      assert.equalTrue(parseFloat(incidenceLower.innerText) > 0);
+      assert.equalTrue(parseFloat(deathPercentageLower.innerText) > 0);
+
+
+
+
+      // await driver.findElement(webdriver.By.id('submit')).click()
+      // await driver.sleep(2000)
+      //
+      // elem = await waitFind('feature-COD')
+      // let t2 = parseScale(await elem.getAttribute('transform'));
+      //
+      //
+      // assert.equalTrue(t2.scale > 1);
+      //
+      // await driver.findElement(webdriver.By.id('undo')).click()
+      // await driver.sleep(2000)
+      // elem = await waitFind('feature-COD')
+      // let t3 = parseScale(await elem.getAttribute('transform'));
+      // assert.equalTrue(t2.scale > t3.scale);
+      //
+      // await driver.findElement(webdriver.By.id('redo')).click()
+      // await driver.sleep(2000)
+      // elem = await waitFind('feature-COD')
+      // let t4 = parseScale(await elem.getAttribute('transform'));
+      // assert.equalTrue(t4.scale > t3.scale);
+
+    }).timeout(0);
+  })
+
+  describe('#testExport', async () =>{
+    it('Check that filtering and submit works', async () =>{
 
     }).timeout(0);
   })
