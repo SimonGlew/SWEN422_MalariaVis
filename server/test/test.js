@@ -272,7 +272,13 @@ describe('hooks', async () => {
       assert.equalTrue(parseFloat(incidenceLower.innerText) > 0);
       assert.equalTrue(parseFloat(deathPercentageLower.innerText) > 0);
 
+      await actions.dragAndDrop(mortalityUpper,{x:-200, y:0}).perform();
+      await actions.dragAndDrop(incidenceUpper,{x:-200, y:0}).perform();
+      await actions.dragAndDrop(deathPercentageUpper,{x:-200, y:0}).perform();
 
+      assert.equalTrue(parseFloat(mortalityUpper.innerText) < 250);
+      assert.equalTrue(parseFloat(incidenceUpper.innerText) < 1000);
+      assert.equalTrue(parseFloat(deathPercentageUpper.innerText) < 0.7);
 
 
       // await driver.findElement(webdriver.By.id('submit')).click()
