@@ -266,3 +266,25 @@ span.block{
 #tooltip p {
 	margin-bottom: 0em;
 }
+
+#line-tooltip {
+	padding: 0.5em;
+	position: absolute;
+	display: none;
+	color: #FFF;
+	background-color: #B95F89;
+	opacity: 0.9;
+	box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
+	border: 1px solid #5D3045;
+  border-radius: 4px;
+  z-index:3;
+}
+
+#line-tooltip h1 {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#line-tooltip p {
+	margin-bottom: 0em;
+}

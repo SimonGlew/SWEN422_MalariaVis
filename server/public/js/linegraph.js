@@ -204,6 +204,31 @@ function addToChart(feature){
       .attr("stroke", "#FFF")
       .attr("stroke-width", 2)
       .style("opacity", 0)
+      .on("mousemove", function (d) {
+        d3.select("#line-tooltip").style("display", "inline-block")
+          .style("left", d3.event.pageX + 5 + "px")
+          .style("top", d3.event.pageY + 5 + "px");
+        var value;
+        if(incidentMortality == "m"){
+          value = parseFloat(d.mortality);
+        }else if(incidentMortality == "i"){
+          value =  parseFloat(d.incidence);
+        }
+        value = value.toFixed(2)
+        d3.selectAll("#line-tooltip > p > .year").html(d.year);
+        d3.selectAll("#line-tooltip > p > .label").html(function(){
+          if(incidentMortality == "m"){
+            return "Mortality Rate:"
+          }else if(incidentMortality == "i"){
+            return "Incidence Rate:"
+          }
+        });
+        d3.selectAll("#line-tooltip > p > .value").html(value);
+        d3.selectAll("#line-tooltip > h1").html(d.name);
+      })
+      .on("mouseout", function(){
+        d3.select("#line-tooltip").style("display", "none")
+      })
       .transition()
       .attr("cy", function(d){
         if(incidentMortality == 'm'){
@@ -213,6 +238,7 @@ function addToChart(feature){
         }
       })
       .style("opacity", 1)
+
 
     redrawLegend();
 }
