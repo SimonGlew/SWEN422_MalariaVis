@@ -80,6 +80,8 @@ function drawChart(){
     .attr("y", margin/2)
     .attr("text-anchor", "middle")
     .attr("alignment-baseline", "central")
+    .attr("font-size", 16)
+    .style("font-weight", "bold")
     .text("Malaria Mortality Rates, 2000 - 2015")
 
   linesvg.append("text")
