@@ -159,7 +159,7 @@ describe('hooks', async () => {
   })
 
   describe('#countryClickTestOne', async () =>{
-    it('Check that dragging works', async () =>{
+    it('Check that map click works', async () =>{
       const actions = driver.actions({ bridge: true });
 
       await driver.manage().window().maximize();
@@ -177,6 +177,66 @@ describe('hooks', async () => {
       console.log("legendval", legendVal);
       assert.equalTrue(stroke == "#00F");
 
+
+    }).timeout(0);
+  })
+
+  describe('#undoTest', async () =>{
+    it('Check that undo works', async () =>{
+      await driver.manage().window().maximize();
+
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+      await driver.sleep(2000)
+
+      let elem = await waitFind('feature-COD')
+
+      await driver.findElement(webdriver.By.id('submit')).click()
+      await driver.sleep(2000)
+
+      elem = await waitFind('feature-COD')
+      let t2 = parseScale(await elem.getAttribute('transform'));
+
+
+      assert.equalTrue(t2.scale > 1);
+
+      await driver.findElement(webdriver.By.id('undo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t3 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t2.scale > t3.scale);
+
+    }).timeout(0);
+  })
+
+  describe('#redoTest', async () =>{
+    it('Check that filtering and submit works', async () =>{
+      await driver.manage().window().maximize();
+
+      await driver.get('http://barretts.ecs.vuw.ac.nz:52724/')
+      await driver.sleep(2000)
+
+      let elem = await waitFind('feature-COD')
+
+      await driver.findElement(webdriver.By.id('submit')).click()
+      await driver.sleep(2000)
+
+      elem = await waitFind('feature-COD')
+      let t2 = parseScale(await elem.getAttribute('transform'));
+
+
+      assert.equalTrue(t2.scale > 1);
+
+      await driver.findElement(webdriver.By.id('undo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t3 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t2.scale > t3.scale);
+
+      await driver.findElement(webdriver.By.id('redo')).click()
+      await driver.sleep(2000)
+      elem = await waitFind('feature-COD')
+      let t4 = parseScale(await elem.getAttribute('transform'));
+      assert.equalTrue(t4.scale > t3.scale);
 
     }).timeout(0);
   })
