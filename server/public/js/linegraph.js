@@ -32,7 +32,7 @@ var line = d3.line()
 //Object defining how lines are drawn initially, along the x axis.
 var zeroLine = d3.line()
   .x(function(d, i){ return xScale(parseInt(d.year)); })
-  .y(function(){ return yScale(0); })
+  .y(function(){ return incidenceYScale(0); })
   .curve(d3.curveMonotoneX)
 
 //Draw initial empty line chart
@@ -288,7 +288,7 @@ function removeFromChart(feature){
   //Return circles to zero then remove
   d3.select("#markers-" + feature.properties.adm0_a3).selectAll("circle")
     .transition()
-    .attr("cy", margin + yScale(0))
+    .attr("cy", margin + incidenceYScale(0))
     .style("opacity", 0)
     .on("end", function(){
       d3.select("#markers-" + feature.properties.adm0_a3).remove();
